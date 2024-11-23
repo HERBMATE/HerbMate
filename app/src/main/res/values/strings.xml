@@ -1,0 +1,38 @@
+<resources>
+    <string name="app_name">HerbMate Discover, Learn, and Apply the Benefits of Herbal Plants</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="title_search">Search</string>
+    <string name="image_classifier_failed">Image classifier failed to initialize. See error logs for details</string>
+    <string name="image_processing_error">Image classifier failed to initialize. See error logs for details</string>
+    <string name="title_bookmark">Bookmark</string>
+    <string name="title_profile">Profile</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string-array name="name_plant">
+        <item>Sambiloto</item>
+        <item>Chamomile</item>
+        <item>Ginseng</item>
+        <item>Lidah Buaya</item>
+        <item>Rosemary</item>
+    </string-array>
+    <integer-array name="image_plant">
+        <item>@drawable/sambiloto</item>
+        <item>@drawable/chamomile</item>
+        <item>@drawable/ginseng</item>
+        <item>@drawable/lidah_buaya</item>
+        <item>@drawable/rosemary</item>
+    </integer-array>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+
+
+</resources>
