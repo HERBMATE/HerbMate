@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.herbmate.Plant
 import com.android.herbmate.PlantAdapter
@@ -50,7 +51,7 @@ class BookmarkFragment : Fragment() {
         plantImages.recycle()
 
         binding.recyclerViewFilters.apply  {
-            layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+            layoutManager = GridLayoutManager(context, 2)
             setHasFixedSize(true)
             adapter = PlantAdapter(requireContext(), listPlant)
         }

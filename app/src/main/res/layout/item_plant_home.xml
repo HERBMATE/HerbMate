@@ -3,13 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/item_card_view"
-    android:layout_width="170dp"
+    android:layout_width="260dp"
     android:backgroundTint="@color/green"
-    android:layout_marginStart="4dp"
     android:layout_marginEnd="8dp"
     card_view:cardCornerRadius="25dp"
     android:layout_marginBottom="16dp"
-    android:layout_height="wrap_content">
+    android:layout_height="286dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -18,7 +17,7 @@
         <ImageView
             android:id="@+id/img_plant"
             android:layout_width="match_parent"
-            android:layout_height="145dp"
+            android:layout_height="220dp"
             android:scaleType="centerCrop"
             android:src="@drawable/sambiloto"
             android:clipToOutline="true"
@@ -30,26 +29,25 @@
             android:id="@+id/tv_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginBottom="16dp"
             android:text="Test"
-            android:textColor="@color/black"
-            android:textSize="16sp"
             android:textStyle="bold"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+
+            android:layout_marginStart="16dp"
             card_view:layout_constraintBottom_toBottomOf="parent"
-            card_view:layout_constraintStart_toStartOf="parent"
-            card_view:layout_constraintTop_toBottomOf="@id/img_plant" />
+            card_view:layout_constraintTop_toBottomOf="@id/img_plant"
+            card_view:layout_constraintStart_toStartOf="parent"/>
 
         <ImageButton
             android:id="@+id/btn_bookmark"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_marginEnd="16dp"
             android:background="@drawable/rounded_btn_bookmark"
             android:backgroundTint="@color/yellow"
-            android:contentDescription="Bookmark button"
             android:src="@drawable/ic_bookmark"
+            android:contentDescription="Bookmark button"
             card_view:layout_constraintBottom_toBottomOf="@+id/tv_name"
             card_view:layout_constraintEnd_toEndOf="@id/img_plant"
             card_view:layout_constraintTop_toTopOf="@+id/tv_name" />

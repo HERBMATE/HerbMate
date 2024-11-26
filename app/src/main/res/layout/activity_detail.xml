@@ -31,15 +31,6 @@
             app:layout_constraintStart_toStartOf="parent" />
 
         <!-- More Icon (typically a settings or menu icon) -->
-        <ImageView
-            android:id="@+id/iv_bookmark"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:src="@drawable/ic_bookmark_white"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <!-- Bottom Sheet -->
@@ -51,6 +42,10 @@
         android:layout_marginTop="16dp"
         app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_margin="16dp"
             android:layout_width="match_parent"
@@ -59,15 +54,25 @@
             <!-- TextView for Plant Name -->
             <TextView
                 android:id="@+id/tv_nama"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
+                android:layout_marginTop="40dp"
                 android:textStyle="bold"
                 android:textSize="24sp"
                 android:text="SAMBILOTO"
                 android:textColor="@color/black"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"/>
+
+            <ImageView
+                android:id="@+id/iv_bookmark"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginEnd="16dp"
+                android:src="@drawable/ic_bookmark"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_nama"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/tv_nama" />
 
             <!-- TextView for Description -->
             <TextView
@@ -106,35 +111,36 @@
                 app:layout_constraintStart_toStartOf="parent"
                 android:text="bla"/>
 
-            <!-- LinearLayout for Recommendations -->
-            <LinearLayout
+            <View
+                android:id="@+id/divider"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/black"
+                android:layout_marginTop="16dp"
+                app:layout_constraintTop_toBottomOf="@id/tv_4"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <!-- Filters -->
+            <TextView
+                android:id="@+id/tv_filter"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginTop="16dp"
-                android:padding="16dp"
-                android:background="@drawable/rounded_corner_detail"
-                app:layout_constraintTop_toBottomOf="@id/tv_4"
-                app:layout_constraintStart_toStartOf="parent">
-
-                <!-- Recommendation Text -->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textStyle="bold"
-                    android:textSize="32sp"
-                    android:textColor="@color/black"
-                    android:text="REKOMENDASI"/>
+                android:text="Filters"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@id/divider"
+                app:layout_constraintStart_toStartOf="parent"/>
 
                 <!-- RecyclerView for Recommendations -->
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"/>
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintTop_toBottomOf="@id/tv_filter"
+                    app:layout_constraintStart_toStartOf="parent"/>
 
-            </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
     </FrameLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

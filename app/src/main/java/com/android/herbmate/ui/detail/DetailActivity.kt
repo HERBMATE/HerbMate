@@ -69,7 +69,7 @@ class DetailActivity : AppCompatActivity() {
         plantImages.recycle()
 
         binding.recyclerView.apply {
-            layoutManager = LinearLayoutManager(context)
+            layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
             setHasFixedSize(true)
             adapter = PlantAdapter(context, listPlant)
         }
