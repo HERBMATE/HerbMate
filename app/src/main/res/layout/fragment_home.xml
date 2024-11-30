@@ -8,23 +8,26 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/gunung21"
+        android:adjustViewBounds="true"
+        android:scaleType="fitCenter"
+        android:src="@drawable/gunung21"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
-        android:layout_marginTop="-20dp"
+        android:layout_marginTop="-40dp"
         tools:ignore="ContentDescription" />
+
 
     <androidx.cardview.widget.CardView
         android:id="@+id/item_card_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardCornerRadius="25dp"
-        app:cardBackgroundColor="@color/green"
+        app:cardBackgroundColor="@color/secondaryColor"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -44,7 +47,7 @@
                 android:text="Try our AI Features"
                 android:textSize="24sp"
                 android:textStyle="bold"
-                android:textColor="@color/black"
+                android:textColor="@color/blackAndWhiteColor"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
@@ -58,7 +61,7 @@
                 android:layout_marginBottom="16dp"
                 android:text="A dialog is a type of modal window that appears in front of app content to provide critical information, or prompt for a decision to be made."
                 android:textSize="16sp"
-                android:textColor="@color/black"
+                android:textColor="@color/blackAndWhiteColor"
                 app:layout_constraintTop_toBottomOf="@id/title_text"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
@@ -67,7 +70,7 @@
                 android:id="@+id/logo_image"
                 android:layout_width="57dp"
                 android:layout_height="11dp"
-                android:background="@drawable/logo_black2x"
+                android:background="@drawable/logoBlackAndWhite"
                 app:layout_constraintTop_toBottomOf="@id/tv_name"
                 app:layout_constraintEnd_toEndOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -83,18 +86,20 @@
         app:queryBackground="@android:color/transparent"
         app:queryHint="Search Plant..."
         android:layout_margin="16dp"
+        android:theme="@style/SearchViewTheme"
         app:layout_constraintTop_toBottomOf="@id/item_card_view"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <!-- ScrollView for Filters and Lists -->
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@id/search_view"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/search_view">
 
         <!-- Divider -->
         <View
@@ -102,7 +107,7 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_margin="16dp"
-            android:background="@color/black" />
+            android:background="@color/blackAndWhiteColor" />
 
         <!-- Filters -->
         <TextView
@@ -140,6 +145,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Category 2" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_category3"
+                style="@style/CustomChipShape"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Category 3" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_category4"
+                style="@style/CustomChipShape"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Category 4" />
+
         </com.google.android.material.chip.ChipGroup>
 
         <!-- RecyclerView for Filtered Items -->
@@ -147,6 +167,6 @@
             android:id="@+id/recycler_view_filters"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp" />
+            android:layout_marginBottom="64dp" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

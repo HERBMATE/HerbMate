@@ -10,6 +10,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.android.herbmate.databinding.ActivityMainBinding
 import com.android.herbmate.ui.login.LoginActivity
+import com.android.herbmate.ui.scan.ScanActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -24,6 +25,9 @@ class MainActivity : AppCompatActivity() {
 //        supportActionBar?.hide()
 
         val navView: BottomNavigationView = binding.navView
+        binding.fab.setOnClickListener{
+            startActivity(Intent(this, ScanActivity::class.java))
+        }
         navView.background = null
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
         // Passing each menu ID as a set of Ids because each
