@@ -36,25 +36,24 @@ android {
     }
     buildFeatures {
         viewBinding = true
-        mlModelBinding = true
+        buildConfig = true
     }
 }
 
 dependencies {
 
-    implementation("org.tensorflow:tensorflow-lite-task-vision:0.4.4")
-    implementation("org.tensorflow:tensorflow-lite-support:0.4.4")
-    implementation("org.tensorflow:tensorflow-lite-metadata:0.4.4")
+    implementation (libs.play.services.auth)
+    implementation (libs.androidx.preference)
+    implementation (libs.androidx.datastore.preferences)
+
+    implementation (libs.retrofit)
+    implementation (libs.converter.gson)
+    implementation(libs.logging.interceptor)
 
     implementation(libs.ucrop)
 
     implementation(libs.circleimageview)
     implementation (libs.glide)
-
-    implementation ("androidx.camera:camera-core:1.4.0")
-    implementation ("androidx.camera:camera-camera2:1.4.0")
-    implementation ("androidx.camera:camera-lifecycle:1.4.0")
-    implementation ("androidx.camera:camera-view:1.4.0")
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
@@ -66,11 +65,8 @@ dependencies {
     implementation(libs.androidx.navigation.ui.ktx)
     implementation(libs.androidx.annotation)
     implementation(libs.androidx.activity)
-    implementation("androidx.core:core-splashscreen:1.0.1")
-    implementation("com.github.bumptech.glide:glide:4.15.1")
-    annotationProcessor("com.github.bumptech.glide:compiler:4.15.1")
-    implementation ("pl.droidsonroids.gif:android-gif-drawable:1.2.29")
-
+    implementation(libs.androidx.datastore.core.android)
+    implementation(libs.androidx.datastore.preferences.core.jvm)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

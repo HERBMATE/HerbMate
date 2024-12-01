@@ -1,26 +1,16 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.HerbMate" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Theme.HerbMate" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/greenD1</item>
+        <item name="colorPrimary">@color/purple_200</item>
+        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorOnPrimary">@color/black</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/greenD2</item>
-        <!-- Tertiary brand color. -->
-        <item name="colorTertiary">@color/greenD3</item>
-        <!-- Tertiary brand color. -->
-        <item name="materialSearchBarStyle">@color/white</item>
+        <item name="colorSecondary">@color/teal_200</item>
+        <item name="colorSecondaryVariant">@color/teal_200</item>
+        <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor">@color/black</item>
+        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
-        <item name="colorOnPrimary">@color/white</item>
     </style>
-    <color name="primaryColor">@color/greenD1</color>
-    <color name="secondaryColor">@color/greenD2</color>
-    <color name="tertiaryColor">@color/greenD3</color>
-    <color name="blackAndWhiteColor">@color/white</color>
-    <color name="whiteAndBlackColor">@color/black</color>
-
-    <color name="searchBarColor">@color/white</color>
-
-    <drawable name="logoBlackAndWhite">@drawable/logo_white</drawable>
 </resources>

@@ -21,7 +21,6 @@ import com.android.herbmate.PlantAdapter
 import com.android.herbmate.PlantAdapterHome
 import com.android.herbmate.R
 import com.android.herbmate.ui.detail.DetailActivity
-import org.tensorflow.lite.task.vision.classifier.Classifications
 import java.io.File
 import com.yalantis.ucrop.UCrop
 
