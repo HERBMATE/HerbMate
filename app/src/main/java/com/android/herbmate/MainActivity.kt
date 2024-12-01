@@ -2,19 +2,23 @@ package com.android.herbmate
 
 import android.content.Intent
 import android.os.Bundle
+import androidx.activity.viewModels
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.android.herbmate.data.retrofit.ApiConfig
 import com.android.herbmate.databinding.ActivityMainBinding
 import com.android.herbmate.ui.login.LoginActivity
-import com.android.herbmate.ui.scan.ScanActivity
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    private val mainViewModel by viewModels<MainViewModel> {
+        ViewModelFactory.getInstance(this)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,12 +26,14 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-//        supportActionBar?.hide()
+        mainViewModel.userSession.observe(this) { user ->
+            if (!user.isLogin) {
+                startActivity(Intent(this, LoginActivity::class.java))
+                finish()
+            }
+        }
 
         val navView: BottomNavigationView = binding.navView
-        binding.fab.setOnClickListener{
-            startActivity(Intent(this, ScanActivity::class.java))
-        }
         navView.background = null
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
         // Passing each menu ID as a set of Ids because each

@@ -7,51 +7,59 @@
     tools:context=".ui.profile.ProfileFragment">
 
     <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:adjustViewBounds="true"
-        android:scaleType="fitCenter"
-        android:src="@drawable/asset4"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="ContentDescription" />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_edit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/btn_auth"
-        android:backgroundTint="@color/primaryColor"
-        android:drawableStart="@drawable/baseline_edit_24"
-        android:paddingLeft="31dp"
-        android:text=""
-        android:textAllCaps="false"
-        android:textColor="@color/white"
-        app:layout_constraintBottom_toTopOf="@+id/name_input_layout"
-        app:layout_constraintEnd_toEndOf="@+id/name_input_layout"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2"
-        app:layout_constraintVertical_bias="1.0" />
+        android:background="@drawable/rectangle"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="ContentDescription" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/name_input_layout"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="67.5dp"
-        android:layout_marginEnd="67.5dp"
-        android:hint="Name"
+    <ImageView
+        android:id="@+id/circle1"
+        android:layout_width="235dp"
+        android:layout_height="235dp"
+        android:background="@drawable/circle"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.32">
+        app:layout_constraintVertical_bias="0.21000000"
+        tools:ignore="ContentDescription"/>
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/ed_name"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </com.google.android.material.textfield.TextInputLayout>
+    <ImageView
+        android:layout_width="235dp"
+        android:layout_height="235dp"
+        android:background="@drawable/circle"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.100000024"
+        tools:ignore="ContentDescription"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/asset221"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription"/>
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/iv_profile_image"
+        android:layout_width="144dp"
+        android:layout_height="144dp"
+        android:src="@drawable/ic_account_circle"
+        android:layout_marginBottom="24dp"
+        app:civ_border_width="2dp"
+        app:civ_border_color="#D3D3D3"
+        android:layout_marginTop="170dp"
+        android:contentDescription="Profile Image"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/email_input_layout"
@@ -64,74 +72,80 @@
         android:layout_marginEnd="67.5dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/name_input_layout">
+        app:layout_constraintTop_toBottomOf="@id/iv_profile_image">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/ed_email"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/name_input_layout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nama"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="67.5dp"
+        android:layout_marginEnd="67.5dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/email_input_layout">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/ed_name"
             android:inputType="textEmailAddress"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/username_input_layout"
+        android:id="@+id/password_input_layout"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="67.5dp"
+        android:hint="Password"
         android:layout_marginTop="16dp"
+        android:layout_marginStart="67.5dp"
         android:layout_marginEnd="67.5dp"
-        android:hint="Username"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/email_input_layout">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/name_input_layout">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/ed_username"
+            android:id="@+id/ed_password"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"/>
     </com.google.android.material.textfield.TextInputLayout>
-
-    <!-- Dark Mode Label -->
-
-    <!-- Dark Mode Switch -->
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_log_out"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:background="@drawable/btn_auth"
-        android:backgroundTint="@color/whiteAndBlackColor"
+        android:layout_marginTop="16dp"
         android:text="Log Out"
         android:textAllCaps="false"
+        android:background="@drawable/btn_auth"
+        android:backgroundTint="@color/white"
         android:textColor="@color/green"
-        app:layout_constraintStart_toStartOf="@+id/tvDarkModeLabel"
-        app:layout_constraintTop_toBottomOf="@+id/tvDarkModeLabel" />
+        app:layout_constraintTop_toBottomOf="@id/password_input_layout"
+        app:layout_constraintStart_toStartOf="@id/password_input_layout"/>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_save"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:background="@drawable/btn_auth"
-        android:backgroundTint="@color/primaryColor"
+        android:layout_marginTop="16dp"
         android:text="Save"
         android:textAllCaps="false"
+        android:background="@drawable/btn_auth"
+        android:backgroundTint="@color/green"
         android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="@id/username_input_layout"
-        app:layout_constraintTop_toBottomOf="@+id/tvDarkModeLabel" />
+        app:layout_constraintTop_toBottomOf="@id/password_input_layout"
+        app:layout_constraintEnd_toEndOf="@id/password_input_layout"/>
 
-    <com.google.android.material.switchmaterial.SwitchMaterial
-        android:id="@+id/switchDarkMode"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:thumb="@drawable/custom_switch_thumb"
-        android:track="@drawable/custom_switch_track"
-        app:layout_constraintEnd_toEndOf="@+id/username_input_layout"
-        app:layout_constraintTop_toBottomOf="@+id/username_input_layout" />
-
+    <!-- Dark Mode Label -->
     <TextView
         android:id="@+id/tvDarkModeLabel"
         android:layout_width="wrap_content"
@@ -139,9 +153,19 @@
         android:text="Dark Mode"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@+id/switchDarkMode"
-        app:layout_constraintStart_toStartOf="@+id/username_input_layout"
-        app:layout_constraintTop_toTopOf="@+id/switchDarkMode"
-        app:layout_constraintVertical_bias="0.538" />
+        app:layout_constraintStart_toStartOf="@+id/password_input_layout"
+        app:layout_constraintTop_toTopOf="@+id/switchDarkMode" />
 
+    <!-- Dark Mode Switch -->
+
+    <com.google.android.material.switchmaterial.SwitchMaterial
+        android:id="@+id/switchDarkMode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:thumb="@drawable/custom_switch_thumb"
+        android:track="@drawable/custom_switch_track"
+        app:layout_constraintEnd_toEndOf="@+id/btn_save"
+        app:layout_constraintTop_toBottomOf="@+id/btn_save" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
