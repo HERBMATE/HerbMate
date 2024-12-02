@@ -5,6 +5,7 @@ import com.android.herbmate.data.response.LoginResponse
 import com.android.herbmate.data.response.RegisterRequest
 import com.android.herbmate.data.response.RegisterResponse
 import com.android.herbmate.data.response.SignInResponse
+import com.android.herbmate.data.response.PenyakitJerawatResponse
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -25,4 +26,8 @@ interface ApiService {
     suspend fun googleSignIn(
         @Query("code") code: String
     ): Response<SignInResponse>
+
+    @GET("penyakit/jerawat")
+    suspend fun getPenyakitJerawat(
+    ): Response<PenyakitJerawatResponse>
 }

@@ -33,7 +33,6 @@
             android:textStyle="bold"
             android:textSize="16sp"
             android:textColor="@color/black"
-
             android:layout_marginStart="16dp"
             card_view:layout_constraintBottom_toBottomOf="parent"
             card_view:layout_constraintTop_toBottomOf="@id/img_plant"

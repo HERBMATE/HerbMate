@@ -19,4 +19,10 @@
         <item name="cornerSize">25%</item> <!-- Membuat chip berbentuk elips -->
     </style>
 
+    <style name="SearchViewTheme" parent="Theme.AppCompat.DayNight">
+        <item name="android:textColor">@color/searchBarColor</item>
+        <item name="android:textColorHint">@color/blackAndWhiteColor</item>
+    </style>
+
+
 </resources>

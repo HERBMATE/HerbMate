@@ -35,5 +35,12 @@
     <string name="login_failed">"Login failed"</string>
     <string name="default_web_client_id">YOUR_WEB_CLIENT_ID_HERE</string>
 
+    <string-array name="chatBot">
+        <item>Saya Chat Bot</item>
+    </string-array>
+
+    <string-array name="chatUser">
+        <item>Hai Kamu Siapa?</item>
+    </string-array>
 
 </resources>

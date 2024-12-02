@@ -12,6 +12,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.android.herbmate.data.retrofit.ApiConfig
 import com.android.herbmate.databinding.ActivityMainBinding
 import com.android.herbmate.ui.login.LoginActivity
+import com.android.herbmate.ui.scan.ScanActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -31,6 +32,10 @@ class MainActivity : AppCompatActivity() {
                 startActivity(Intent(this, LoginActivity::class.java))
                 finish()
             }
+        }
+
+        binding.fab.setOnClickListener{
+            startActivity(Intent(this, ScanActivity::class.java))
         }
 
         val navView: BottomNavigationView = binding.navView

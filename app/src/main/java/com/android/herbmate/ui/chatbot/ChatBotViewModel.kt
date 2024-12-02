@@ -1,10 +1,10 @@
-package com.android.herbmate.ui.search
+package com.android.herbmate.ui.chatbot
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class SearchViewModel : ViewModel() {
+class ChatBotViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
         value = "This is dashboard Fragment"

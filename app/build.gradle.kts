@@ -42,13 +42,25 @@ android {
 
 dependencies {
 
-    implementation (libs.play.services.auth)
-    implementation (libs.androidx.preference)
-    implementation (libs.androidx.datastore.preferences)
+//    implementation (libs.play.services.auth)
+//    implementation (libs.androidx.preference)
+//    implementation (libs.androidx.datastore.preferences)
+//
 
-    implementation (libs.retrofit)
-    implementation (libs.converter.gson)
-    implementation(libs.logging.interceptor)
+    implementation("androidx.core:core-splashscreen:1.0.1")
+    implementation("com.github.bumptech.glide:glide:4.15.1")
+    annotationProcessor("com.github.bumptech.glide:compiler:4.15.1")
+    implementation ("pl.droidsonroids.gif:android-gif-drawable:1.2.29")
+    implementation ("androidx.camera:camera-core:1.4.0")
+    implementation ("androidx.camera:camera-camera2:1.4.0")
+    implementation ("androidx.camera:camera-lifecycle:1.4.0")
+    implementation ("androidx.camera:camera-view:1.4.0")
+
+    implementation(libs.androidx.datastore.preferences)
+
+    implementation("com.squareup.okhttp3:logging-interceptor:4.9.1")
+    implementation ("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
 
     implementation(libs.ucrop)
 
@@ -65,8 +77,11 @@ dependencies {
     implementation(libs.androidx.navigation.ui.ktx)
     implementation(libs.androidx.annotation)
     implementation(libs.androidx.activity)
-    implementation(libs.androidx.datastore.core.android)
-    implementation(libs.androidx.datastore.preferences.core.jvm)
+
+    implementation(libs.androidx.datastore.preferences.core)
+
+//    implementation(libs.androidx.datastore.core.android)
+//    implementation(libs.androidx.datastore.preferences.core.jvm)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
