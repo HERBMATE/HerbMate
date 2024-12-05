@@ -5,10 +5,14 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.android.herbmate.data.HerbMateRepository
 import com.android.herbmate.di.Injection
-import com.android.herbmate.ui.home.HomeViewModel
+import com.android.herbmate.ui.detail.DetailViewModel
 import com.android.herbmate.ui.login.LoginViewModel
 import com.android.herbmate.ui.profile.ProfileViewModel
 import com.android.herbmate.ui.register.RegisterViewModel
+import com.android.herbmate.ui.upload.UploadViewModel
+import com.android.herbmate.ui.bookmark.BookmarkViewModel
+import com.android.herbmate.ui.chatbot.ChatBotViewModel
+import com.android.herbmate.ui.home.HomeViewModel
 
 class ViewModelFactory(private val repository: HerbMateRepository) : ViewModelProvider.NewInstanceFactory() {
 
@@ -26,6 +30,21 @@ class ViewModelFactory(private val repository: HerbMateRepository) : ViewModelPr
             }
             modelClass.isAssignableFrom(RegisterViewModel::class.java) -> {
                 RegisterViewModel(repository) as T
+            }
+            modelClass.isAssignableFrom(UploadViewModel::class.java) -> {
+                UploadViewModel(repository) as T
+            }
+            modelClass.isAssignableFrom(DetailViewModel::class.java) -> {
+                DetailViewModel(repository) as T
+            }
+            modelClass.isAssignableFrom(BookmarkViewModel::class.java) -> {
+                BookmarkViewModel(repository) as T
+            }
+            modelClass.isAssignableFrom(HomeViewModel::class.java) -> {
+                HomeViewModel(repository) as T
+            }
+            modelClass.isAssignableFrom(ChatBotViewModel::class.java) -> {
+                ChatBotViewModel(repository) as T
             }
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }

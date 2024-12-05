@@ -42,7 +42,7 @@ android {
 
 dependencies {
 
-//    implementation (libs.play.services.auth)
+    implementation("com.google.android.gms:play-services-auth:20.7.0")
 //    implementation (libs.androidx.preference)
 //    implementation (libs.androidx.datastore.preferences)
 //

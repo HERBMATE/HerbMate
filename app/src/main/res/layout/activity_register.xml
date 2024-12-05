@@ -49,30 +49,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/name_input_layout">
 
-        <com.google.android.material.textfield.TextInputEditText
+        <com.android.herbmate.ui.customview.EmailInput
             android:id="@+id/ed_email"
             android:inputType="textEmailAddress"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/username_input_layout"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Username"
-        android:layout_marginTop="16dp"
-        android:layout_marginStart="67.5dp"
-        android:layout_marginEnd="67.5dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/email_input_layout">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/ed_username"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="65dp"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -86,13 +67,13 @@
         android:layout_marginEnd="67.5dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/username_input_layout">
+        app:layout_constraintTop_toBottomOf="@id/email_input_layout">
 
-        <com.google.android.material.textfield.TextInputEditText
+        <com.android.herbmate.ui.customview.PasswordInput
             android:id="@+id/ed_password"
             android:inputType="textPassword"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="65dp"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -108,11 +89,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/password_input_layout">
 
-        <com.google.android.material.textfield.TextInputEditText
+        <com.android.herbmate.ui.customview.PasswordInput
             android:id="@+id/ed_confirm_password"
             android:inputType="textPassword"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="65dp"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <androidx.appcompat.widget.AppCompatButton
@@ -137,6 +118,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:background="@drawable/asset321"/>
 
-
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/email_input_layout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/password_input_layout"
+        android:visibility="gone"
+        tools:visibility="visible"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

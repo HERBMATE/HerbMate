@@ -24,5 +24,9 @@
         <item name="android:textColorHint">@color/blackAndWhiteColor</item>
     </style>
 
-
+    <style name="ErrorTextStyle">
+        <item name="android:padding">0dp</item> <!-- Pastikan tidak ada padding -->
+        <item name="android:textColor">@android:color/black</item> <!-- Ganti dengan warna yang sesuai -->
+        <item name="android:layout_marginStart">0dp</item> <!-- Pastikan tidak ada margin di kiri -->
+    </style>
 </resources>

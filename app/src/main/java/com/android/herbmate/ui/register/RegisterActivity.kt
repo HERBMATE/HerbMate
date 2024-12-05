@@ -1,6 +1,7 @@
 package com.android.herbmate.ui.register
 
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
@@ -40,6 +41,24 @@ class RegisterActivity : AppCompatActivity() {
             }
         }
 
+        val emailLayout = binding.emailInputLayout
+        val emailInput = binding.edEmail
+        val passwordLayout = binding.passwordInputLayout
+        val passwordInput = binding.edPassword
+        val confirmPasswordLayout = binding.confirmPasswordInputLayout
+        val confirmPasswordInput = binding.edConfirmPassword
+
+        passwordInput.setTextInputLayout(passwordLayout)
+        confirmPasswordInput.setTextInputLayout(confirmPasswordLayout)
+
+        confirmPasswordInput.setOtherPasswordInput(passwordInput)
+        confirmPasswordInput.setAsConfirmPassword()
+
+        emailInput.setTextInputLayout(emailLayout)
+        passwordInput.setTextInputLayout(passwordLayout)
+        val passsword = passwordInput.setTextInputLayout(passwordLayout)
+        Log.d("Register", "Password: $passsword")
+
         binding.btnRegister.setOnClickListener {
             val name = binding.edName.text.toString()
             val email = binding.edEmail.text.toString()
@@ -52,6 +71,8 @@ class RegisterActivity : AppCompatActivity() {
                 } else{
                     Toast.makeText(this, "Password tidak sama", Toast.LENGTH_SHORT).show()
                 }
+            } else{
+                Toast.makeText(this, "Semua field harus diisi", Toast.LENGTH_SHORT).show()
             }
         }
     }

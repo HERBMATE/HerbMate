@@ -45,12 +45,19 @@ class DetailActivity : AppCompatActivity() {
         }
 
         val name = intent.getStringExtra(EXTRA_NAME)
-        val imageResourceId = intent.getIntExtra(DetailActivity.EXTRA_IMAGE, 0)
+        val imageResourceId = intent.getStringExtra(EXTRA_IMAGE)
         Glide.with(this)
             .load(imageResourceId)
             .into(binding.headerImage)
+        val asal = intent.getStringExtra(EXTRA_ASAL)
+        val latin = intent.getStringExtra(EXTRA_LATIN)
+        val id = intent.getStringExtra(EXTRA_ID)
+        val kandungan = intent.getStringExtra(EXTRA_KANDUNGAN)
 
         binding.tvNama.text = name
+        binding.tvNamaLatin.text = latin
+        binding.tvAsal.text = asal
+        binding.tvKandungan.text = kandungan
         supportActionBar?.hide()
 
         val plantNames = resources.getStringArray(R.array.name_plant)
@@ -82,5 +89,9 @@ class DetailActivity : AppCompatActivity() {
     companion object{
         const val EXTRA_NAME = "extra_name"
         const val EXTRA_IMAGE = "extra_image"
+        const val EXTRA_ID = "extra_id"
+        const val EXTRA_ASAL = "extra_asal"
+        const val EXTRA_LATIN = "extra_latin"
+        const val EXTRA_KANDUNGAN = "extra_kandungan"
     }
 }

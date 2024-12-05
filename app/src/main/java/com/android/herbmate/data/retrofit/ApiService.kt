@@ -1,15 +1,21 @@
 package com.android.herbmate.data.retrofit
 
+import com.android.herbmate.data.response.FaqResponse
+import com.android.herbmate.data.response.HerbPredictResponse
 import com.android.herbmate.data.response.LoginRequest
 import com.android.herbmate.data.response.LoginResponse
 import com.android.herbmate.data.response.RegisterRequest
 import com.android.herbmate.data.response.RegisterResponse
 import com.android.herbmate.data.response.SignInResponse
 import com.android.herbmate.data.response.PenyakitJerawatResponse
+import com.android.herbmate.data.response.TanamanResponse
+import okhttp3.MultipartBody
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.Multipart
 import retrofit2.http.POST
+import retrofit2.http.Part
 import retrofit2.http.Path
 import retrofit2.http.Query
 
@@ -30,4 +36,18 @@ interface ApiService {
     @GET("penyakit/jerawat")
     suspend fun getPenyakitJerawat(
     ): Response<PenyakitJerawatResponse>
+
+    @Multipart
+    @POST("predict")
+    suspend fun herbPredict(
+        @Part file: MultipartBody.Part
+    ): HerbPredictResponse
+
+    @GET("tanaman")
+    suspend fun getTanaman(
+    ) : TanamanResponse
+
+    @GET("api/pertanyaan/kategori/2")
+    suspend fun getPertanyaanKategori(
+    ) : FaqResponse
 }

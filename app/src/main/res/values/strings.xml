@@ -34,13 +34,32 @@
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
     <string name="default_web_client_id">YOUR_WEB_CLIENT_ID_HERE</string>
+    <string name="email_handling">Format email tidak valid</string>
+    <string name="password_handling">Password harus lebih dari 8 karakter</string>
+    <string name="tampilkan_password">Show Password</string>
+    <string name="confirm_password_handling">Password tidak sama</string>
+    <string name="confirm_password_empty">Password Kosong</string>
 
-    <string-array name="chatBot">
-        <item>Saya Chat Bot</item>
+    <string-array name="faq">
+        <item>Nama Tanaman</item>
+        <item>Nama Penyakit</item>
     </string-array>
 
-    <string-array name="chatUser">
-        <item>Hai Kamu Siapa?</item>
+    <string-array name="Tanaman">
+        <item>Nangka</item>
+        <item>Nangka</item>
+        <item>Nangka</item>
+        <item>Nangka</item>
+        <item>Nangka</item>
+    </string-array>
+
+    <string-array name="Penyakit">
+        <item>Flu</item>
+        <item>Flu</item>
+        <item>Flu</item>
+        <item>Flu</item>
+        <item>Flu</item>
+        <item>Flu</item>
     </string-array>
 
 </resources>

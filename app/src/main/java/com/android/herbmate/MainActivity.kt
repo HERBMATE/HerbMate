@@ -28,10 +28,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         mainViewModel.userSession.observe(this) { user ->
-            if (!user.isLogin) {
-                startActivity(Intent(this, LoginActivity::class.java))
-                finish()
-            }
+//            if (!user.isLogin) {
+//                startActivity(Intent(this, LoginActivity::class.java))
+//                finish()
+//            }
         }
 
         binding.fab.setOnClickListener{

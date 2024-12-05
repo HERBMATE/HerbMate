@@ -1,67 +1,56 @@
 package com.android.herbmate.ui.chatbot
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.Spinner
+import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.android.herbmate.ChatBotAdapter
-import com.android.herbmate.R
 import androidx.recyclerview.widget.RecyclerView
-import android.widget.Button
-import com.android.herbmate.ChatMessage
+import com.android.herbmate.R
+//import com.android.herbmate.adapter.TanamanAdapter
+import com.android.herbmate.data.ApiResult
+import com.android.herbmate.ViewModelFactory
 
 class ChatBotFragment : Fragment() {
 
+//    private lateinit var faqAdapter: TanamanAdapter
     private lateinit var recyclerView: RecyclerView
-    private lateinit var chatBotAdapter: ChatBotAdapter
-    private val messages = mutableListOf<ChatMessage>()
+    private lateinit var spinnerFaq: Spinner
+    private lateinit var spinnerOptions: Spinner
 
-    private val faqList = listOf(
-        "Apa itu chatbot?",
-        "Bagaimana cara kerja chatbot?",
-        "Apa manfaat menggunakan chatbot?"
-    )
+    private val viewModel by viewModels<ChatBotViewModel> {
+        ViewModelFactory.getInstance(requireContext())
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_search, container, false)
+        return inflater.inflate(R.layout.fragment_chat_bot, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        recyclerView = view.findViewById(R.id.recyclerView)
-        recyclerView.layoutManager = LinearLayoutManager(context)
-        chatBotAdapter = ChatBotAdapter(messages)
-        recyclerView.adapter = chatBotAdapter
+        val spinner: Spinner = view.findViewById(R.id.spinner)
 
-        // Menampilkan FAQ
-        showFAQ()
+        // Buat adapter dari daftar string
+        val adapter = ArrayAdapter.createFromResource(
+            requireContext(),
+            R.array.Tanaman,  // Array dari strings.xml
+            android.R.layout.simple_spinner_item
+        )
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
 
-        // Menangani klik pada pertanyaan FAQ
-        view.findViewById<Button>(R.id.btn_send).setOnClickListener {
-            // Kirim pesan dari pengguna
-            val userMessage = "Pertanyaan dari pengguna"
-            addMessage(userMessage, true)
-            // Simulasi respons dari chatbot
-            addMessage("Ini adalah respons dari chatbot.", false)
-        }
+        // Hubungkan adapter dengan Spinner
+        spinner.adapter = adapter
     }
 
-    private fun showFAQ() {
-        for (faq in faqList) {
-            addMessage(faq, false) // Menampilkan FAQ sebagai pesan dari chatbot
-        }
-    }
-
-    private fun addMessage(message: String, isUser : Boolean) {
-        messages.add(ChatMessage(message, isUser ))
-        chatBotAdapter.notifyItemInserted(messages.size - 1)
-        recyclerView.scrollToPosition(messages.size - 1)
-    }
 }

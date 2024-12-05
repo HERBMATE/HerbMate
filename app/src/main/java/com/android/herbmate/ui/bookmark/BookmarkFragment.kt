@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
@@ -13,7 +12,6 @@ import com.android.herbmate.Plant
 import com.android.herbmate.PlantAdapter
 import com.android.herbmate.R
 import com.android.herbmate.databinding.FragmentBookmarkBinding
-import com.android.myapplication.herbmate.ui.bookmark.BookmarkViewModel
 
 class BookmarkFragment : Fragment() {
 
@@ -56,16 +54,8 @@ class BookmarkFragment : Fragment() {
             adapter = PlantAdapter(requireContext(), listPlant)
         }
 
-        binding.recyclerViewOther.apply  {
-            layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-            setHasFixedSize(true)
-            adapter = PlantAdapter(requireContext(), listPlant)
-        }
-
         return root
     }
-
-
 
     override fun onDestroyView() {
         super.onDestroyView()

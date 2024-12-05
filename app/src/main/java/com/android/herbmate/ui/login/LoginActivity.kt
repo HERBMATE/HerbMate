@@ -3,10 +3,12 @@ package com.android.herbmate.ui.login
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.text.InputType
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import com.android.herbmate.MainActivity
 import com.android.herbmate.R
@@ -16,10 +18,10 @@ import com.android.herbmate.data.response.SignInResponse
 import com.android.herbmate.data.retrofit.ApiConfig
 import com.android.herbmate.databinding.ActivityLoginBinding
 import com.android.herbmate.ui.register.RegisterActivity
-//import com.google.android.gms.auth.api.signin.GoogleSignIn
-//import com.google.android.gms.auth.api.signin.GoogleSignInClient
-//import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-//import com.google.android.gms.common.api.ApiException
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.api.ApiException
 import kotlinx.coroutines.launch
 
 class LoginActivity : AppCompatActivity() {
@@ -27,7 +29,7 @@ class LoginActivity : AppCompatActivity() {
     private val viewModel by viewModels<LoginViewModel> {
         ViewModelFactory.getInstance(this)
     }
-//    private lateinit var googleSignInClient: GoogleSignInClient
+    private lateinit var googleSignInClient: GoogleSignInClient
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,36 +41,57 @@ class LoginActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        val emailLayout = binding.emailInputLayout
+        val emailInput = binding.edEmail
+
+        val passwordLayout = binding.passwordInputLayout
+        val passwordInput = binding.edPassword
+
+        emailInput.setTextInputLayout(emailLayout)
+        passwordInput.setTextInputLayout(passwordLayout)
+
         viewModel.loginResult.observe(this) { result ->
             when (result) {
                 is ApiResult.Loading -> {
-                    // Tampilkan loading jika diperlukan
+                    binding.progressBar.isVisible = true
                 }
                 is ApiResult.Success -> {
+                    binding.progressBar.isVisible = false
                     startActivity(Intent(this, MainActivity::class.java))
                     finish()
                 }
                 is ApiResult.Error -> {
+                    binding.progressBar.isVisible = false
                     Log.d("Login Error", result.error)
                     Toast.makeText(this, result.error, Toast.LENGTH_SHORT).show()
                 }
             }
         }
 
-//        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-//            .requestIdToken(getString(R.string.default_web_client_id))
-//            .requestEmail()
-//            .build()
-//
-//        googleSignInClient = GoogleSignIn.getClient(this, gso)
-//
-//        binding.btnLoginGoogle.setOnClickListener {
-//            val signInIntent = googleSignInClient.signInIntent
-//            startActivityForResult(signInIntent, RC_SIGN_IN)
-//        }
+        val showPasswordCheckBox = binding.showPasswordCheckBox
+        showPasswordCheckBox.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                passwordInput.inputType = InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
+            } else {
+                passwordInput.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
+            }
+            passwordInput.text?.let { passwordInput.setSelection(it.length) }
+        }
+
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(getString(R.string.default_web_client_id))
+            .requestEmail()
+            .build()
+
+        googleSignInClient = GoogleSignIn.getClient(this, gso)
+
+        binding.btnLoginGoogle.setOnClickListener {
+            val signInIntent = googleSignInClient.signInIntent
+            startActivityForResult(signInIntent, RC_SIGN_IN)
+        }
 
         binding.btnLogin.setOnClickListener {
-            val email = binding.edUsername.text.toString()
+            val email = binding.edEmail.text.toString()
             val password = binding.edPassword.text.toString()
 
             if (email.isNotEmpty() && password.isNotEmpty()) {
@@ -79,23 +102,23 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-//    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-//        super.onActivityResult(requestCode, resultCode, data)
-//
-//        if (requestCode == RC_SIGN_IN) {
-//            val task = GoogleSignIn.getSignedInAccountFromIntent(data)
-//            try {
-//                val account = task.getResult(ApiException::class.java)
-//                val idToken = account?.idToken // Ambil idToken
-//
-//                if (idToken != null) {
-//                    sendIdTokenToServer(idToken) // Kirim idToken ke server
-//                }
-//            } catch (e: ApiException) {
-//                Toast.makeText(this, "Login gagal: ${e.message}", Toast.LENGTH_SHORT).show()
-//            }
-//        }
-//    }
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == RC_SIGN_IN) {
+            val task = GoogleSignIn.getSignedInAccountFromIntent(data)
+            try {
+                val account = task.getResult(ApiException::class.java)
+                val idToken = account?.idToken // Ambil idToken
+
+                if (idToken != null) {
+                    sendIdTokenToServer(idToken) // Kirim idToken ke server
+                }
+            } catch (e: ApiException) {
+                Toast.makeText(this, "Login gagal: ${e.message}", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
 
     private fun sendIdTokenToServer(idToken: String) {
         val apiService = ApiConfig.getApiServices()
