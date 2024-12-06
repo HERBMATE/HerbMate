@@ -8,6 +8,7 @@ import com.android.herbmate.data.response.HerbPredictResponse
 import com.android.herbmate.data.response.LoginRequest
 import com.android.herbmate.data.response.LoginResponse
 import com.android.herbmate.data.response.RegisterRequest
+import com.android.herbmate.data.response.SearchReponseItem
 import com.android.herbmate.data.response.TanamanResponse
 import com.android.herbmate.data.response.TanamanResponseItem
 import com.android.herbmate.data.retrofit.ApiService
@@ -90,6 +91,17 @@ class HerbMateRepository(
         } catch (e: Exception) {
             ApiResult.Error(e.message ?: "Unknown error") // Handle errors
         }
+    }
+
+    suspend fun searchTanaman(nama: String, order: String): ApiResult<List<TanamanResponseItem>> {
+        return try {
+            val response = apiService.searchTanaman(nama, order)
+            val tanamanItems = response.tanamanResponse
+            ApiResult.Success(tanamanItems)
+        } catch (e: Exception) {
+            ApiResult.Error(e.message ?: "Unknown error")
+        }
+
     }
 
 //    suspend fun getListTanaman(): ApiResult<List<String>> {

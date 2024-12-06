@@ -8,6 +8,7 @@ import com.android.herbmate.data.response.RegisterRequest
 import com.android.herbmate.data.response.RegisterResponse
 import com.android.herbmate.data.response.SignInResponse
 import com.android.herbmate.data.response.PenyakitJerawatResponse
+import com.android.herbmate.data.response.SearchResponse
 import com.android.herbmate.data.response.TanamanResponse
 import okhttp3.MultipartBody
 import retrofit2.Response
@@ -50,4 +51,10 @@ interface ApiService {
     @GET("api/pertanyaan/kategori/2")
     suspend fun getPertanyaanKategori(
     ) : FaqResponse
+
+    @GET("tanaman")
+    suspend fun searchTanaman(
+        @Query("nama") nama : String,
+        @Query("order") order : String
+    ) : TanamanResponse
 }

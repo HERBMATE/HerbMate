@@ -45,7 +45,7 @@
             android:layout_marginEnd="16dp"
             android:background="@drawable/rounded_btn_bookmark"
             android:backgroundTint="@color/yellow"
-            android:src="@drawable/ic_bookmark"
+            android:src="@drawable/ic_bookmark_border"
             android:contentDescription="Bookmark button"
             card_view:layout_constraintBottom_toBottomOf="@+id/tv_name"
             card_view:layout_constraintEnd_toEndOf="@id/img_plant"
