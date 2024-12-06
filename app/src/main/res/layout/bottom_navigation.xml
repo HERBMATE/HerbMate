@@ -11,10 +11,10 @@
         android:layout_height="65dp"
         android:layout_gravity="bottom"
         app:fabCradleMargin="10dp"
-        android:color="@color/green"
+        android:color="@color/primaryColor"
         app:contentInsetStart="0dp"
 
-        android:backgroundTint="@color/green" >
+        android:backgroundTint="@color/primaryColor" >
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/nav_view"

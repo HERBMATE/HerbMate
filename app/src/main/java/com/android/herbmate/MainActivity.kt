@@ -7,11 +7,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import com.android.herbmate.data.retrofit.ApiConfig
 import com.android.herbmate.databinding.ActivityMainBinding
-import com.android.herbmate.ui.login.LoginActivity
 import com.android.herbmate.ui.scan.ScanActivity
 
 class MainActivity : AppCompatActivity() {
@@ -45,7 +42,7 @@ class MainActivity : AppCompatActivity() {
         // menu should be considered as top level destinations.
         val appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.navigation_home, R.id.navigation_search, R.id.navigation_bookmark, R.id.navigation_home
+                R.id.navigation_home, R.id.navigation_chatbot, R.id.navigation_bookmark, R.id.navigation_home
             )
         )
 //        setupActionBarWithNavController(navController, appBarConfiguration)

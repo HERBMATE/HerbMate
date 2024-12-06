@@ -4,14 +4,14 @@
     <!-- Outer Border -->
     <item>
         <shape android:shape="oval">
-            <solid android:color="@color/white" /> <!-- Outline Color -->
+            <solid android:color="@color/whiteAndBlackColor" /> <!-- Outline Color -->
         </shape>
     </item>
 
     <!-- Inner FAB -->
     <item android:top="4dp" android:bottom="4dp" android:left="4dp" android:right="4dp">
         <shape android:shape="oval">
-            <solid android:color="@color/green" /> <!-- FAB Background Color -->
+            <solid android:color="@color/primaryColor" /> <!-- FAB Background Color -->
         </shape>
     </item>
 

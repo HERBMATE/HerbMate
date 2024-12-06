@@ -5,12 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.herbmate.Plant
 import com.android.herbmate.PlantAdapter
 import com.android.herbmate.R
+import com.android.herbmate.ViewModelFactory
 import com.android.herbmate.databinding.FragmentBookmarkBinding
 
 class BookmarkFragment : Fragment() {
@@ -22,13 +24,15 @@ class BookmarkFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
+    private val viewModel by viewModels<BookmarkViewModel> {
+        ViewModelFactory.getInstance(requireContext())
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val bookmarkViewModel =
-            ViewModelProvider(this).get(BookmarkViewModel::class.java)
 
         _binding = FragmentBookmarkBinding.inflate(inflater, container, false)
         val root: View = binding.root

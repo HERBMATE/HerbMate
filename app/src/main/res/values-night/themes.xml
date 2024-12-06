@@ -23,4 +23,8 @@
     <color name="searchBarColor">@color/white</color>
 
     <drawable name="logoBlackAndWhite">@drawable/logo_white</drawable>
+    <drawable name="ic_bookmark_blackAndWhite">@drawable/ic_bookmark_white</drawable>
+    <drawable name="ic_home_blackAndWhite">@drawable/ic_home_white</drawable>
+    <drawable name="ic_profile_blackAndWhite">@drawable/ic_person_white</drawable>
+    <drawable name="ic_chatbot_blackAndWhite">@drawable/ic_chatbot_white</drawable>
 </resources>

@@ -39,6 +39,7 @@
     <string name="tampilkan_password">Show Password</string>
     <string name="confirm_password_handling">Password tidak sama</string>
     <string name="confirm_password_empty">Password Kosong</string>
+    <string name="title_chatbot">Chatbot</string>
 
     <string-array name="faq">
         <item>Nama Tanaman</item>

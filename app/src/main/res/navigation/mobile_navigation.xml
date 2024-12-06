@@ -12,9 +12,9 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/navigation_search"
+        android:id="@+id/navigation_chatbot"
         android:name="com.android.herbmate.ui.chatbot.ChatBotFragment"
-        android:label="@string/title_search"
+        android:label="@string/title_chatbot"
         tools:layout="@layout/fragment_chat_bot" />
 
     <fragment
