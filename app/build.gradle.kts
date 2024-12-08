@@ -46,7 +46,6 @@ dependencies {
 //    implementation (libs.androidx.preference)
 //    implementation (libs.androidx.datastore.preferences)
 //
-
     implementation("androidx.core:core-splashscreen:1.0.1")
     implementation("com.github.bumptech.glide:glide:4.15.1")
     annotationProcessor("com.github.bumptech.glide:compiler:4.15.1")

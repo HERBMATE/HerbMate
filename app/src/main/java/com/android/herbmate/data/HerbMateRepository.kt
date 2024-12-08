@@ -11,8 +11,9 @@ import com.android.herbmate.data.response.RegisterRequest
 import com.android.herbmate.data.response.SearchReponseItem
 import com.android.herbmate.data.response.TanamanResponse
 import com.android.herbmate.data.response.TanamanResponseItem
+import com.android.herbmate.data.response.UserUpdateRequest
+import com.android.herbmate.data.response.UserUpdateResponse
 import com.android.herbmate.data.retrofit.ApiService
-import com.google.gson.Gson
 import kotlinx.coroutines.flow.Flow
 import okhttp3.MultipartBody
 import retrofit2.HttpException
@@ -48,6 +49,22 @@ class HerbMateRepository(
         }
     }
 
+    suspend fun update(email: String, name: String, password: String): ApiResult<UserUpdateResponse> {
+        return try {
+            val request = UserUpdateRequest(name, password)
+            val response = apiService.userUpdate(email, request)
+            val user = UserModel(
+                name = response.data.username,
+                email = response.data.email,
+                token = response.token,
+                isLogin = true
+            )
+            saveSession(user)
+            ApiResult.Success(response)
+        } catch (e: HttpException) {
+            ApiResult.Error(e.message ?: "Unknown error")
+        }
+    }
     private suspend fun saveSession(user: UserModel) {
         userPreference.saveSession(user)
     }
@@ -58,6 +75,14 @@ class HerbMateRepository(
 
     suspend fun logout() {
         userPreference.logout()
+    }
+
+    fun getThemeSetting(): Flow<Boolean> {
+        return userPreference.getThemeSetting()
+    }
+
+    suspend fun saveThemeSetting(isDarkModeActive: Boolean) {
+        userPreference.saveThemeSetting(isDarkModeActive)
     }
 
     suspend fun uploadHerbImage(file: MultipartBody.Part): ApiResult<HerbPredictResponse> {

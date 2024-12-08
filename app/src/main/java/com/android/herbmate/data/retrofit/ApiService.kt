@@ -10,6 +10,9 @@ import com.android.herbmate.data.response.SignInResponse
 import com.android.herbmate.data.response.PenyakitJerawatResponse
 import com.android.herbmate.data.response.SearchResponse
 import com.android.herbmate.data.response.TanamanResponse
+import com.android.herbmate.data.response.UpdateData
+import com.android.herbmate.data.response.UserUpdateRequest
+import com.android.herbmate.data.response.UserUpdateResponse
 import okhttp3.MultipartBody
 import retrofit2.Response
 import retrofit2.http.Body
@@ -57,4 +60,10 @@ interface ApiService {
         @Query("nama") nama : String,
         @Query("order") order : String
     ) : TanamanResponse
+
+    @POST("users/update/{email}")
+    suspend fun userUpdate(
+        @Path("email") email: String,
+        @Body userUpdateRequest: UserUpdateRequest
+    ) : UserUpdateResponse
 }

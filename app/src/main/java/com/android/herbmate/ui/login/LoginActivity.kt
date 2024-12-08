@@ -109,7 +109,7 @@ class LoginActivity : AppCompatActivity() {
             val task = GoogleSignIn.getSignedInAccountFromIntent(data)
             try {
                 val account = task.getResult(ApiException::class.java)
-                val idToken = account?.idToken // Ambil idToken
+                val idToken = account?.idToken
 
                 if (idToken != null) {
                     sendIdTokenToServer(idToken) // Kirim idToken ke server
@@ -134,6 +134,7 @@ class LoginActivity : AppCompatActivity() {
 //                        Toast.makeText(this, "Login Berhasil", Toast.LENGTH_SHORT).show()
                     }
                 } else {
+                    Log.d("Login", response.message())
                     Toast.makeText(this@LoginActivity, "Login gagal: ${response.message()}", Toast.LENGTH_SHORT).show()
                 }
             } catch (e: Exception) {

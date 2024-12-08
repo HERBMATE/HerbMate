@@ -28,19 +28,19 @@
         android:text=""
         android:textAllCaps="false"
         android:textColor="@color/white"
-        app:layout_constraintBottom_toTopOf="@+id/name_input_layout"
-        app:layout_constraintEnd_toEndOf="@+id/name_input_layout"
+        app:layout_constraintBottom_toTopOf="@+id/email_input_layout"
+        app:layout_constraintEnd_toEndOf="@+id/email_input_layout"
         app:layout_constraintTop_toBottomOf="@+id/imageView2"
         app:layout_constraintVertical_bias="1.0" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/name_input_layout"
+        android:id="@+id/email_input_layout"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="67.5dp"
         android:layout_marginEnd="67.5dp"
-        android:hint="Name"
+        android:enabled="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -48,46 +48,46 @@
         app:layout_constraintVertical_bias="0.32">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/ed_name"
+            android:id="@+id/ed_email"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/email_input_layout"
+        android:id="@+id/name_input_layout"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Email"
         android:layout_marginTop="16dp"
         android:layout_marginStart="67.5dp"
         android:layout_marginEnd="67.5dp"
+        android:enabled="false"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/name_input_layout">
+        app:layout_constraintTop_toBottomOf="@id/email_input_layout">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/ed_email"
+            android:id="@+id/ed_name"
             android:inputType="textEmailAddress"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/username_input_layout"
+        android:id="@+id/password_input_layout"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="67.5dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="67.5dp"
-        android:hint="Username"
+        android:enabled="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/email_input_layout">
+        app:layout_constraintTop_toBottomOf="@id/name_input_layout">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/ed_username"
+            android:id="@+id/ed_password"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -100,7 +100,7 @@
         android:id="@+id/btn_log_out"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/btn_auth"
         android:backgroundTint="@color/whiteAndBlackColor"
         android:text="Log Out"
@@ -117,20 +117,35 @@
         android:background="@drawable/btn_auth"
         android:backgroundTint="@color/primaryColor"
         android:text="Save"
+        android:visibility="gone"
         android:textAllCaps="false"
         android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="@id/username_input_layout"
-        app:layout_constraintTop_toBottomOf="@+id/tvDarkModeLabel" />
+        app:layout_constraintEnd_toEndOf="@id/password_input_layout"
+        app:layout_constraintTop_toBottomOf="@+id/password_input_layout" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/btn_auth"
+        android:backgroundTint="@color/primaryColor"
+        android:text="Cancel"
+        android:textAllCaps="false"
+        android:visibility="gone"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_save"
+        app:layout_constraintStart_toStartOf="@id/password_input_layout"
+        app:layout_constraintTop_toTopOf="@+id/btn_save" />
 
     <com.google.android.material.switchmaterial.SwitchMaterial
         android:id="@+id/switchDarkMode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:thumb="@drawable/custom_switch_thumb"
         android:track="@drawable/custom_switch_track"
-        app:layout_constraintEnd_toEndOf="@+id/username_input_layout"
-        app:layout_constraintTop_toBottomOf="@+id/username_input_layout" />
+        app:layout_constraintEnd_toEndOf="@+id/password_input_layout"
+        app:layout_constraintTop_toBottomOf="@+id/btn_save" />
 
     <TextView
         android:id="@+id/tvDarkModeLabel"
@@ -139,7 +154,7 @@
         android:text="Dark Mode"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@+id/switchDarkMode"
-        app:layout_constraintStart_toStartOf="@+id/username_input_layout"
+        app:layout_constraintStart_toStartOf="@+id/password_input_layout"
         app:layout_constraintTop_toTopOf="@+id/switchDarkMode"
         app:layout_constraintVertical_bias="0.538" />
 

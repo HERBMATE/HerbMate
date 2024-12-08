@@ -8,4 +8,8 @@ import com.android.herbmate.data.pref.UserModel
 
 class MainViewModel(val repository: HerbMateRepository) : ViewModel() {
     val userSession: LiveData<UserModel> = repository.getSession().asLiveData()
+
+    fun getThemeSettings(): LiveData<Boolean> {
+        return repository.getThemeSetting().asLiveData()
+    }
 }
