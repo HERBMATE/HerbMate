@@ -13,8 +13,12 @@ import com.android.herbmate.ui.upload.UploadViewModel
 import com.android.herbmate.ui.bookmark.BookmarkViewModel
 import com.android.herbmate.ui.chatbot.ChatBotViewModel
 import com.android.herbmate.ui.home.HomeViewModel
+import com.google.ai.client.generativeai.GenerativeModel
 
-class ViewModelFactory(private val repository: HerbMateRepository) : ViewModelProvider.NewInstanceFactory() {
+class ViewModelFactory(
+    private val repository: HerbMateRepository,
+    private val generativeModel: GenerativeModel
+) : ViewModelProvider.NewInstanceFactory() {
 
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
@@ -44,7 +48,7 @@ class ViewModelFactory(private val repository: HerbMateRepository) : ViewModelPr
                 HomeViewModel(repository) as T
             }
             modelClass.isAssignableFrom(ChatBotViewModel::class.java) -> {
-                ChatBotViewModel(repository) as T
+                ChatBotViewModel(generativeModel) as T
             }
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }
@@ -53,11 +57,17 @@ class ViewModelFactory(private val repository: HerbMateRepository) : ViewModelPr
     companion object {
         @Volatile
         private var INSTANCE: ViewModelFactory? = null
+
         @JvmStatic
         fun getInstance(context: Context): ViewModelFactory {
+            val repository = Injection.provideRepository(context)
+            val generativeModel = GenerativeModel(
+                modelName = "gemini-pro",
+                apiKey = "AIzaSyA3j1LX3fvspUzIdqdeJvX3ejqoMVj_jRs"
+            )
             if (INSTANCE == null) {
                 synchronized(ViewModelFactory::class.java) {
-                    INSTANCE = ViewModelFactory(Injection.provideRepository(context))
+                    INSTANCE = ViewModelFactory(repository, generativeModel)
                 }
             }
             return INSTANCE as ViewModelFactory

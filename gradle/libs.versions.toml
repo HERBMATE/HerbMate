@@ -21,6 +21,7 @@ ucrop = "2.2.9-native"
 litertSupportApi = "1.0.1"
 annotation = "1.6.0"
 activity = "1.9.3"
+generativeai = "0.9.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -45,6 +46,7 @@ ucrop = { module = "com.github.yalantis:ucrop", version.ref = "ucrop" }
 litert-support-api = { group = "com.google.ai.edge.litert", name = "litert-support-api", version.ref = "litertSupportApi" }
 androidx-annotation = { group = "androidx.annotation", name = "annotation", version.ref = "annotation" }
 androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
+generativeai = { module = "com.google.ai.client.generativeai:generativeai", version.ref = "generativeai" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
