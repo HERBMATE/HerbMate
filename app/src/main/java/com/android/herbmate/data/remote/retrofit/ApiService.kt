@@ -4,7 +4,6 @@ import com.android.herbmate.data.remote.response.AddBookmarkResponse
 import com.android.herbmate.data.remote.response.ChatBotRequest
 import com.android.herbmate.data.remote.response.ChatBotResponse
 import com.android.herbmate.data.remote.response.DeleteBookmarkResponse
-import com.android.herbmate.data.remote.response.FaqResponse
 import com.android.herbmate.data.remote.response.ForgotPassRequest
 import com.android.herbmate.data.remote.response.ForgotPassResponse
 import com.android.herbmate.data.remote.response.GetBookmarkResponse
@@ -14,14 +13,8 @@ import com.android.herbmate.data.remote.response.LoginResponse
 import com.android.herbmate.data.remote.response.RegisterRequest
 import com.android.herbmate.data.remote.response.RegisterResponse
 import com.android.herbmate.data.remote.response.SignInResponse
-import com.android.herbmate.data.remote.response.PenyakitJerawatResponse
-import com.android.herbmate.data.remote.response.SearchRequest
-import com.android.herbmate.data.remote.response.SearchResponse
 import com.android.herbmate.data.remote.response.TanamanDetailsResponse
 import com.android.herbmate.data.remote.response.TanamanResponse
-import com.android.herbmate.data.remote.response.UpdateData
-import com.android.herbmate.data.remote.response.UserUpdateRequest
-import com.android.herbmate.data.remote.response.UserUpdateResponse
 import okhttp3.MultipartBody
 import retrofit2.Response
 import retrofit2.http.Body
@@ -37,23 +30,23 @@ import retrofit2.http.Query
 interface ApiService {
     @POST("users/register")
     suspend fun register(
-        @Body request: com.android.herbmate.data.remote.response.RegisterRequest
-    ): com.android.herbmate.data.remote.response.RegisterResponse
+        @Body request: RegisterRequest
+    ): RegisterResponse
 
     @POST("users/login")
     suspend fun login(
-        @Body request: com.android.herbmate.data.remote.response.LoginRequest
-    ): com.android.herbmate.data.remote.response.LoginResponse
+        @Body request: LoginRequest
+    ): LoginResponse
 
     @GET("auth/google/callback")
     suspend fun googleSignIn(
         @Query("code") code: String
-    ): com.android.herbmate.data.remote.response.SignInResponse
+    ): SignInResponse
 
     @POST("users/forgotPass")
     suspend fun forgotPass(
-        @Body request: com.android.herbmate.data.remote.response.ForgotPassRequest
-    ) : com.android.herbmate.data.remote.response.ForgotPassResponse
+        @Body request: ForgotPassRequest
+    ) : ForgotPassResponse
 
 //    @POST("users/reset-password")
 //    suspend fun resetPassword(
@@ -65,42 +58,47 @@ interface ApiService {
     @POST("predict")
     suspend fun herbPredict(
         @Part file: MultipartBody.Part
-    ): com.android.herbmate.data.remote.response.HerbPredictResponse
+    ): HerbPredictResponse
 
     @GET("tanaman/getAllTanaman")
     suspend fun getTanaman(
-    ) : com.android.herbmate.data.remote.response.TanamanResponse
+    ) : TanamanResponse
 
     @GET("tanaman/getDetails/{nama}")
     suspend fun getTanamanDetails(
         @Path("nama") nama: String
-    ) : com.android.herbmate.data.remote.response.TanamanDetailsResponse
+    ) : TanamanDetailsResponse
 
     @GET("users/getBookmark/{idUser}")
     suspend fun getBookmark(
         @Path("idUser") idUser: Int
-    ) : com.android.herbmate.data.remote.response.GetBookmarkResponse
+    ) : GetBookmarkResponse
 
     @POST("users/addBookmark/{idUser}/{id}")
     suspend fun addBookmark(
         @Path("idUser") idUser: Int,
         @Path("id") id: Int
-    ) : com.android.herbmate.data.remote.response.AddBookmarkResponse
+    ) : AddBookmarkResponse
 
     @DELETE("users/delBookmark/{idBookmark}")
     suspend fun deleteBookmark(
         @Path("idBookmark") idBookmark: Int
-    ) : com.android.herbmate.data.remote.response.DeleteBookmarkResponse
+    ) : DeleteBookmarkResponse
 
     @POST("chatbot")
     suspend fun chatBot(
-        @Body request: com.android.herbmate.data.remote.response.ChatBotRequest
-    ) : com.android.herbmate.data.remote.response.ChatBotResponse
+        @Body request: ChatBotRequest
+    ) : ChatBotResponse
 
     @GET("tanaman/search")
     suspend fun search(
         @Query("search") nama : String?,
-    ) : com.android.herbmate.data.remote.response.TanamanResponse
+    ) : TanamanResponse
+
+    @GET("tanaman/getRekomendasi/{penyakit}")
+    suspend fun rekomendasi(
+        @Path("penyakit") penyakit : String
+    ) : Response<TanamanResponse>
 
 //    @GET("tanaman")
 //    suspend fun searchTanaman(

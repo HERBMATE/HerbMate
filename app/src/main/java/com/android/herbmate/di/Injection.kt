@@ -1,6 +1,7 @@
 package com.android.herbmate.di
 
 import android.content.Context
+import android.util.Log
 import com.android.herbmate.data.HerbMateRepository
 import com.android.herbmate.data.local.room.HistoryDatabase
 import com.android.herbmate.data.local.pref.UserPreference
@@ -19,5 +20,6 @@ object Injection {
         val dao = database.historyDao()
         val appExecutors = AppExecutors()
         return HerbMateRepository.getInstance(apiService, pref, dao, appExecutors)
+        Log.d("Injection", "Token: ${user.token}")
     }
 }

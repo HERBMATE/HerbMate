@@ -12,7 +12,7 @@ import com.android.herbmate.databinding.ItemPlantHomeBinding
 import com.android.herbmate.ui.detail.DetailActivity
 import com.bumptech.glide.Glide
 
-class PlantAdapterHome(private val listener: OnBookmarkClickListener) : ListAdapter<TanamanItem, PlantAdapterHome.ListViewHolder>(
+class RekomendasiAdapter(private val listener: OnBookmarkClickListener) : ListAdapter<TanamanItem, RekomendasiAdapter.ListViewHolder>(
     DIFF_CALLBACK
 ) {
     class ListViewHolder(private val binding: ItemPlantHomeBinding) : RecyclerView.ViewHolder(binding.root) {

@@ -5,21 +5,26 @@ import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.android.herbmate.OnBookmarkClickListener
 import com.android.herbmate.databinding.ActivityDetailBinding
 import com.android.herbmate.adapter.BookmarkAdapter
 import com.android.herbmate.data.ViewModelFactory
 import com.android.herbmate.adapter.PenyakitAdapter
+import com.android.herbmate.adapter.RekomendasiAdapter
 import com.android.herbmate.data.ApiResult
 import com.bumptech.glide.Glide
 
-class DetailActivity : AppCompatActivity() {
+class DetailActivity : AppCompatActivity(), OnBookmarkClickListener {
 
     private lateinit var binding : ActivityDetailBinding
     private lateinit var adapter: BookmarkAdapter
     private lateinit var penyakitAdapter: PenyakitAdapter
+    private lateinit var rekomendasiAdapter: RekomendasiAdapter
     private val viewModel by viewModels<DetailViewModel>{
         ViewModelFactory.getInstance(this)
     }
+
+    private var idUser : Int = 0
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,9 +36,13 @@ class DetailActivity : AppCompatActivity() {
             onBackPressed()
         }
 
+        observeUserSession()
         penyakitAdapter = PenyakitAdapter()
+        rekomendasiAdapter = RekomendasiAdapter(this)
         binding.rvPenyakit.layoutManager = LinearLayoutManager(this)
         binding.rvPenyakit.adapter = penyakitAdapter
+        binding.rvRekomendasi.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        binding.rvRekomendasi.adapter = rekomendasiAdapter
 
         viewModel.detailTanaman.observe(this){ result ->
             when(result){
@@ -46,10 +55,14 @@ class DetailActivity : AppCompatActivity() {
                 is ApiResult.Success -> {
                     penyakitAdapter.submitList(result.data)
                     val penyakit = result.data.map { it.penyakit }
-                    Log.d("DetailTanaman", "Data: ${penyakit}")
+                    viewModel.getRekomendasi(penyakit)
                     }
                 }
             }
+
+        viewModel.rekomendasi.observe(this) { rekomendasiList ->
+            rekomendasiAdapter.submitList(rekomendasiList)
+        }
 
         val name = intent.getStringExtra(EXTRA_NAME)
         val image = intent.getStringExtra(EXTRA_IMAGE)
@@ -67,8 +80,17 @@ class DetailActivity : AppCompatActivity() {
 
         if (name != null) {
             viewModel.getDetailsTanaman(name)
-            Log.d("nama", name)
         }
+    }
+
+    private fun observeUserSession() {
+        viewModel.userSession.observe(this) { user ->
+            idUser = user.id
+        }
+    }
+
+    override fun onBookmarkClick(idTanaman: Int) {
+        viewModel.addBookmark(idUser , idTanaman)
     }
 
     companion object{

@@ -66,21 +66,18 @@ class UploadActivity : AppCompatActivity() {
                     is ApiResult.Success -> {
                         binding.progressBar.visibility = View.GONE
 
-                        // Ambil data dari hasil API
-                        val nama = result.data.nama
-                        val namaLatin = result.data.namaLatin
-                        val asal = result.data.asal
-                        val gambar = result.data.gambar
-                        val id = result.data.id
-                        val kandungan = result.data.kandungan
+                        val nama = result.data.data.nama
+                        val namaLatin = result.data.data.namaLatin
+                        val asal = result.data.data.asal
+                        val gambar = result.data.data.gambar
+                        val id = result.data.data.id
+                        val kandungan = result.data.data.kandungan
 
-                        // Simpan data ke riwayat
                         historyViewModel.addHistory(
                             filePath = uri.toString(),
                             plant = nama
                         )
 
-                        // Pindah ke halaman detail
                         val intent = Intent(binding.root.context, DetailActivity::class.java).apply {
                             putExtra(DetailActivity.EXTRA_NAME, nama)
                             putExtra(DetailActivity.EXTRA_LATIN, namaLatin)

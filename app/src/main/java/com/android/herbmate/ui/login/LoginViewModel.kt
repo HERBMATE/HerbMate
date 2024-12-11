@@ -10,8 +10,8 @@ import com.android.herbmate.data.remote.response.LoginResponse
 import kotlinx.coroutines.launch
 
 class LoginViewModel(val repository : HerbMateRepository) : ViewModel() {
-    private val _loginResult = MutableLiveData<ApiResult<com.android.herbmate.data.remote.response.LoginResponse>>()
-    val loginResult: LiveData<ApiResult<com.android.herbmate.data.remote.response.LoginResponse>> get() = _loginResult
+    private val _loginResult = MutableLiveData<ApiResult<LoginResponse>>()
+    val loginResult: LiveData<ApiResult<LoginResponse>> get() = _loginResult
 
     fun login(email: String, password: String) {
         viewModelScope.launch {
