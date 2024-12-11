@@ -1,14 +1,30 @@
 package com.android.herbmate.data.remote.response
 
+import com.google.gson.annotations.SerializedName
+
 data class UserUpdateResponse(
-    val data: com.android.herbmate.data.remote.response.UpdateData,
+
+    @field:SerializedName("data")
+    val data: UpdateData,
+
+    @field:SerializedName("error")
+    val error: Boolean,
+
+    @field:SerializedName("message")
     val message: String,
+
+    @field:SerializedName("token")
     val token: String
 )
 
 data class UpdateData(
-	val idUser: Int,
-	val email: String,
-	val username: String
-)
 
+    @field:SerializedName("idUser")
+    val idUser: Int,
+
+    @field:SerializedName("name")
+    val name: String,
+
+    @field:SerializedName("email")
+    val email: String
+)

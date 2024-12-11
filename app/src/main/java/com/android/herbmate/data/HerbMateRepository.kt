@@ -18,6 +18,8 @@ import com.android.herbmate.data.remote.response.LoginResponse
 import com.android.herbmate.data.remote.response.RegisterRequest
 import com.android.herbmate.data.remote.response.TanamanDetailsItem
 import com.android.herbmate.data.remote.response.TanamanItem
+import com.android.herbmate.data.remote.response.UserUpdateRequest
+import com.android.herbmate.data.remote.response.UserUpdateResponse
 import com.android.herbmate.data.remote.retrofit.ApiConfig
 import com.android.herbmate.data.remote.retrofit.ApiService
 import com.android.herbmate.utils.AppExecutors
@@ -83,22 +85,24 @@ class HerbMateRepository(
         }
     }
 
-    //    suspend fun update(email: String, name: String, password: String): ApiResult<UserUpdateResponse> {
-//        return try {
-//            val request = UserUpdateRequest(name, password)
-//            val response = apiService.userUpdate(email, request)
-//            val user = UserModel(
-//                name = response.data.username,
-//                email = response.data.email,
-//                token = response.token,
-//                isLogin = true
-//            )
-//            saveSession(user)
-//            ApiResult.Success(response)
-//        } catch (e: HttpException) {
-//            ApiResult.Error(e.message ?: "Unknown error")
-//        }
-//    }
+        suspend fun update(email: String, name: String?, verify: String?, password: String?): ApiResult<UserUpdateResponse> {
+        return try {
+            val request = UserUpdateRequest(name, verify, password)
+            val response = apiService.userUpdate(email, request)
+            val user = UserModel(
+                id = response.data.idUser,
+                name = response.data.name,
+                email = response.data.email,
+                token = response.token,
+                isLogin = true
+            )
+            saveSession(user)
+            ApiResult.Success(response)
+        } catch (e: HttpException) {
+            ApiResult.Error(e.message ?: "Unknown error")
+        }
+    }
+
     private suspend fun saveSession(user: UserModel) {
         userPreference.saveSession(user)
     }

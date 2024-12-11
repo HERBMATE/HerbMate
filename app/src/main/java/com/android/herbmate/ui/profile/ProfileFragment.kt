@@ -25,6 +25,7 @@ class ProfileFragment : Fragment() {
         ViewModelFactory.getInstance(requireContext())
     }
     private val binding get() = _binding!!
+    private var userEmail: String? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -47,11 +48,9 @@ class ProfileFragment : Fragment() {
         binding.switchDarkMode.isChecked = isDarkMode
         binding.switchDarkMode.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
-                // Aktifkan Dark Mode
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
                 saveThemePreference(true)
             } else {
-                // Aktifkan Light Mode
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
                 saveThemePreference(false)
             }
@@ -63,12 +62,14 @@ class ProfileFragment : Fragment() {
             if (isEdit) {
                 binding.edName.isEnabled = false
                 binding.edPassword.isEnabled = false
+                binding.edPasswordbaru.isEnabled = false
                 binding.btnSave.visibility = View.GONE
                 binding.btnCancel.visibility = View.GONE
                 isEdit = false
             } else {
                 binding.edName.isEnabled = true
                 binding.edPassword.isEnabled = true
+                binding.edPasswordbaru.isEnabled = true
                 binding.btnSave.visibility = View.VISIBLE
                 binding.btnCancel.visibility = View.VISIBLE
                 isEdit = true
@@ -77,20 +78,34 @@ class ProfileFragment : Fragment() {
 
         viewModel.updateResult.observe(viewLifecycleOwner) { result ->
             when (result) {
-                is ApiResult.Error -> TODO()
-                is ApiResult.Loading -> TODO()
-                is ApiResult.Success -> TODO()
+                is ApiResult.Error -> {
+                    binding.progressBar.visibility = View.GONE
+                }
+                is ApiResult.Loading -> {
+                    binding.progressBar.visibility = View.VISIBLE
+                }
+                is ApiResult.Success -> {
+                    binding.progressBar.visibility = View.GONE
+                    binding.edName.isEnabled = false
+                    binding.edPassword.isEnabled = false
+                    binding.edPasswordbaru.isEnabled = false
+                    binding.edPassword.text = null
+                    binding.edPasswordbaru.text = null
+                    binding.btnSave.visibility = View.GONE
+                    binding.btnCancel.visibility = View.GONE
+                }
             }
         }
 
-//        binding.btnSave.setOnClickListener {
-//            viewModel.update(email, name, password)
-//            binding.edName.isEnabled = false
-//            binding.edPassword.isEnabled = false
-//            binding.btnSave.visibility = View.GONE
-//            binding.btnCancel.visibility = View.GONE
-//            isEdit = false
-//        }
+        binding.btnSave.setOnClickListener {
+            val email = binding.edEmail.text.toString()
+            val name = binding.edName.text.toString()
+            val verify = binding.edPassword.text.toString()
+            val password = binding.edPasswordbaru.text.toString()
+
+            viewModel.update(email, name,verify, password)
+
+        }
 
         binding.btnCancel.setOnClickListener {
             binding.edName.isEnabled = false

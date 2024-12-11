@@ -22,13 +22,13 @@ class ProfileViewModel(val repository: HerbMateRepository) : ViewModel() {
         }
     }
 
-//    fun update(email: String, name: String, password: String) {
-//        viewModelScope.launch {
-//            _updateResult.value = ApiResult.Loading
-//            val result = repository.update(email, name, password)
-//            _updateResult.value = result
-//        }
-//    }
+    fun update(email: String, name: String?, verify: String?, password: String?) {
+        viewModelScope.launch {
+            _updateResult.value = ApiResult.Loading
+            val result = repository.update(email, name, verify, password)
+            _updateResult.value = result
+        }
+    }
 
     fun getThemeSettings(): LiveData<Boolean> {
         return repository.getThemeSetting().asLiveData()

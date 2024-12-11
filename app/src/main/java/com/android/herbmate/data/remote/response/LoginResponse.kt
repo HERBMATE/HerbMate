@@ -1,7 +1,7 @@
 package com.android.herbmate.data.remote.response
 
 data class LoginResponse(
-    val data: com.android.herbmate.data.remote.response.LoginResult,
+    val data: LoginResult,
     val error: Boolean,
     val message: String,
     val token: String

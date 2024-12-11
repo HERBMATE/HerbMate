@@ -15,6 +15,8 @@ import com.android.herbmate.data.remote.response.RegisterResponse
 import com.android.herbmate.data.remote.response.SignInResponse
 import com.android.herbmate.data.remote.response.TanamanDetailsResponse
 import com.android.herbmate.data.remote.response.TanamanResponse
+import com.android.herbmate.data.remote.response.UserUpdateRequest
+import com.android.herbmate.data.remote.response.UserUpdateResponse
 import okhttp3.MultipartBody
 import retrofit2.Response
 import retrofit2.http.Body
@@ -48,11 +50,11 @@ interface ApiService {
         @Body request: ForgotPassRequest
     ) : ForgotPassResponse
 
-//    @POST("users/reset-password")
-//    suspend fun resetPassword(
-//        @Query("token") token: String,
-//        @Body request: ForgotPassRequest
-//    ) : ResetPassResponse
+    @PATCH("users/update/{email}")
+    suspend fun userUpdate(
+        @Path("email") email: String,
+        @Body request: UserUpdateRequest
+    ) : UserUpdateResponse
 
     @Multipart
     @POST("predict")
