@@ -128,6 +128,20 @@
         app:layout_constraintTop_toBottomOf="@+id/tvDarkModeLabel" />
 
     <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_history"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/btn_auth"
+        android:backgroundTint="@color/whiteAndBlackColor"
+        android:text="History"
+        android:textAllCaps="false"
+        android:textColor="@color/green"
+        app:layout_constraintEnd_toEndOf="@+id/btn_save"
+        app:layout_constraintStart_toStartOf="@+id/btn_save"
+        app:layout_constraintTop_toBottomOf="@+id/tvDarkModeLabel" />
+
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_save"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -24,47 +24,46 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.HerbMate"
         tools:targetApi="31">
-
+        <activity
+            android:name=".ui.history.HistoryActivity"
+            android:exported="false" />
         <activity
             android:name=".ui.splash.SplashActivity"
             android:exported="true"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".ui.forgetpass.ForgetPassActivity"
             android:exported="false" />
         <activity
             android:name=".ui.upload.UploadActivity"
             android:exported="false" />
-
         <activity
             android:name=".ui.onboarding.OnBoardingActivity"
             android:exported="true"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-
-        <!--        <activity-->
-<!--            android:name=".ui.onboarding.OnBoardingActivity"-->
-<!--            android:exported="false" />-->
-<!--        <activity-->
-<!--            android:name=".SplashActivity"-->
-<!--            android:exported="true"-->
-<!--            android:theme="@style/SplashTheme">-->
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
-
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
-<!--        </activity>-->
+        </activity> <!-- <activity -->
+        <!-- android:name=".ui.onboarding.OnBoardingActivity" -->
+        <!-- android:exported="false" /> -->
+        <!-- <activity -->
+        <!-- android:name=".SplashActivity" -->
+        <!-- android:exported="true" -->
+        <!-- android:theme="@style/SplashTheme"> -->
+        <!-- <intent-filter> -->
+        <!-- <action android:name="android.intent.action.MAIN" /> -->
+        <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+        <!-- </intent-filter> -->
+        <!-- </activity> -->
         <activity
             android:name=".ui.scan.ScanActivity"
             android:exported="false" />
@@ -86,8 +85,7 @@
         <activity
             android:name=".MainActivity"
             android:exported="false"
-            android:label="@string/app_name">
-        </activity>
+            android:label="@string/app_name"></activity>
         <activity
             android:name="com.yalantis.ucrop.UCropActivity"
             android:screenOrientation="portrait"

@@ -15,6 +15,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.android.herbmate.ViewModelFactory
 import com.android.herbmate.data.ApiResult
 import com.android.herbmate.databinding.FragmentProfileBinding
+import com.android.herbmate.ui.history.HistoryActivity
 import com.android.herbmate.ui.login.LoginActivity
 import com.google.android.material.switchmaterial.SwitchMaterial
 
@@ -105,6 +106,10 @@ class ProfileFragment : Fragment() {
         binding.btnLogOut.setOnClickListener {
             viewModel.logout()
             startActivity(Intent(requireContext(), LoginActivity::class.java))
+        }
+
+        binding.btnHistory.setOnClickListener{
+            startActivity(Intent(requireContext(), HistoryActivity::class.java))
         }
 
         viewModel.userSession.observe(viewLifecycleOwner) { user ->

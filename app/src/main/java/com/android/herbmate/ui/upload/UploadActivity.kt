@@ -5,16 +5,15 @@ import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import androidx.activity.enableEdgeToEdge
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.android.herbmate.R
 import com.android.herbmate.ViewModelFactory
 import com.android.herbmate.data.ApiResult
 import com.android.herbmate.databinding.ActivityUploadBinding
 import com.android.herbmate.ui.detail.DetailActivity
+import com.android.herbmate.ui.history.HistoryViewModel
 import com.android.herbmate.utils.reduceFileImage
 import com.android.herbmate.utils.uriToFile
 import okhttp3.MediaType.Companion.toMediaType
@@ -23,29 +22,33 @@ import okhttp3.RequestBody.Companion.asRequestBody
 
 class UploadActivity : AppCompatActivity() {
     private lateinit var binding: ActivityUploadBinding
-    private val viewModel by viewModels<UploadViewModel>{
+
+    private val uploadViewModel by viewModels<UploadViewModel> {
         ViewModelFactory.getInstance(this)
     }
+
+    private val historyViewModel by viewModels<HistoryViewModel> {
+        ViewModelFactory.getInstance(this)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityUploadBinding.inflate(layoutInflater)
         setContentView(binding.root)
-//        val uri = intent.getParcelableExtra<Uri>("image_uri")
-        val uri = intent.getParcelableExtra<Uri>("image_uri")
 
+        val uri = intent.getParcelableExtra<Uri>("image_uri")
         if (uri != null) {
-            viewModel.currentImageUri = uri
+            uploadViewModel.currentImageUri = uri
             showImage()
         }
 
         binding.uploadBtn.setOnClickListener {
             uploadImage()
         }
-
     }
 
     private fun uploadImage() {
-        viewModel.currentImageUri?.let { uri ->
+        uploadViewModel.currentImageUri?.let { uri ->
             val imageFile = uriToFile(uri, this).reduceFileImage()
             Log.d("Image File", "showImage: ${imageFile.path}")
             val requestImageFile = imageFile.asRequestBody("image/jpeg".toMediaType())
@@ -54,23 +57,34 @@ class UploadActivity : AppCompatActivity() {
                 imageFile.name,
                 requestImageFile
             )
-            viewModel.uploadImage(multipartBody)
-            viewModel.uploadResponse.observe(this) { result ->
+
+            uploadViewModel.uploadImage(multipartBody)
+            uploadViewModel.uploadResponse.observe(this) { result ->
                 when (result) {
                     is ApiResult.Loading -> {
                         binding.progressBar.visibility = View.VISIBLE
                     }
                     is ApiResult.Success -> {
                         binding.progressBar.visibility = View.GONE
+
+                        // Ambil data dari hasil API
                         val nama = result.data.nama
-                        val nama_latin = result.data.namaLatin
+                        val namaLatin = result.data.namaLatin
                         val asal = result.data.asal
                         val gambar = result.data.gambar
                         val id = result.data.id
                         val kandungan = result.data.kandungan
+
+                        // Simpan data ke riwayat
+                        historyViewModel.addHistory(
+                            filePath = uri.toString(),
+                            plant = nama
+                        )
+
+                        // Pindah ke halaman detail
                         val intent = Intent(binding.root.context, DetailActivity::class.java).apply {
                             putExtra(DetailActivity.EXTRA_NAME, nama)
-                            putExtra(DetailActivity.EXTRA_LATIN, nama_latin)
+                            putExtra(DetailActivity.EXTRA_LATIN, namaLatin)
                             putExtra(DetailActivity.EXTRA_ASAL, asal)
                             putExtra(DetailActivity.EXTRA_IMAGE, gambar)
                             putExtra(DetailActivity.EXTRA_ID, id)
@@ -80,17 +94,16 @@ class UploadActivity : AppCompatActivity() {
                     }
                     is ApiResult.Error -> {
                         binding.progressBar.visibility = View.GONE
-
+                        Toast.makeText(this, "Error: ${result.error}", Toast.LENGTH_SHORT).show()
+                        Log.e("Upload Error", "uploadImage: ${result.error}")
                     }
-
                 }
-
             }
         }
     }
 
     private fun showImage() {
-        viewModel.currentImageUri?.let {
+        uploadViewModel.currentImageUri?.let {
             Log.d("Image URI", "showImage: $it")
             binding.image.setImageURI(it)
         }

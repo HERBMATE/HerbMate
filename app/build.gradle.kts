@@ -53,6 +53,8 @@ dependencies {
 //
     implementation("androidx.core:core-splashscreen:1.0.1")
     implementation("com.github.bumptech.glide:glide:4.15.1")
+    implementation(libs.androidx.room.common)
+    implementation(libs.androidx.room.ktx)
 //    implementation(libs.googleid)
     annotationProcessor("com.github.bumptech.glide:compiler:4.15.1")
     implementation ("pl.droidsonroids.gif:android-gif-drawable:1.2.29")
