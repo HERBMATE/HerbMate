@@ -58,7 +58,7 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:layout_marginStart="67.5dp"
         android:layout_marginEnd="67.5dp"
         android:hint="Nama"
@@ -80,7 +80,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="67.5dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="67.5dp"
         android:enabled="false"
         android:hint="@string/password_lama"
@@ -94,7 +94,25 @@
             android:layout_height="match_parent" />
     </com.google.android.material.textfield.TextInputLayout>
 
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/password_baru_input_layout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="67.5dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="67.5dp"
+        android:enabled="false"
+        android:hint="@string/password_baru"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/password_input_layout">
 
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/ed_passwordbaru"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_log_out"
@@ -113,7 +131,7 @@
         android:id="@+id/btn_save"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="16dp"
         android:background="@drawable/btn_auth"
         android:backgroundTint="@color/primaryColor"
         android:text="Save"
@@ -122,7 +140,7 @@
         android:textAllCaps="false"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="@id/password_input_layout"
-        app:layout_constraintTop_toBottomOf="@+id/password_input_layout" />
+        app:layout_constraintTop_toBottomOf="@+id/password_baru_input_layout" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_cancel"
@@ -136,7 +154,7 @@
         tools:visibility="visible"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="@+id/btn_save"
-        app:layout_constraintStart_toStartOf="@id/password_input_layout"
+        app:layout_constraintStart_toStartOf="@id/password_baru_input_layout"
         app:layout_constraintTop_toTopOf="@+id/btn_save" />
 
     <com.google.android.material.switchmaterial.SwitchMaterial
@@ -146,7 +164,7 @@
         android:layout_marginTop="16dp"
         android:thumb="@drawable/custom_switch_thumb"
         android:track="@drawable/custom_switch_track"
-        app:layout_constraintEnd_toEndOf="@+id/password_input_layout"
+        app:layout_constraintEnd_toEndOf="@+id/password_baru_input_layout"
         app:layout_constraintTop_toBottomOf="@+id/btn_save" />
 
     <TextView
@@ -156,9 +174,9 @@
         android:text="Dark Mode"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@+id/switchDarkMode"
-        app:layout_constraintStart_toStartOf="@+id/password_input_layout"
+        app:layout_constraintStart_toStartOf="@+id/password_baru_input_layout"
         app:layout_constraintTop_toTopOf="@+id/switchDarkMode"
-        app:layout_constraintVertical_bias="0.538" />
+        app:layout_constraintVertical_bias="0.558" />
 
     <ProgressBar
         android:id="@+id/progress_bar"

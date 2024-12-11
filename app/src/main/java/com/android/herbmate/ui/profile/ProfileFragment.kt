@@ -62,13 +62,15 @@ class ProfileFragment : Fragment() {
         binding.btnEdit.setOnClickListener {
             if (isEdit) {
                 binding.edName.isEnabled = false
-                binding.edPassword.isEnabled = false
+                binding.edPassword.visibility = View.GONE
+                binding.edPasswordbaru.visibility = View.GONE
                 binding.btnSave.visibility = View.GONE
                 binding.btnCancel.visibility = View.GONE
                 isEdit = false
             } else {
                 binding.edName.isEnabled = true
-                binding.edPassword.isEnabled = true
+                binding.edPassword.visibility = View.VISIBLE
+                binding.edPasswordbaru.visibility = View.VISIBLE
                 binding.btnSave.visibility = View.VISIBLE
                 binding.btnCancel.visibility = View.VISIBLE
                 isEdit = true

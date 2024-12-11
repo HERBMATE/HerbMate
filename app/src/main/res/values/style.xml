@@ -29,4 +29,9 @@
         <item name="android:textColor">@android:color/black</item> <!-- Ganti dengan warna yang sesuai -->
         <item name="android:layout_marginStart">0dp</item> <!-- Pastikan tidak ada margin di kiri -->
     </style>
+
+    <style name="CustomShapeAppearance" parent="ShapeAppearance.MaterialComponents.SmallComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">16dp</item>
+    </style>
 </resources>

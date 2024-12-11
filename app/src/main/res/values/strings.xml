@@ -42,6 +42,7 @@
     <string name="title_chatbot">Chatbot</string>
     <string name="forget_password">Forget Password</string>
     <string name="password_lama">Password Lama</string>
+    <string name="password_baru">Password Baru</string>
 
     <string-array name="faq">
         <item>Nama Tanaman</item>
