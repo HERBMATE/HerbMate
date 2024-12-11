@@ -1,12 +1,37 @@
 package com.android.herbmate.data.response
 
+import com.google.gson.annotations.SerializedName
+
 data class TanamanResponse(
-	val tanamanResponse: List<TanamanResponseItem>
+
+	@field:SerializedName("data")
+	val data: List<TanamanItem>,
+
+	@field:SerializedName("error")
+	val error: Boolean,
+
+	@field:SerializedName("message")
+	val message: String
 )
 
-data class TanamanResponseItem(
-	val nama: String? = null,
-	val id: Int? = null,
-	val gambar: String? = null
+data class TanamanItem(
+
+	@field:SerializedName("asal")
+	val asal: String,
+
+	@field:SerializedName("nama")
+	val nama: String,
+
+	@field:SerializedName("nama_latin")
+	val namaLatin: String,
+
+	@field:SerializedName("id")
+	val id: Int,
+
+	@field:SerializedName("kandungan")
+	val kandungan: String,
+
+	@field:SerializedName("gambar")
+	val gambar: String
 )
 

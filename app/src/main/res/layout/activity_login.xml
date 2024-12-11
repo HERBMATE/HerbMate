@@ -48,7 +48,6 @@
         android:layout_marginTop="8dp"
         android:layout_marginStart="67.5dp"
         android:layout_marginEnd="67.5dp"
-        app:endIconMode="password_toggle"
         app:errorTextAppearance="@style/ErrorTextStyle"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -61,6 +60,15 @@
             android:layout_height="65dp"/>
 
     </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/tv_forget_pass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/forget_password"
+        app:layout_constraintEnd_toEndOf="@id/password_input_layout"
+        app:layout_constraintTop_toBottomOf="@+id/password_input_layout"/>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_login"
@@ -103,12 +111,15 @@
         android:id="@+id/btn_login_google"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:background="@drawable/btn_auth"
         android:backgroundTint="@android:color/transparent"
+        android:drawableStart="@drawable/google_icon"
+        android:drawablePadding="8dp"
         android:text="Login with Google"
         android:textAllCaps="false"
         android:textColor="@color/green"
-        app:layout_constraintEnd_toEndOf="@+id/logo"
+        app:layout_constraintEnd_toEndOf="@+id/btn_register"
         app:layout_constraintStart_toStartOf="@+id/btn_login"
         app:layout_constraintTop_toBottomOf="@+id/btn_login" />
 

@@ -15,9 +15,9 @@ class LoginViewModel(val repository : HerbMateRepository) : ViewModel() {
 
     fun login(email: String, password: String) {
         viewModelScope.launch {
-            _loginResult.value = ApiResult.Loading // Set status loading
+            _loginResult.value = ApiResult.Loading
             val result = repository.login(email, password)
-            _loginResult.value = result // Set hasil login
+            _loginResult.value = result
         }
     }
 }

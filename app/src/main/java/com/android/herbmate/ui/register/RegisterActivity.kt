@@ -1,7 +1,9 @@
 package com.android.herbmate.ui.register
 
 import android.os.Bundle
+import android.text.InputType
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
@@ -26,21 +28,59 @@ class RegisterActivity : AppCompatActivity() {
         viewModel.registerResult.observe(this) { result ->
             when (result) {
                 is ApiResult.Loading -> {
-                    // Tampilkan loading jika diperlukan
+                    binding.progressBar.visibility = View.VISIBLE
                 }
 
                 is ApiResult.Success -> {
-                    // Tangani hasil sukses
+                    binding.progressBar.visibility = View.GONE
                     Toast.makeText(this, result.data, Toast.LENGTH_SHORT).show()
                 }
 
                 is ApiResult.Error -> {
-                    // Tangani kesalahan, misalnya tampilkan pesan kesalahan
-                    Toast.makeText(this, result.error, Toast.LENGTH_SHORT).show()
+                    binding.progressBar.visibility = View.GONE
+                    Log.d("Register Error", result.error)
                 }
             }
         }
 
+        binding.btnRegister.setOnClickListener {
+            val name = binding.edName.text.toString().trim()
+            val email = binding.edEmail.text.toString().trim()
+            val password = binding.edPassword.text.toString().trim()
+            val confirmPassword = binding.edConfirmPassword.text.toString().trim()
+
+            // Validasi input kosong
+            when {
+                name.isEmpty() -> {
+                    Toast.makeText(this, "Nama tidak boleh kosong", Toast.LENGTH_SHORT).show()
+                    binding.edName.requestFocus()
+                }
+                email.isEmpty() -> {
+                    Toast.makeText(this, "Email tidak boleh kosong", Toast.LENGTH_SHORT).show()
+                    binding.edEmail.requestFocus()
+                }
+                password.isEmpty() -> {
+                    Toast.makeText(this, "Password tidak boleh kosong", Toast.LENGTH_SHORT).show()
+                    binding.edPassword.requestFocus()
+                }
+                confirmPassword.isEmpty() -> {
+                    Toast.makeText(this, "Konfirmasi password tidak boleh kosong", Toast.LENGTH_SHORT).show()
+                    binding.edConfirmPassword.requestFocus()
+                }
+                password != confirmPassword -> {
+                    Toast.makeText(this, "Password dan konfirmasi tidak cocok", Toast.LENGTH_SHORT).show()
+                }
+                else -> {
+                    // Jika semua input valid, panggil ViewModel untuk registrasi pengguna
+                    viewModel.registerUser(name, email, password)
+                }
+            }
+        }
+
+        setupInputFields()
+    }
+
+    private fun setupInputFields() {
         val emailLayout = binding.emailInputLayout
         val emailInput = binding.edEmail
         val passwordLayout = binding.passwordInputLayout
@@ -56,24 +96,19 @@ class RegisterActivity : AppCompatActivity() {
 
         emailInput.setTextInputLayout(emailLayout)
         passwordInput.setTextInputLayout(passwordLayout)
-        val passsword = passwordInput.setTextInputLayout(passwordLayout)
-        Log.d("Register", "Password: $passsword")
 
-        binding.btnRegister.setOnClickListener {
-            val name = binding.edName.text.toString()
-            val email = binding.edEmail.text.toString()
-            val password = binding.edPassword.text.toString()
-            val confirmPassword = binding.edConfirmPassword.text.toString()
-
-            if (name.isNotEmpty() && email.isNotEmpty() && password.isNotEmpty() && confirmPassword.isNotEmpty()) {
-                if (password == confirmPassword) {
-                    viewModel.registerUser(name, email, password)
-                } else{
-                    Toast.makeText(this, "Password tidak sama", Toast.LENGTH_SHORT).show()
-                }
-            } else{
-                Toast.makeText(this, "Semua field harus diisi", Toast.LENGTH_SHORT).show()
+        binding.showPasswordCheckBox.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                passwordInput.inputType = InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
+                confirmPasswordInput.inputType = InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
+            } else {
+                passwordInput.inputType =
+                    InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
+                confirmPasswordInput.inputType =
+                    InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
             }
+            passwordInput.text?.let { passwordInput.setSelection(it.length) }
+            confirmPasswordInput.text?.let { confirmPasswordInput.setSelection(it.length) }
         }
     }
 }

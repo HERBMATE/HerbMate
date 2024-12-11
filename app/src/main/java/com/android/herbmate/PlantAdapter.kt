@@ -7,38 +7,58 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.android.herbmate.data.response.BookmarkItem
+import com.android.herbmate.data.response.TanamanItem
+import com.android.herbmate.databinding.ItemPlantBinding
 import com.android.herbmate.ui.detail.DetailActivity
 import com.bumptech.glide.Glide
 
-class PlantAdapter(private val context: Context, private val plants: List<Plant>) : RecyclerView.Adapter<PlantAdapter.ListViewHolder>() {
-    class ListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val image : ImageView = itemView.findViewById(R.id.img_plant)
-        val name: TextView = itemView.findViewById(R.id.tv_name)
+class PlantAdapter(private val listener: OnBookmarkClickListener) : ListAdapter<BookmarkItem, PlantAdapter.ListViewHolder>(DIFF_CALLBACK) {
+    class ListViewHolder(private val binding: ItemPlantBinding) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(plant: BookmarkItem, listener: OnBookmarkClickListener) {
+            binding.tvName.text = plant.nama
+            val gambar = "https://storage.googleapis.com/test-ren-bucket/Lidah%20Buaya.jpg"
+            Glide.with(binding.root.context)
+                .load(gambar)
+                .into(binding.imgPlant)
+
+            val idBookmark = plant.idBookmark
+            binding.root.setOnClickListener {
+                val intent = Intent(binding.root.context, DetailActivity::class.java).apply {
+                    putExtra(DetailActivity.EXTRA_NAME, plant.nama)
+                    putExtra(DetailActivity.EXTRA_IMAGE, gambar)
+                }
+                binding.root.context.startActivity(intent)
+            }
+
+            binding.btnBookmark.setOnClickListener {
+                listener.onBookmarkClick(idBookmark) // Call the listener with only idTanaman
+            }
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_plant, parent, false)
-        return ListViewHolder(view)
+        val binding = ItemPlantBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return ListViewHolder(binding)
     }
 
-    override fun getItemCount(): Int = plants.size
-
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
-        val plant = plants[position]
+        val plant = getItem(position)
+        holder.bind(plant, listener)
+    }
 
-        holder.name.text = plant.name
-        Glide.with(holder.itemView.context)
-            .load(plant.image)
-            .into(holder.image)
-
-        holder.itemView.setOnClickListener {
-            val intent = Intent(context, DetailActivity::class.java).apply {
-                putExtra(DetailActivity.EXTRA_NAME, plant.name)
-                putExtra(DetailActivity.EXTRA_IMAGE, plant.image)
+    companion object {
+        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<BookmarkItem>() {
+            override fun areItemsTheSame(oldItem: BookmarkItem, newItem: BookmarkItem): Boolean {
+                return oldItem.id == newItem.id
             }
-            context.startActivity(intent)
-        }
 
+            override fun areContentsTheSame(oldItem: BookmarkItem, newItem: BookmarkItem): Boolean {
+                return oldItem == newItem
+            }
+        }
     }
 }

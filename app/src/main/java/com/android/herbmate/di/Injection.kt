@@ -12,7 +12,7 @@ object Injection {
     fun provideRepository(context: Context): HerbMateRepository {
         val pref = UserPreference.getInstance(context.dataStore)
         val user = runBlocking { pref.getSession().first() }
-        val apiService = ApiConfig.getApiServices()
+        val apiService = ApiConfig.getApiServices(user.token)
         return HerbMateRepository.getInstance(apiService, pref)
     }
 }

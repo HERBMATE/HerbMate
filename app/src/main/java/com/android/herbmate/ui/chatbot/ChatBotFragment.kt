@@ -33,31 +33,31 @@ class ChatBotFragment : Fragment() {
     ): View {
         val view = inflater.inflate(R.layout.fragment_chat_bot, container, false)
 
-        recyclerView = view.findViewById(R.id.recyclerView)
-        editTextMessage = view.findViewById(R.id.editTextMessage)
-        buttonSend = view.findViewById(R.id.buttonSend)
-
-        messageAdapter = MessageAdapter(mutableListOf())
-        recyclerView.adapter = messageAdapter
-        recyclerView.layoutManager = LinearLayoutManager(requireContext())
-
-        observeViewModel()
-
-        buttonSend.setOnClickListener {
-            val messageContent = editTextMessage.text.toString()
-            if (messageContent.isNotEmpty()) {
-                viewModel.sendMessage(messageContent)
-                editTextMessage.text.clear()
-            }
-        }
+//        recyclerView = view.findViewById(R.id.recyclerView)
+//        editTextMessage = view.findViewById(R.id.editTextMessage)
+//        buttonSend = view.findViewById(R.id.buttonSend)
+//
+//        messageAdapter = MessageAdapter(mutableListOf())
+//        recyclerView.adapter = messageAdapter
+//        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+//
+//        observeViewModel()
+//
+//        buttonSend.setOnClickListener {
+//            val messageContent = editTextMessage.text.toString()
+//            if (messageContent.isNotEmpty()) {
+//                viewModel.sendMessage(messageContent)
+//                editTextMessage.text.clear()
+//            }
+//        }
 
         return view
     }
 
-    private fun observeViewModel() {
-        viewModel.messages.observe(viewLifecycleOwner, Observer { messages ->
-            messageAdapter.updateMessages(messages)
-            recyclerView.scrollToPosition(messages.size - 1)
-        })
-    }
+//    private fun observeViewModel() {
+//        viewModel.messages.observe(viewLifecycleOwner, Observer { messages ->
+//            messageAdapter.updateMessages(messages)
+//            recyclerView.scrollToPosition(messages.size - 1)
+//        })
+//    }
 }

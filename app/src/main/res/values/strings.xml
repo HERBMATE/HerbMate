@@ -33,13 +33,15 @@
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
-    <string name="default_web_client_id">YOUR_WEB_CLIENT_ID_HERE</string>
+    <string name="default_web_client_id">7784081244-ftk8a4777sm8c0aft79e8a2c67jojq5l.apps.googleusercontent.com</string>
     <string name="email_handling">Format email tidak valid</string>
     <string name="password_handling">Password harus lebih dari 8 karakter</string>
     <string name="tampilkan_password">Show Password</string>
     <string name="confirm_password_handling">Password tidak sama</string>
     <string name="confirm_password_empty">Password Kosong</string>
     <string name="title_chatbot">Chatbot</string>
+    <string name="forget_password">Forget Password</string>
+    <string name="password_lama">Password Lama</string>
 
     <string-array name="faq">
         <item>Nama Tanaman</item>

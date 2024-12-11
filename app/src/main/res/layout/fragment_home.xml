@@ -116,34 +116,116 @@
             android:text="Filters"
             android:textStyle="bold" />
 
-        <com.google.android.material.chip.ChipGroup
-            android:id="@+id/chip_group"
-            android:layout_width="wrap_content"
+        <HorizontalScrollView
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp">
+            android:scrollbars="none">
 
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chip_all"
-                style="@style/CustomChipShape"
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/chip_group_penyakit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="All" />
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                app:singleSelection="true"
+                app:selectionRequired="true"
+                app:singleLine="true"
+                app:chipSpacingHorizontal="8dp">
 
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chip_category1"
-                style="@style/CustomChipShape"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Category 1" />
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_all"
+                    style="@style/CustomChipShape"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="All" />
 
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chip_category2"
-                style="@style/CustomChipShape"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Category 2" />
-        </com.google.android.material.chip.ChipGroup>
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_diabetes"
+                    style="@style/CustomChipShape"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Diabetes" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_kanker"
+                    style="@style/CustomChipShape"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Kanker" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_hipertensi"
+                    style="@style/CustomChipShape"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Hipertensi" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_jerawat"
+                    style="@style/CustomChipShape"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Jerawat" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_radang"
+                    style="@style/CustomChipShape"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Radang" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_insomnia"
+                    style="@style/CustomChipShape"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Insomnia" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_batu_ginjal"
+                    style="@style/CustomChipShape"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Batu Ginjal" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_batuk"
+                    style="@style/CustomChipShape"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Batuk" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_diare"
+                    style="@style/CustomChipShape"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Diare" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_sariawan"
+                    style="@style/CustomChipShape"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Sariawan" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_maag"
+                    style="@style/CustomChipShape"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Maag" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_rematik"
+                    style="@style/CustomChipShape"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Rematik" />
+
+            </com.google.android.material.chip.ChipGroup>
+        </HorizontalScrollView>
 
         <!-- RecyclerView for Filtered Items -->
         <androidx.recyclerview.widget.RecyclerView

@@ -6,11 +6,15 @@ import androidx.activity.viewModels
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import com.android.herbmate.databinding.ActivityMainBinding
+import com.android.herbmate.ui.login.LoginActivity
 import com.android.herbmate.ui.scan.ScanActivity
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
@@ -25,12 +29,14 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        mainViewModel.userSession.observe(this) { user ->
-//            if (!user.isLogin) {
-//                startActivity(Intent(this, LoginActivity::class.java))
-//                finish()
+//        lifecycleScope.launch {
+//            mainViewModel.userSession.observe(this@MainActivity) { userSession ->
+//                if (!userSession.isLogin) {
+//                    startActivity(Intent(this@MainActivity, LoginActivity::class.java))
+//                    finish()
+//                }
 //            }
-        }
+//        }
 
         binding.fab.setOnClickListener{
             startActivity(Intent(this, ScanActivity::class.java))
@@ -47,8 +53,6 @@ class MainActivity : AppCompatActivity() {
         val navView: BottomNavigationView = binding.navView
         navView.background = null
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
         val appBarConfiguration = AppBarConfiguration(
             setOf(
                 R.id.navigation_home, R.id.navigation_chatbot, R.id.navigation_bookmark, R.id.navigation_home

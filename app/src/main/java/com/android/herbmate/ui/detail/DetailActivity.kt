@@ -2,8 +2,10 @@ package com.android.herbmate.ui.detail
 
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.ImageView
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -11,6 +13,9 @@ import com.android.herbmate.R
 import com.android.herbmate.databinding.ActivityDetailBinding
 import com.android.herbmate.Plant
 import com.android.herbmate.PlantAdapter
+import com.android.herbmate.ViewModelFactory
+import com.android.herbmate.adapter.PenyakitAdapter
+import com.android.herbmate.data.ApiResult
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.bumptech.glide.Glide
 
@@ -18,71 +23,56 @@ class DetailActivity : AppCompatActivity() {
 
     private lateinit var binding : ActivityDetailBinding
     private lateinit var adapter: PlantAdapter
-    private var listPlant = ArrayList<Plant>()
+    private lateinit var penyakitAdapter: PenyakitAdapter
+    private val viewModel by viewModels<DetailViewModel>{
+        ViewModelFactory.getInstance(this)
+    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val imageUri = intent.getStringExtra(EXTRA_IMAGE)
-        val resultText = intent.getStringExtra(EXTRA_NAME)
-
-
-        imageUri?.let {
-            val imageUri = Uri.parse(it)
-            binding.headerImage.setImageURI(imageUri)
+        binding.ivBack.setOnClickListener{
+            onBackPressed()
         }
 
-        binding.tvNama.text = resultText ?: "No result available"
+        penyakitAdapter = PenyakitAdapter()
+        binding.rvPenyakit.layoutManager = LinearLayoutManager(this)
+        binding.rvPenyakit.adapter = penyakitAdapter
 
-        val displayMetrics = resources.displayMetrics
-        val screenHeight = displayMetrics.heightPixels
-
-        BottomSheetBehavior.from(findViewById(R.id.bottomSheet)).apply {
-            peekHeight = (screenHeight * 0.6).toInt()
-            this.state = BottomSheetBehavior.STATE_COLLAPSED
-        }
+        viewModel.detailTanaman.observe(this){ result ->
+            when(result){
+                is ApiResult.Error -> {
+                    Log.d("DetailTanaman", "Error: ${result.error}")
+                }
+                is ApiResult.Loading -> {
+                    Log.d("DetailTanaman", "Loading")
+                }
+                is ApiResult.Success -> {
+                    penyakitAdapter.submitList(result.data)
+                    }
+                }
+            }
 
         val name = intent.getStringExtra(EXTRA_NAME)
-        val imageResourceId = intent.getStringExtra(EXTRA_IMAGE)
-        Glide.with(this)
-            .load(imageResourceId)
-            .into(binding.headerImage)
+        val image = intent.getStringExtra(EXTRA_IMAGE)
         val asal = intent.getStringExtra(EXTRA_ASAL)
         val latin = intent.getStringExtra(EXTRA_LATIN)
-        val id = intent.getStringExtra(EXTRA_ID)
         val kandungan = intent.getStringExtra(EXTRA_KANDUNGAN)
 
         binding.tvNama.text = name
         binding.tvNamaLatin.text = latin
         binding.tvAsal.text = asal
         binding.tvKandungan.text = kandungan
-        supportActionBar?.hide()
+        Glide.with(binding.root.context)
+            .load(image)
+            .into(binding.headerImage)
 
-        val plantNames = resources.getStringArray(R.array.name_plant)
-        val plantImages = resources.obtainTypedArray(R.array.image_plant)
-
-        listPlant.clear()
-
-        for (i in plantNames.indices) {
-            listPlant.add(
-                Plant(
-                    name = plantNames[i],
-                    image = plantImages.getResourceId(i, -1)
-                )
-            )
-        }
-        plantImages.recycle()
-
-        binding.recyclerView.apply {
-            layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-            setHasFixedSize(true)
-            adapter = PlantAdapter(context, listPlant)
-        }
-
-        binding.ivBack.setOnClickListener{
-            onBackPressed()
+        if (name != null) {
+            viewModel.getDetailsTanaman(name)
+            Log.d("nama", name)
         }
     }
 

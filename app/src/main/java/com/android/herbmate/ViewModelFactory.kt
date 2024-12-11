@@ -12,13 +12,11 @@ import com.android.herbmate.ui.register.RegisterViewModel
 import com.android.herbmate.ui.upload.UploadViewModel
 import com.android.herbmate.ui.bookmark.BookmarkViewModel
 import com.android.herbmate.ui.chatbot.ChatBotViewModel
+import com.android.herbmate.ui.forgetpass.ForgotPassViewModel
 import com.android.herbmate.ui.home.HomeViewModel
-import com.google.ai.client.generativeai.GenerativeModel
+import com.android.herbmate.ui.splash.SplashViewModel
 
-class ViewModelFactory(
-    private val repository: HerbMateRepository,
-    private val generativeModel: GenerativeModel
-) : ViewModelProvider.NewInstanceFactory() {
+class ViewModelFactory(private val repository: HerbMateRepository) : ViewModelProvider.NewInstanceFactory() {
 
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
@@ -48,7 +46,13 @@ class ViewModelFactory(
                 HomeViewModel(repository) as T
             }
             modelClass.isAssignableFrom(ChatBotViewModel::class.java) -> {
-                ChatBotViewModel(generativeModel) as T
+                ChatBotViewModel(repository) as T
+            }
+            modelClass.isAssignableFrom(ForgotPassViewModel::class.java) -> {
+                ForgotPassViewModel(repository) as T
+            }
+            modelClass.isAssignableFrom(SplashViewModel::class.java) -> {
+                SplashViewModel(repository) as T
             }
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }
@@ -57,17 +61,11 @@ class ViewModelFactory(
     companion object {
         @Volatile
         private var INSTANCE: ViewModelFactory? = null
-
         @JvmStatic
         fun getInstance(context: Context): ViewModelFactory {
-            val repository = Injection.provideRepository(context)
-            val generativeModel = GenerativeModel(
-                modelName = "gemini-pro",
-                apiKey = "AIzaSyA3j1LX3fvspUzIdqdeJvX3ejqoMVj_jRs"
-            )
             if (INSTANCE == null) {
                 synchronized(ViewModelFactory::class.java) {
-                    INSTANCE = ViewModelFactory(repository, generativeModel)
+                    INSTANCE = ViewModelFactory(Injection.provideRepository(context))
                 }
             }
             return INSTANCE as ViewModelFactory

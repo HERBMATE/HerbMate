@@ -1,0 +1,82 @@
+<!-- Layout untuk menampilkan detail resep -->
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="@android:color/white">
+
+    <TextView
+        android:id="@+id/tv_hd_resep"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Resep"
+        android:textSize="16sp"
+        android:textColor="@android:color/black"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:id="@+id/tv_resep"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Resep"
+        app:layout_constraintTop_toBottomOf="@id/tv_hd_resep"
+        app:layout_constraintStart_toStartOf="@id/tv_hd_resep"/>
+
+    <TextView
+        android:id="@+id/tv_hd_efek_samping"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Efek Samping"
+        android:textSize="16sp"
+        android:textColor="@android:color/black"
+        app:layout_constraintTop_toBottomOf="@id/tv_resep"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:id="@+id/tv_efek_samping"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Efek Samping"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_hd_efek_samping"/>
+
+    <TextView
+        android:id="@+id/tv_hd_manfaat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Manfaat"
+        android:textSize="16sp"
+        android:textColor="@android:color/black"
+        app:layout_constraintTop_toBottomOf="@id/tv_efek_samping"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:id="@+id/tv_manfaat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Manfaat"
+        app:layout_constraintTop_toBottomOf="@id/tv_hd_manfaat"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:id="@+id/tv_hd_sumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sumber"
+        android:textSize="16sp"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toBottomOf="@id/tv_manfaat"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/tv_sumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="sumber"
+        app:layout_constraintTop_toBottomOf="@id/tv_hd_sumber"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -42,12 +42,17 @@ android {
 
 dependencies {
 
+//    implementation (libs.androidx.credentials)
+//    implementation (libs.androidx.credentials.play.services.auth)
+//    implementation (libs.androidx.credentials.play.services.auth.v100alpha03)
+//    implementation (libs.androidx.credentials.v100alpha03)
     implementation("com.google.android.gms:play-services-auth:20.7.0")
 //    implementation (libs.androidx.preference)
 //    implementation (libs.androidx.datastore.preferences)
 //
     implementation("androidx.core:core-splashscreen:1.0.1")
     implementation("com.github.bumptech.glide:glide:4.15.1")
+//    implementation(libs.googleid)
     annotationProcessor("com.github.bumptech.glide:compiler:4.15.1")
     implementation ("pl.droidsonroids.gif:android-gif-drawable:1.2.29")
     implementation ("androidx.camera:camera-core:1.4.0")

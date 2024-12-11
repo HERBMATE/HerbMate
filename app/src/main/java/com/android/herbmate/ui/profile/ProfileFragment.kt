@@ -107,8 +107,8 @@ class ProfileFragment : Fragment() {
 
         viewModel.userSession.observe(viewLifecycleOwner) { user ->
             user?.let {
-                binding.edEmail.text = Editable.Factory.getInstance().newEditable(it.name ?: "")
-                binding.edName.text = Editable.Factory.getInstance().newEditable(it.email?: "")
+                binding.edEmail.text = Editable.Factory.getInstance().newEditable(it.name)
+                binding.edName.text = Editable.Factory.getInstance().newEditable(it.email)
 
             } ?: run {
                 binding.edEmail.text = Editable.Factory.getInstance().newEditable("")
