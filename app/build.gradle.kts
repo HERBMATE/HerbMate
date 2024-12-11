@@ -17,6 +17,8 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField("String", "BASE_URL", "\"https://herbmate-backend-7784081244.asia-southeast2.run.app/\"")
     }
 
     buildTypes {
@@ -39,6 +41,8 @@ android {
         viewBinding = true
         buildConfig = true
     }
+
+
 }
 
 dependencies {
