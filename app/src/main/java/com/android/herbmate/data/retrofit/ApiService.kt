@@ -1,6 +1,8 @@
 package com.android.herbmate.data.retrofit
 
 import com.android.herbmate.data.response.AddBookmarkResponse
+import com.android.herbmate.data.response.ChatBotRequest
+import com.android.herbmate.data.response.ChatBotResponse
 import com.android.herbmate.data.response.DeleteBookmarkResponse
 import com.android.herbmate.data.response.FaqResponse
 import com.android.herbmate.data.response.ForgotPassRequest
@@ -86,6 +88,11 @@ interface ApiService {
     suspend fun deleteBookmark(
         @Path("idBookmark") idBookmark: Int
     ) : DeleteBookmarkResponse
+
+    @POST("chatbot")
+    suspend fun chatBot(
+        @Body request: ChatBotRequest
+    ) : ChatBotResponse
 
 //    @GET("tanaman")
 //    suspend fun searchTanaman(

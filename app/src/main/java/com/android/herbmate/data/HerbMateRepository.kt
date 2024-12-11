@@ -5,6 +5,8 @@ import com.android.herbmate.data.pref.UserModel
 import com.android.herbmate.data.pref.UserPreference
 import com.android.herbmate.data.response.AddBookmarkResponse
 import com.android.herbmate.data.response.BookmarkItem
+import com.android.herbmate.data.response.ChatBotRequest
+import com.android.herbmate.data.response.ChatBotResponse
 import com.android.herbmate.data.response.DeleteBookmarkResponse
 import com.android.herbmate.data.response.FaqResponse
 import com.android.herbmate.data.response.ForgotPassRequest
@@ -187,6 +189,15 @@ class HerbMateRepository(
                 ApiResult.Error(response.message)
             }
         } catch (e : Exception) {
+            ApiResult.Error(e.message ?: "Unknown error")
+        }
+    }
+
+    suspend fun chatBot(prompt: String): ApiResult<ChatBotResponse> {
+        return try {
+            val response = apiService.chatBot(ChatBotRequest(prompt))
+            ApiResult.Success(response)
+        } catch (e: Exception) {
             ApiResult.Error(e.message ?: "Unknown error")
         }
     }

@@ -1,20 +1,25 @@
 package com.android.herbmate.adapter
 
-// MessageAdapter.kt
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.android.herbmate.Message
 import com.android.herbmate.R
+import de.hdodenhof.circleimageview.CircleImageView
 
-class MessageAdapter(private val messages: MutableList<Message>) :
+class MessageAdapter(private val messages: MutableList<Message>, private var userName: String) :
     RecyclerView.Adapter<MessageAdapter.MessageViewHolder>() {
 
     class MessageViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val textView: TextView = itemView.findViewById(R.id.textViewMessage)
+        val textViewName: TextView = itemView.findViewById(R.id.textViewName)
+        val textViewMessage: TextView = itemView.findViewById(R.id.textViewMessage)
+        val imageViewProfile: CircleImageView = itemView.findViewById(R.id.imageViewProfile)
+        val messageLayout: LinearLayout = itemView.findViewById(R.id.messageLayout) // Reference to the message layout
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MessageViewHolder {
@@ -24,26 +29,20 @@ class MessageAdapter(private val messages: MutableList<Message>) :
 
     override fun onBindViewHolder(holder: MessageViewHolder, position: Int) {
         val message = messages[position]
-        holder.textView.text = message.content
 
-        // Atur latar belakang berdasarkan pengirim
-        holder.textView.setBackgroundResource(
-            if (message.isSentByUser) R.drawable.bg_message_sent
-            else R.drawable.bg_message_received
-        )
+        holder.textViewMessage.text = message.content
 
-        // Atur posisi berdasarkan pengirim
-        val params = holder.textView.layoutParams as LinearLayout.LayoutParams
-
-        if (message.isSentByUser) {
-            // Pesan dari pengguna: geser ke kanan
-            params.gravity = android.view.Gravity.END
+        if (message.isSentByUser ) {
+            holder.textViewName.text = userName
+            holder.imageViewProfile.visibility = View.GONE
+            holder.textViewMessage.setBackgroundResource(R.drawable.bg_message_sent)
         } else {
-            // Pesan dari lawan bicara: geser ke kiri
-            params.gravity = android.view.Gravity.START
-        }
+            holder.textViewName.text = "HerbMate"
+            holder.imageViewProfile.setImageResource(R.drawable.ic_herbmate)
+            holder.imageViewProfile.visibility = View.VISIBLE
+            holder.textViewMessage.setBackgroundResource(R.drawable.bg_message_received)
 
-        holder.textView.layoutParams = params
+        }
     }
 
     override fun getItemCount(): Int = messages.size
@@ -53,4 +52,10 @@ class MessageAdapter(private val messages: MutableList<Message>) :
         messages.addAll(newMessages)
         notifyDataSetChanged()
     }
+
+    fun setUserName(name: String) {
+        userName = name
+        notifyDataSetChanged()
+    }
 }
+

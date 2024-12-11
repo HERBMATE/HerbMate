@@ -49,6 +49,7 @@ dependencies {
     implementation("com.google.android.gms:play-services-auth:20.7.0")
 //    implementation (libs.androidx.preference)
 //    implementation (libs.androidx.datastore.preferences)
+    implementation ("de.hdodenhof:circleimageview:3.1.0")
 //
     implementation("androidx.core:core-splashscreen:1.0.1")
     implementation("com.github.bumptech.glide:glide:4.15.1")
