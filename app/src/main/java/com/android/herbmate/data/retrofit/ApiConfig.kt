@@ -10,6 +10,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 class ApiConfig {
     companion object{
         private const val BASE_URL = "http://10.0.2.2:3000/"
+//        private const val BASE_URL = "https://herbmate-backend-7784081244.asia-southeast2.run.app/"
         fun getApiServices(token: String): ApiService {
             val loggingInterceptor = if (BuildConfig.DEBUG) {
                 HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)

@@ -52,6 +52,8 @@ class DetailActivity : AppCompatActivity() {
                 }
                 is ApiResult.Success -> {
                     penyakitAdapter.submitList(result.data)
+                    val penyakit = result.data.map { it.penyakit }
+                    Log.d("DetailTanaman", "Data: ${penyakit}")
                     }
                 }
             }

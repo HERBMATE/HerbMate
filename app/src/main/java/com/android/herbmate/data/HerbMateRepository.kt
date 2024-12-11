@@ -7,6 +7,7 @@ import com.android.herbmate.data.response.AddBookmarkResponse
 import com.android.herbmate.data.response.BookmarkItem
 import com.android.herbmate.data.response.ChatBotRequest
 import com.android.herbmate.data.response.ChatBotResponse
+import com.android.herbmate.data.response.DataSearchItem
 import com.android.herbmate.data.response.DeleteBookmarkResponse
 import com.android.herbmate.data.response.FaqResponse
 import com.android.herbmate.data.response.ForgotPassRequest
@@ -15,7 +16,7 @@ import com.android.herbmate.data.response.HerbPredictResponse
 import com.android.herbmate.data.response.LoginRequest
 import com.android.herbmate.data.response.LoginResponse
 import com.android.herbmate.data.response.RegisterRequest
-import com.android.herbmate.data.response.SearchReponseItem
+import com.android.herbmate.data.response.SearchRequest
 import com.android.herbmate.data.response.TanamanDetailsItem
 import com.android.herbmate.data.response.TanamanDetailsResponse
 import com.android.herbmate.data.response.TanamanItem
@@ -197,6 +198,20 @@ class HerbMateRepository(
         return try {
             val response = apiService.chatBot(ChatBotRequest(prompt))
             ApiResult.Success(response)
+        } catch (e: Exception) {
+            ApiResult.Error(e.message ?: "Unknown error")
+        }
+    }
+
+    suspend fun search(search: String?): ApiResult<List<TanamanItem>> {
+        return try {
+            val response = apiService.search(search)
+            if (!response.error) {
+                val searchItems = response.data
+                ApiResult.Success(searchItems)
+            } else {
+                ApiResult.Error(response.message)
+            }
         } catch (e: Exception) {
             ApiResult.Error(e.message ?: "Unknown error")
         }

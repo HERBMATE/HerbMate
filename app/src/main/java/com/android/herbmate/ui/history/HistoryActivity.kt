@@ -4,13 +4,16 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.android.herbmate.ViewModelFactory
 import com.android.herbmate.adapter.HistoryAdapter
 import com.android.herbmate.databinding.ActivityHistoryBinding
 import com.android.herbmate.ui.history.HistoryViewModel
 
 class HistoryActivity : AppCompatActivity() {
     private lateinit var binding: ActivityHistoryBinding
-    private val viewModel: HistoryViewModel by viewModels()
+    private val viewModel by viewModels< HistoryViewModel >{
+        ViewModelFactory.getInstance(this)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,12 +27,10 @@ class HistoryActivity : AppCompatActivity() {
         binding.recyclerView.adapter = adapter
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
 
-        // Observe LiveData dari ViewModel
         viewModel.historyListLiveData.observe(this) { historyList ->
             adapter.updateData(historyList) // Perbarui data di adapter
         }
 
-        // Muat data awal
         viewModel.loadHistory()
     }
 }

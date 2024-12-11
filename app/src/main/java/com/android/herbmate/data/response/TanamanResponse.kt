@@ -32,6 +32,9 @@ data class TanamanItem(
 	val kandungan: String,
 
 	@field:SerializedName("gambar")
-	val gambar: String
+	val gambar: String,
+
+	@field:SerializedName("penyakit")
+	val penyakit: String? = null
 )
 

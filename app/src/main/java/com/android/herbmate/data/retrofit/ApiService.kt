@@ -15,6 +15,7 @@ import com.android.herbmate.data.response.RegisterRequest
 import com.android.herbmate.data.response.RegisterResponse
 import com.android.herbmate.data.response.SignInResponse
 import com.android.herbmate.data.response.PenyakitJerawatResponse
+import com.android.herbmate.data.response.SearchRequest
 import com.android.herbmate.data.response.SearchResponse
 import com.android.herbmate.data.response.TanamanDetailsResponse
 import com.android.herbmate.data.response.TanamanResponse
@@ -93,6 +94,11 @@ interface ApiService {
     suspend fun chatBot(
         @Body request: ChatBotRequest
     ) : ChatBotResponse
+
+    @GET("tanaman/search")
+    suspend fun search(
+        @Query("search") nama : String?,
+    ) : TanamanResponse
 
 //    @GET("tanaman")
 //    suspend fun searchTanaman(

@@ -14,6 +14,7 @@ import com.android.herbmate.ui.upload.UploadViewModel
 import com.android.herbmate.ui.bookmark.BookmarkViewModel
 import com.android.herbmate.ui.chatbot.ChatBotViewModel
 import com.android.herbmate.ui.forgetpass.ForgotPassViewModel
+import com.android.herbmate.ui.history.HistoryViewModel
 import com.android.herbmate.ui.home.HomeViewModel
 import com.android.herbmate.ui.splash.SplashViewModel
 
@@ -54,6 +55,9 @@ class ViewModelFactory(private val repository: HerbMateRepository) : ViewModelPr
             }
             modelClass.isAssignableFrom(SplashViewModel::class.java) -> {
                 SplashViewModel(repository) as T
+            }
+            modelClass.isAssignableFrom(HistoryViewModel::class.java) -> {
+                HistoryViewModel(repository) as T
             }
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }

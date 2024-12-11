@@ -14,6 +14,7 @@ import com.android.herbmate.R
 import com.android.herbmate.data.response.TanamanDetailsItem
 import com.android.herbmate.data.response.TanamanItem
 import com.android.herbmate.databinding.ItemPenyakitBinding
+import com.android.herbmate.ui.detail.DetailActivity
 
 class PenyakitAdapter : ListAdapter<TanamanDetailsItem, PenyakitAdapter.ListViewHolder>(DIFF_CALLBACK) {
 
@@ -24,33 +25,20 @@ class PenyakitAdapter : ListAdapter<TanamanDetailsItem, PenyakitAdapter.ListView
         fun bind(item: TanamanDetailsItem, position: Int, expandedPositions: Set<Int>) {
             binding.tvPenyakit.text = item.penyakit
 
-            // Mengatur visibilitas layout resep
-            val isExpanded = expandedPositions.contains(position)
-            binding.llResep.visibility = if (isExpanded) View.VISIBLE else View.GONE
+            binding.llResep.visibility = if (expandedPositions.contains(position)) View.VISIBLE else View.GONE
 
-            // Mengubah ikon pada drawableEnd
-            val icon = if (isExpanded) {
-                R.drawable.ic_dropup_black
-            } else {
-                R.drawable.ic_dropdown_black
-            }
-            binding.tvPenyakit.setCompoundDrawablesWithIntrinsicBounds(0, 0, icon, 0)
-
-            // Tambahkan child view jika belum ditambahkan saat expand
-            if (binding.llResep.childCount == 0 && isExpanded) {
+            if (binding.llResep.childCount == 0 && expandedPositions.contains(position)) {
                 val inflater = LayoutInflater.from(binding.llResep.context)
                 val viewResep = inflater.inflate(R.layout.item_resep, binding.llResep, false)
-
                 val tvResep = viewResep.findViewById<TextView>(R.id.tv_resep)
                 tvResep.text = item.resep
-
                 val tvEfekSamping = viewResep.findViewById<TextView>(R.id.tv_efek_samping)
                 tvEfekSamping.text = item.efekSamping
-
                 val tvManfaat = viewResep.findViewById<TextView>(R.id.tv_manfaat)
                 tvManfaat.text = item.manfaat
-
                 val tvSumber = viewResep.findViewById<Button>(R.id.tv_sumber)
+
+                // Mengatur klik tombol sumber untuk membuka link
                 tvSumber.setOnClickListener {
                     val url = item.sumber
                     if (url.isNotEmpty()) {

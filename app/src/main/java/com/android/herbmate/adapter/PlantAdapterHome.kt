@@ -19,7 +19,7 @@ class PlantAdapterHome(private val listener: OnBookmarkClickListener) : ListAdap
     class ListViewHolder(private val binding: ItemPlantHomeBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(plant: TanamanItem, listener: OnBookmarkClickListener) {
             binding.tvName.text = plant.nama
-            val gambar = "https://storage.googleapis.com/test-ren-bucket/Lidah%20Buaya.jpg"
+            val gambar = plant.gambar
             Glide.with(binding.root.context)
                 .load(gambar)
                 .into(binding.imgPlant)
