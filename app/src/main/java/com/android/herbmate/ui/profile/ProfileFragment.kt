@@ -11,8 +11,7 @@ import android.view.ViewGroup
 import android.widget.CompoundButton
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
-import com.android.herbmate.ViewModelFactory
+import com.android.herbmate.data.ViewModelFactory
 import com.android.herbmate.data.ApiResult
 import com.android.herbmate.databinding.FragmentProfileBinding
 import com.android.herbmate.ui.history.HistoryActivity

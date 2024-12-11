@@ -9,22 +9,17 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
-import androidx.lifecycle.lifecycleScope
-import com.android.herbmate.MainActivity
+import com.android.herbmate.ui.main.MainActivity
 import com.android.herbmate.R
-import com.android.herbmate.ViewModelFactory
+import com.android.herbmate.data.ViewModelFactory
 import com.android.herbmate.data.ApiResult
-import com.android.herbmate.data.response.SignInResponse
-import com.android.herbmate.data.retrofit.ApiConfig
 import com.android.herbmate.databinding.ActivityLoginBinding
 import com.android.herbmate.ui.forgetpass.ForgetPassActivity
 import com.android.herbmate.ui.register.RegisterActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
-import kotlinx.coroutines.launch
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding

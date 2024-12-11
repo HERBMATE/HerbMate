@@ -1,28 +1,21 @@
 package com.android.herbmate.ui.detail
 
-import android.net.Uri
 import android.os.Bundle
 import android.util.Log
-import android.view.View
-import android.widget.ImageView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.android.herbmate.R
 import com.android.herbmate.databinding.ActivityDetailBinding
-import com.android.herbmate.Plant
-import com.android.herbmate.PlantAdapter
-import com.android.herbmate.ViewModelFactory
+import com.android.herbmate.adapter.BookmarkAdapter
+import com.android.herbmate.data.ViewModelFactory
 import com.android.herbmate.adapter.PenyakitAdapter
 import com.android.herbmate.data.ApiResult
-import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.bumptech.glide.Glide
 
 class DetailActivity : AppCompatActivity() {
 
     private lateinit var binding : ActivityDetailBinding
-    private lateinit var adapter: PlantAdapter
+    private lateinit var adapter: BookmarkAdapter
     private lateinit var penyakitAdapter: PenyakitAdapter
     private val viewModel by viewModels<DetailViewModel>{
         ViewModelFactory.getInstance(this)

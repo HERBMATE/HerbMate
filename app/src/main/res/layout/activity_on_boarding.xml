@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layoutDescription="@xml/activity_on_boarding_scene"
-    tools:context=".MainActivity">
+    tools:context=".ui.main.MainActivity">
 
 <!--    menu1-->
     <ImageView

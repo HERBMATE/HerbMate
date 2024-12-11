@@ -2,15 +2,14 @@ package com.android.herbmate.ui.chatbot
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
-import com.android.herbmate.Message
+import com.android.herbmate.data.model.Message
 import kotlinx.coroutines.launch
 import com.android.herbmate.data.ApiResult
 import com.android.herbmate.data.HerbMateRepository
-import com.android.herbmate.data.pref.UserModel
+import com.android.herbmate.data.local.pref.UserModel
 
 class ChatBotViewModel(private val repository: HerbMateRepository) : ViewModel() {
 

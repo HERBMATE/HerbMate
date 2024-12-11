@@ -7,9 +7,8 @@ import android.os.Looper
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
-import com.android.herbmate.MainActivity
-import com.android.herbmate.R
-import com.android.herbmate.ViewModelFactory
+import com.android.herbmate.ui.main.MainActivity
+import com.android.herbmate.data.ViewModelFactory
 import com.android.herbmate.databinding.ActivitySplashBinding
 import com.android.herbmate.ui.login.LoginActivity
 

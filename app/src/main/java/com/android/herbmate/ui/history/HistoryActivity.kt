@@ -4,10 +4,9 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.android.herbmate.ViewModelFactory
+import com.android.herbmate.data.ViewModelFactory
 import com.android.herbmate.adapter.HistoryAdapter
 import com.android.herbmate.databinding.ActivityHistoryBinding
-import com.android.herbmate.ui.history.HistoryViewModel
 
 class HistoryActivity : AppCompatActivity() {
     private lateinit var binding: ActivityHistoryBinding

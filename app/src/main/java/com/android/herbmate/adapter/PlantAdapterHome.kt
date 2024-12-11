@@ -7,17 +7,17 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.android.herbmate.OnBookmarkClickListener
-import com.android.herbmate.data.response.TanamanItem
+import com.android.herbmate.data.remote.response.TanamanItem
 import com.android.herbmate.databinding.ItemPlantHomeBinding
 import com.android.herbmate.ui.detail.DetailActivity
 import com.android.herbmate.ui.home.HomeFragment
 import com.bumptech.glide.Glide
 
-class PlantAdapterHome(private val listener: OnBookmarkClickListener) : ListAdapter<TanamanItem, PlantAdapterHome.ListViewHolder>(
+class PlantAdapterHome(private val listener: OnBookmarkClickListener) : ListAdapter<com.android.herbmate.data.remote.response.TanamanItem, PlantAdapterHome.ListViewHolder>(
     DIFF_CALLBACK
 ) {
     class ListViewHolder(private val binding: ItemPlantHomeBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(plant: TanamanItem, listener: OnBookmarkClickListener) {
+        fun bind(plant: com.android.herbmate.data.remote.response.TanamanItem, listener: OnBookmarkClickListener) {
             binding.tvName.text = plant.nama
             val gambar = plant.gambar
             Glide.with(binding.root.context)
@@ -53,12 +53,12 @@ class PlantAdapterHome(private val listener: OnBookmarkClickListener) : ListAdap
     }
 
     companion object {
-        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<TanamanItem>() {
-            override fun areItemsTheSame(oldItem: TanamanItem, newItem: TanamanItem): Boolean {
+        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<com.android.herbmate.data.remote.response.TanamanItem>() {
+            override fun areItemsTheSame(oldItem: com.android.herbmate.data.remote.response.TanamanItem, newItem: com.android.herbmate.data.remote.response.TanamanItem): Boolean {
                 return oldItem.id == newItem.id
             }
 
-            override fun areContentsTheSame(oldItem: TanamanItem, newItem: TanamanItem): Boolean {
+            override fun areContentsTheSame(oldItem: com.android.herbmate.data.remote.response.TanamanItem, newItem: com.android.herbmate.data.remote.response.TanamanItem): Boolean {
                 return oldItem == newItem
             }
         }

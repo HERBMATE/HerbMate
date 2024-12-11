@@ -4,17 +4,16 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.android.herbmate.HistoryEntity
-import com.android.herbmate.HistoryRepository
+import com.android.herbmate.data.local.entity.HistoryEntity
+import com.android.herbmate.data.HerbMateRepository
 import kotlinx.coroutines.launch
 
-class HistoryViewModel(private val repository: HistoryRepository) : ViewModel() {
+class HistoryViewModel(private val repository: HerbMateRepository) : ViewModel() {
 
     // LiveData untuk daftar history
     private val _historyListLiveData = MutableLiveData<List<HistoryEntity>>()
     val historyListLiveData: LiveData<List<HistoryEntity>> get() = _historyListLiveData
 
-    // Tambahkan data baru ke dalam history
     fun addHistory(filePath: String, plant: String) {
         viewModelScope.launch {
             val newHistory = HistoryEntity(

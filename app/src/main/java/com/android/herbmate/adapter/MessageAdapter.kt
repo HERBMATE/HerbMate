@@ -1,14 +1,12 @@
 package com.android.herbmate.adapter
 
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.android.herbmate.Message
+import com.android.herbmate.data.model.Message
 import com.android.herbmate.R
 import de.hdodenhof.circleimageview.CircleImageView
 

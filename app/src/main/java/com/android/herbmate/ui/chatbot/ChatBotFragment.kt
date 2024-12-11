@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.android.herbmate.ViewModelFactory
+import com.android.herbmate.data.ViewModelFactory
 import com.android.herbmate.databinding.FragmentChatBotBinding
 import com.android.herbmate.adapter.MessageAdapter
 

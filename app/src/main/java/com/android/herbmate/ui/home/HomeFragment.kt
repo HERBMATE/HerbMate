@@ -11,13 +11,11 @@ import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.android.herbmate.Plant
 import com.android.herbmate.adapter.PlantAdapterHome
-import com.android.herbmate.ViewModelFactory
+import com.android.herbmate.data.ViewModelFactory
 import com.android.herbmate.data.ApiResult
 import com.android.herbmate.OnBookmarkClickListener
 import com.google.android.material.chip.Chip
-import retrofit2.http.Query
 
 class HomeFragment : Fragment(), OnBookmarkClickListener {
 

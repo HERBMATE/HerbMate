@@ -7,14 +7,14 @@ import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.android.herbmate.data.ApiResult
 import com.android.herbmate.data.HerbMateRepository
-import com.android.herbmate.data.pref.UserModel
-import com.android.herbmate.data.response.UserUpdateResponse
+import com.android.herbmate.data.local.pref.UserModel
+import com.android.herbmate.data.remote.response.UserUpdateResponse
 import kotlinx.coroutines.launch
 
 class ProfileViewModel(val repository: HerbMateRepository) : ViewModel() {
 
-    private val _updateResult = MutableLiveData<ApiResult<UserUpdateResponse>>()
-    val updateResult: LiveData<ApiResult<UserUpdateResponse>> get() = _updateResult
+    private val _updateResult = MutableLiveData<ApiResult<com.android.herbmate.data.remote.response.UserUpdateResponse>>()
+    val updateResult: LiveData<ApiResult<com.android.herbmate.data.remote.response.UserUpdateResponse>> get() = _updateResult
 
     fun logout() {
         viewModelScope.launch {

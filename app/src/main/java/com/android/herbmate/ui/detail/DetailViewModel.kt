@@ -7,13 +7,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.android.herbmate.data.ApiResult
 import com.android.herbmate.data.HerbMateRepository
-import com.android.herbmate.data.response.TanamanDetailsItem
+import com.android.herbmate.data.remote.response.TanamanDetailsItem
 import kotlinx.coroutines.launch
 
 class DetailViewModel(val repository: HerbMateRepository) : ViewModel() {
 
-    private val _detailTanaman = MutableLiveData<ApiResult<List<TanamanDetailsItem>>>()
-    val detailTanaman: LiveData<ApiResult<List<TanamanDetailsItem>>> = _detailTanaman
+    private val _detailTanaman = MutableLiveData<ApiResult<List<com.android.herbmate.data.remote.response.TanamanDetailsItem>>>()
+    val detailTanaman: LiveData<ApiResult<List<com.android.herbmate.data.remote.response.TanamanDetailsItem>>> = _detailTanaman
 
     fun getDetailsTanaman(nama: String) {
         viewModelScope.launch {

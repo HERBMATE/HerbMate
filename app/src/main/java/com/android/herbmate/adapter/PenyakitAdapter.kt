@@ -11,18 +11,18 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.android.herbmate.R
-import com.android.herbmate.data.response.TanamanDetailsItem
-import com.android.herbmate.data.response.TanamanItem
+import com.android.herbmate.data.remote.response.TanamanDetailsItem
+import com.android.herbmate.data.remote.response.TanamanItem
 import com.android.herbmate.databinding.ItemPenyakitBinding
 import com.android.herbmate.ui.detail.DetailActivity
 
-class PenyakitAdapter : ListAdapter<TanamanDetailsItem, PenyakitAdapter.ListViewHolder>(DIFF_CALLBACK) {
+class PenyakitAdapter : ListAdapter<com.android.herbmate.data.remote.response.TanamanDetailsItem, PenyakitAdapter.ListViewHolder>(DIFF_CALLBACK) {
 
     private val expandedPositions = mutableSetOf<Int>()
 
     class ListViewHolder(private val binding: ItemPenyakitBinding) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: TanamanDetailsItem, position: Int, expandedPositions: Set<Int>) {
+        fun bind(item: com.android.herbmate.data.remote.response.TanamanDetailsItem, position: Int, expandedPositions: Set<Int>) {
             binding.tvPenyakit.text = item.penyakit
 
             binding.llResep.visibility = if (expandedPositions.contains(position)) View.VISIBLE else View.GONE
@@ -72,9 +72,9 @@ class PenyakitAdapter : ListAdapter<TanamanDetailsItem, PenyakitAdapter.ListView
     }
 
     companion object {
-        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<TanamanDetailsItem>() {
-            override fun areItemsTheSame(oldItem: TanamanDetailsItem, newItem: TanamanDetailsItem) = oldItem.id == newItem.id
-            override fun areContentsTheSame(oldItem: TanamanDetailsItem, newItem: TanamanDetailsItem) = oldItem == newItem
+        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<com.android.herbmate.data.remote.response.TanamanDetailsItem>() {
+            override fun areItemsTheSame(oldItem: com.android.herbmate.data.remote.response.TanamanDetailsItem, newItem: com.android.herbmate.data.remote.response.TanamanDetailsItem) = oldItem.id == newItem.id
+            override fun areContentsTheSame(oldItem: com.android.herbmate.data.remote.response.TanamanDetailsItem, newItem: com.android.herbmate.data.remote.response.TanamanDetailsItem) = oldItem == newItem
         }
     }
 }

@@ -1,30 +1,33 @@
 package com.android.herbmate.data
 
 import android.util.Log
-import com.android.herbmate.data.pref.UserModel
-import com.android.herbmate.data.pref.UserPreference
-import com.android.herbmate.data.response.AddBookmarkResponse
-import com.android.herbmate.data.response.BookmarkItem
-import com.android.herbmate.data.response.ChatBotRequest
-import com.android.herbmate.data.response.ChatBotResponse
-import com.android.herbmate.data.response.DataSearchItem
-import com.android.herbmate.data.response.DeleteBookmarkResponse
-import com.android.herbmate.data.response.FaqResponse
-import com.android.herbmate.data.response.ForgotPassRequest
-import com.android.herbmate.data.response.ForgotPassResponse
-import com.android.herbmate.data.response.HerbPredictResponse
-import com.android.herbmate.data.response.LoginRequest
-import com.android.herbmate.data.response.LoginResponse
-import com.android.herbmate.data.response.RegisterRequest
-import com.android.herbmate.data.response.SearchRequest
-import com.android.herbmate.data.response.TanamanDetailsItem
-import com.android.herbmate.data.response.TanamanDetailsResponse
-import com.android.herbmate.data.response.TanamanItem
-import com.android.herbmate.data.response.TanamanResponse
-import com.android.herbmate.data.response.UserUpdateRequest
-import com.android.herbmate.data.response.UserUpdateResponse
-import com.android.herbmate.data.retrofit.ApiConfig
-import com.android.herbmate.data.retrofit.ApiService
+import com.android.herbmate.data.local.entity.HistoryEntity
+import com.android.herbmate.data.local.room.HistoryDao
+import com.android.herbmate.data.local.pref.UserModel
+import com.android.herbmate.data.local.pref.UserPreference
+import com.android.herbmate.data.remote.response.AddBookmarkResponse
+import com.android.herbmate.data.remote.response.BookmarkItem
+import com.android.herbmate.data.remote.response.ChatBotRequest
+import com.android.herbmate.data.remote.response.ChatBotResponse
+import com.android.herbmate.data.remote.response.DataSearchItem
+import com.android.herbmate.data.remote.response.DeleteBookmarkResponse
+import com.android.herbmate.data.remote.response.FaqResponse
+import com.android.herbmate.data.remote.response.ForgotPassRequest
+import com.android.herbmate.data.remote.response.ForgotPassResponse
+import com.android.herbmate.data.remote.response.HerbPredictResponse
+import com.android.herbmate.data.remote.response.LoginRequest
+import com.android.herbmate.data.remote.response.LoginResponse
+import com.android.herbmate.data.remote.response.RegisterRequest
+import com.android.herbmate.data.remote.response.SearchRequest
+import com.android.herbmate.data.remote.response.TanamanDetailsItem
+import com.android.herbmate.data.remote.response.TanamanDetailsResponse
+import com.android.herbmate.data.remote.response.TanamanItem
+import com.android.herbmate.data.remote.response.TanamanResponse
+import com.android.herbmate.data.remote.response.UserUpdateRequest
+import com.android.herbmate.data.remote.response.UserUpdateResponse
+import com.android.herbmate.data.remote.retrofit.ApiConfig
+import com.android.herbmate.data.remote.retrofit.ApiService
+import com.android.herbmate.utils.AppExecutors
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 import okhttp3.MultipartBody
@@ -32,12 +35,14 @@ import retrofit2.HttpException
 
 class HerbMateRepository(
     private val apiService: ApiService,
-    private val userPreference: UserPreference
+    private val userPreference: UserPreference,
+    private val dao : HistoryDao,
+    private val appExecutors: AppExecutors
 ) {
 
-    suspend fun login(email: String, password: String): ApiResult<LoginResponse> {
+    suspend fun login(email: String, password: String): ApiResult<com.android.herbmate.data.remote.response.LoginResponse> {
         return try {
-            val request = LoginRequest(email, password)
+            val request = com.android.herbmate.data.remote.response.LoginRequest(email, password)
             val response = apiService.login(request)
             val user = UserModel(
                 id = response.data.idUser,
@@ -56,16 +61,26 @@ class HerbMateRepository(
 
     suspend fun register(name: String, email: String, password: String): ApiResult<String> {
         return try {
-            val response = apiService.register(RegisterRequest(name, email, password))
+            val response = apiService.register(
+                com.android.herbmate.data.remote.response.RegisterRequest(
+                    name,
+                    email,
+                    password
+                )
+            )
             ApiResult.Success(response.message)
         } catch (e: HttpException) {
             ApiResult.Error(e.message ?: "Unknown error")
         }
     }
 
-    suspend fun forgotPass(email: String): ApiResult<ForgotPassResponse> {
+    suspend fun forgotPass(email: String): ApiResult<com.android.herbmate.data.remote.response.ForgotPassResponse> {
         return try {
-            val response = apiService.forgotPass(ForgotPassRequest(email))
+            val response = apiService.forgotPass(
+                com.android.herbmate.data.remote.response.ForgotPassRequest(
+                    email
+                )
+            )
             ApiResult.Success(response)
         } catch (e: HttpException) {
             ApiResult.Error(e.message ?: "Unknown error")
@@ -107,7 +122,7 @@ class HerbMateRepository(
         userPreference.saveThemeSetting(isDarkModeActive)
     }
 
-    suspend fun uploadHerbImage(file: MultipartBody.Part): ApiResult<HerbPredictResponse> {
+    suspend fun uploadHerbImage(file: MultipartBody.Part): ApiResult<com.android.herbmate.data.remote.response.HerbPredictResponse> {
         return try {
             val response = apiService.herbPredict(file)
             if (response.id != null) {
@@ -120,7 +135,7 @@ class HerbMateRepository(
         }
     }
 
-    suspend fun getTanaman(): ApiResult<List<TanamanItem>> {
+    suspend fun getTanaman(): ApiResult<List<com.android.herbmate.data.remote.response.TanamanItem>> {
         val user = getSession().first()
         ApiConfig.getApiServices(user.token)
         return try {
@@ -136,7 +151,7 @@ class HerbMateRepository(
         }
     }
 
-    suspend fun getDetailTanaman(nama : String): ApiResult<List<TanamanDetailsItem>> {
+    suspend fun getDetailTanaman(nama : String): ApiResult<List<com.android.herbmate.data.remote.response.TanamanDetailsItem>> {
         return try {
             val response = apiService.getTanamanDetails(nama)
             if (!response.error) {
@@ -151,7 +166,7 @@ class HerbMateRepository(
     }
 
 
-    suspend fun addBookmark(idUser: Int, id: Int): ApiResult<AddBookmarkResponse> {
+    suspend fun addBookmark(idUser: Int, id: Int): ApiResult<com.android.herbmate.data.remote.response.AddBookmarkResponse> {
         return try{
             val response = apiService.addBookmark(idUser, id)
             if (!response.error) {
@@ -164,7 +179,7 @@ class HerbMateRepository(
         }
     }
 
-    suspend fun getBookmark() : ApiResult<List<BookmarkItem>> {
+    suspend fun getBookmark() : ApiResult<List<com.android.herbmate.data.remote.response.BookmarkItem>> {
         return try {
             val user = getSession().first()
             val idUser = user.id
@@ -181,7 +196,7 @@ class HerbMateRepository(
         }
     }
 
-    suspend fun deleteBookmark(idBookmark: Int) : ApiResult<DeleteBookmarkResponse> {
+    suspend fun deleteBookmark(idBookmark: Int) : ApiResult<com.android.herbmate.data.remote.response.DeleteBookmarkResponse> {
         return try {
             val response = apiService.deleteBookmark(idBookmark)
             if (!response.error) {
@@ -194,16 +209,20 @@ class HerbMateRepository(
         }
     }
 
-    suspend fun chatBot(prompt: String): ApiResult<ChatBotResponse> {
+    suspend fun chatBot(prompt: String): ApiResult<com.android.herbmate.data.remote.response.ChatBotResponse> {
         return try {
-            val response = apiService.chatBot(ChatBotRequest(prompt))
+            val response = apiService.chatBot(
+                com.android.herbmate.data.remote.response.ChatBotRequest(
+                    prompt
+                )
+            )
             ApiResult.Success(response)
         } catch (e: Exception) {
             ApiResult.Error(e.message ?: "Unknown error")
         }
     }
 
-    suspend fun search(search: String?): ApiResult<List<TanamanItem>> {
+    suspend fun search(search: String?): ApiResult<List<com.android.herbmate.data.remote.response.TanamanItem>> {
         return try {
             val response = apiService.search(search)
             if (!response.error) {
@@ -215,6 +234,14 @@ class HerbMateRepository(
         } catch (e: Exception) {
             ApiResult.Error(e.message ?: "Unknown error")
         }
+    }
+
+    suspend fun addHistory(history: HistoryEntity) {
+        dao.insertHistory(history)
+    }
+
+    suspend fun getHistory(): List<HistoryEntity> {
+        return dao.getAllHistory()
     }
 
 //    suspend fun loginGoogle(code: String): ApiResult<LoginResponse> {
@@ -259,10 +286,12 @@ class HerbMateRepository(
         private var instance: HerbMateRepository? = null
         fun getInstance(
             apiService: ApiService,
-            userPreference: UserPreference
+            userPreference: UserPreference,
+            dao : HistoryDao,
+            appExecutors: AppExecutors
         ): HerbMateRepository =
             instance ?: synchronized(this) {
-                instance ?: HerbMateRepository(apiService, userPreference)
+                instance ?: HerbMateRepository(apiService, userPreference, dao, appExecutors)
             }.also { instance = it }
     }
 }

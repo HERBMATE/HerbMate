@@ -6,8 +6,7 @@ import android.os.Bundle
 import android.view.WindowInsets
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
-import androidx.constraintlayout.motion.widget.MotionLayout
-import com.android.herbmate.MainActivity
+import com.android.herbmate.ui.main.MainActivity
 import com.android.herbmate.databinding.ActivityOnBoardingBinding
 
 class OnBoardingActivity : AppCompatActivity() {

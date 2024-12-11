@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.android.herbmate.HistoryEntity
+import com.android.herbmate.data.local.entity.HistoryEntity
 import com.android.herbmate.R
 import com.bumptech.glide.Glide
 

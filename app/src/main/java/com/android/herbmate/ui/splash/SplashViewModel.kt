@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import com.android.herbmate.data.HerbMateRepository
-import com.android.herbmate.data.pref.UserModel
+import com.android.herbmate.data.local.pref.UserModel
 
 class SplashViewModel(val repository: HerbMateRepository) : ViewModel() {
 
