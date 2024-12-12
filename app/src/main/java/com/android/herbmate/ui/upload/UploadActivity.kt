@@ -41,6 +41,50 @@ class UploadActivity : AppCompatActivity() {
             showImage()
         }
 
+        uploadViewModel.uploadResponse.observe(this) { result ->
+            when (result) {
+                is ApiResult.Loading -> {
+                    binding.progressBar.visibility = View.VISIBLE
+                    binding.uploadBtn.isEnabled = false
+                    Log.d("Upload", "Loading")
+                }
+                is ApiResult.Success -> {
+                    Log.d("Upload", "Success")
+                    binding.progressBar.visibility = View.GONE
+                    binding.uploadBtn.isEnabled = true
+
+                    val nama = result.data.data.nama
+                    val namaLatin = result.data.data.namaLatin
+                    val asal = result.data.data.asal
+                    val gambar = result.data.data.gambar
+                    val id = result.data.data.id
+                    val kandungan = result.data.data.kandungan
+
+                    historyViewModel.addHistory(
+                        filePath = uri.toString(),
+                        plant = nama
+                    )
+
+                    val intent = Intent(binding.root.context, DetailActivity::class.java).apply {
+                        putExtra(DetailActivity.EXTRA_NAME, nama)
+                        putExtra(DetailActivity.EXTRA_LATIN, namaLatin)
+                        putExtra(DetailActivity.EXTRA_ASAL, asal)
+                        putExtra(DetailActivity.EXTRA_IMAGE, gambar)
+                        putExtra(DetailActivity.EXTRA_ID, id)
+                        putExtra(DetailActivity.EXTRA_KANDUNGAN, kandungan)
+                    }
+                    binding.root.context.startActivity(intent)
+                    finish()
+                }
+                is ApiResult.Error -> {
+                    binding.progressBar.visibility = View.GONE
+                    binding.uploadBtn.isEnabled = true
+                    Toast.makeText(this, "Error: ${result.error}", Toast.LENGTH_SHORT).show()
+                    Log.e("Upload Error", "uploadImage: ${result.error}")
+                }
+            }
+        }
+
         binding.uploadBtn.setOnClickListener {
             uploadImage()
         }
@@ -58,43 +102,6 @@ class UploadActivity : AppCompatActivity() {
             )
 
             uploadViewModel.uploadImage(multipartBody)
-            uploadViewModel.uploadResponse.observe(this) { result ->
-                when (result) {
-                    is ApiResult.Loading -> {
-                        binding.progressBar.visibility = View.VISIBLE
-                    }
-                    is ApiResult.Success -> {
-                        binding.progressBar.visibility = View.GONE
-
-                        val nama = result.data.data.nama
-                        val namaLatin = result.data.data.namaLatin
-                        val asal = result.data.data.asal
-                        val gambar = result.data.data.gambar
-                        val id = result.data.data.id
-                        val kandungan = result.data.data.kandungan
-
-                        historyViewModel.addHistory(
-                            filePath = uri.toString(),
-                            plant = nama
-                        )
-
-                        val intent = Intent(binding.root.context, DetailActivity::class.java).apply {
-                            putExtra(DetailActivity.EXTRA_NAME, nama)
-                            putExtra(DetailActivity.EXTRA_LATIN, namaLatin)
-                            putExtra(DetailActivity.EXTRA_ASAL, asal)
-                            putExtra(DetailActivity.EXTRA_IMAGE, gambar)
-                            putExtra(DetailActivity.EXTRA_ID, id)
-                            putExtra(DetailActivity.EXTRA_KANDUNGAN, kandungan)
-                        }
-                        binding.root.context.startActivity(intent)
-                    }
-                    is ApiResult.Error -> {
-                        binding.progressBar.visibility = View.GONE
-                        Toast.makeText(this, "Error: ${result.error}", Toast.LENGTH_SHORT).show()
-                        Log.e("Upload Error", "uploadImage: ${result.error}")
-                    }
-                }
-            }
         }
     }
 

@@ -9,6 +9,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.android.herbmate.data.local.entity.HistoryEntity
 import com.android.herbmate.R
 import com.bumptech.glide.Glide
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 class HistoryAdapter(private var historyList: List<HistoryEntity>) :
     RecyclerView.Adapter<HistoryAdapter.HistoryViewHolder>() {
@@ -27,9 +29,15 @@ class HistoryAdapter(private var historyList: List<HistoryEntity>) :
 
     override fun onBindViewHolder(holder: HistoryViewHolder, position: Int) {
         val history = historyList[position]
+        val formatedDate = formatTimestamp(history.timestamp)
         Glide.with(holder.itemView.context).load(history.filePath).into(holder.imageThumbnail)
-        holder.timestamp.text = history.timestamp.toString()
+        holder.timestamp.text = formatedDate
         holder.plantName.text = history.plant
+    }
+
+    private fun formatTimestamp(timestamp: Long): String {
+        val dateFormat = SimpleDateFormat("dd MMMM yyyy HH:mm:ss", Locale.getDefault())
+        return dateFormat.format(timestamp)
     }
 
     override fun getItemCount() = historyList.size

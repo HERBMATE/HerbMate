@@ -19,7 +19,6 @@ class ChatBotViewModel(private val repository: HerbMateRepository) : ViewModel()
     val userSession: LiveData<UserModel> = repository.getSession().asLiveData()
 
     fun sendMessage(content: String) {
-        // Tambahkan pesan pengguna ke daftar
         val userMessage = Message(content = content, isSentByUser = true)
         addMessage(userMessage)
         callChatbot(content)
@@ -41,7 +40,6 @@ class ChatBotViewModel(private val repository: HerbMateRepository) : ViewModel()
     }
 
     private fun addMessage(message: Message) {
-        // Tambahkan pesan ke list
         val currentMessages = _messages.value ?: mutableListOf()
         currentMessages.add(message)
         _messages.value = currentMessages

@@ -40,11 +40,6 @@ interface ApiService {
         @Body request: LoginRequest
     ): LoginResponse
 
-    @GET("auth/google/callback")
-    suspend fun googleSignIn(
-        @Query("code") code: String
-    ): SignInResponse
-
     @POST("users/forgotPass")
     suspend fun forgotPass(
         @Body request: ForgotPassRequest

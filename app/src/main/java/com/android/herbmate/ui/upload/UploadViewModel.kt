@@ -16,11 +16,12 @@ import okhttp3.MultipartBody
 class UploadViewModel(val repository: HerbMateRepository) : ViewModel() {
 
     var currentImageUri : Uri? = null
-    private val _uploadResponse = MutableLiveData<ApiResult<com.android.herbmate.data.remote.response.HerbPredictResponse>>()
-    val uploadResponse: LiveData<ApiResult<com.android.herbmate.data.remote.response.HerbPredictResponse>> get() = _uploadResponse
+    private val _uploadResponse = MutableLiveData<ApiResult<HerbPredictResponse>>()
+    val uploadResponse: LiveData<ApiResult<HerbPredictResponse>> get() = _uploadResponse
 
     fun uploadImage(file: MultipartBody.Part) {
         viewModelScope.launch {
+            _uploadResponse.postValue(ApiResult.Loading)
             val response = repository.uploadHerbImage(file)
             _uploadResponse.postValue(response)
         }

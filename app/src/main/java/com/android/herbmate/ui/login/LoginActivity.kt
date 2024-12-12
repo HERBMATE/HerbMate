@@ -26,11 +26,6 @@ class LoginActivity : AppCompatActivity() {
     private val viewModel by viewModels<LoginViewModel> {
         ViewModelFactory.getInstance(this)
     }
-    private lateinit var googleSignInClient: GoogleSignInClient
-
-    companion object {
-        private const val RC_SIGN_IN = 9001
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -89,17 +84,19 @@ class LoginActivity : AppCompatActivity() {
             when (result) {
                 is ApiResult.Loading -> {
                     binding.progressBar.isVisible = true
+                    binding.btnLogin.isEnabled = false
                 }
 
                 is ApiResult.Success -> {
+                    binding.btnLogin.isEnabled = true
                     binding.progressBar.isVisible = false
                     startActivity(Intent(this, MainActivity::class.java))
                     finish()
                 }
 
                 is ApiResult.Error -> {
+                    binding.btnLogin.isEnabled = true
                     binding.progressBar.isVisible = false
-                    Log.d("Login Error", result.error)
                     Toast.makeText(this, result.error, Toast.LENGTH_SHORT).show()
                 }
             }

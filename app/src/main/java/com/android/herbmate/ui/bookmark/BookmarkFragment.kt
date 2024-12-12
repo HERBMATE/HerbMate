@@ -58,9 +58,9 @@ class BookmarkFragment : Fragment(), OnBookmarkClickListener {
                         binding.tvKosong.text = getString(R.string.bookmark_kosong)
                         binding.tvKosong.visibility = View.VISIBLE
                     } else {
-                        adapter.submitList(plants)
                         binding.tvKosong.visibility = View.GONE
                     }
+                    adapter.submitList(plants)
                 }
 
                 is ApiResult.Error -> {
@@ -79,6 +79,11 @@ class BookmarkFragment : Fragment(), OnBookmarkClickListener {
                 viewModel.deleteBookmark(it)
             }
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.getBookmark()
     }
 
     override fun onDestroyView() {

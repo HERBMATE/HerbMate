@@ -40,13 +40,11 @@ class ChatBotFragment : Fragment() {
             adapter = messageAdapter
         }
 
-        // Observasi data di ViewModel
         viewModel.messages.observe(viewLifecycleOwner) { messages ->
             messageAdapter.updateMessages(messages)
             binding.recyclerView.scrollToPosition(messages.size - 1)
         }
 
-        // Tombol kirim pesan
         binding.buttonSend.setOnClickListener {
             val messageContent = binding.editTextMessage.text.toString()
             if (messageContent.isNotEmpty()) {

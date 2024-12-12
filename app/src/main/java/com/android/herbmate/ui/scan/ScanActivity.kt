@@ -43,6 +43,7 @@ class ScanActivity : AppCompatActivity() {
 
         binding.takePictureButton.setOnClickListener {
             takePhoto()
+            binding.takePictureButton.isEnabled = false
         }
 
         checkCameraPermission()

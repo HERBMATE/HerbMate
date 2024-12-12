@@ -79,8 +79,14 @@ class ProfileFragment : Fragment() {
             when (result) {
                 is ApiResult.Error -> {
                     binding.progressBar.visibility = View.GONE
+                    binding.btnCancel.visibility = View.GONE
+                    binding.btnSave.visibility = View.GONE
                 }
                 is ApiResult.Loading -> {
+                    binding.btnCancel.visibility = View.VISIBLE
+                    binding.btnSave.visibility = View.VISIBLE
+                    binding.btnSave.isEnabled = false
+                    binding.btnCancel.isEnabled = false
                     binding.progressBar.visibility = View.VISIBLE
                 }
                 is ApiResult.Success -> {

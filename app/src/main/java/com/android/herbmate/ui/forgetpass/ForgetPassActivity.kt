@@ -1,5 +1,6 @@
 package com.android.herbmate.ui.forgetpass
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -9,6 +10,7 @@ import androidx.core.view.isVisible
 import com.android.herbmate.data.ViewModelFactory
 import com.android.herbmate.data.ApiResult
 import com.android.herbmate.databinding.ActivityForgetPassBinding
+import com.android.herbmate.ui.login.LoginActivity
 
 class ForgetPassActivity : AppCompatActivity() {
 
@@ -16,7 +18,6 @@ class ForgetPassActivity : AppCompatActivity() {
     private val viewModel by viewModels<ForgotPassViewModel>{
         ViewModelFactory.getInstance(this)
     }
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,7 +42,6 @@ class ForgetPassActivity : AppCompatActivity() {
                 is ApiResult.Success -> {
                     binding.progressBar.isVisible = false
                     showDialog("Berhasil", result.data.message){
-                        finish()
                     }
                     Toast.makeText(this, result.data.message, Toast.LENGTH_SHORT).show()
                 }
@@ -70,6 +70,8 @@ class ForgetPassActivity : AppCompatActivity() {
             .setPositiveButton("OK") { dialog, _ ->
                 dialog.dismiss()
                 onOkClick()
+                startActivity(Intent(this, LoginActivity::class.java))
+                finish()
             }
             .setCancelable(false)
             .show()

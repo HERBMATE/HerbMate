@@ -72,6 +72,10 @@ class DetailActivity : AppCompatActivity(), OnBookmarkClickListener {
         binding.rvRekomendasi.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         binding.rvRekomendasi.adapter = rekomendasiAdapter
 
+        binding.ivBack.setOnClickListener {
+            onBackPressed()
+        }
+
         viewModel.detailTanaman.observe(this){ result ->
             when(result){
                 is ApiResult.Error -> {

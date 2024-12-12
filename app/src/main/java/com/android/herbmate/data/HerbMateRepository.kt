@@ -75,12 +75,12 @@ class HerbMateRepository(
 
     suspend fun forgotPass(email: String): ApiResult<ForgotPassResponse> {
         return try {
-            val response = currentApiService.forgotPass(
-                ForgotPassRequest(
-                    email
-                )
-            )
-            ApiResult.Success(response)
+            val response = currentApiService.forgotPass(ForgotPassRequest(email))
+            if (!response.error) {
+                ApiResult.Success(response)
+            } else {
+                ApiResult.Error(response.message)
+            }
         } catch (e: HttpException) {
             ApiResult.Error(e.message ?: "Unknown error")
         }
@@ -193,7 +193,7 @@ class HerbMateRepository(
         val response = currentApiService.getBookmark(idUser)
 
         if (!response.error) {
-            val bookmarkItems = response.data ?: emptyList()  // Menghindari NullPointerException
+            val bookmarkItems = response.data ?: emptyList()
             ApiResult.Success(bookmarkItems)
         } else {
             ApiResult.Error(response.message)
@@ -218,14 +218,14 @@ class HerbMateRepository(
 
     suspend fun chatBot(prompt: String): ApiResult<ChatBotResponse> {
         return try {
-            val response = currentApiService.chatBot(
-                ChatBotRequest(
-                    prompt
-                )
-            )
-            ApiResult.Success(response)
+            val response = currentApiService.chatBot(ChatBotRequest(prompt))
+            if (response.error) {
+                ApiResult.Error(response.response)
+            } else {
+                ApiResult.Success(response)
+            }
         } catch (e: Exception) {
-            ApiResult.Error(e.message ?: "Unknown error")
+            ApiResult.Error(e.message ?: "Unknown error") // Mengembalikan pesan kesalahan jika terjadi exception
         }
     }
 

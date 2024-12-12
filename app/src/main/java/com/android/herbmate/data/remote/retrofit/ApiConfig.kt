@@ -10,7 +10,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class ApiConfig {
     companion object{
-//        private const val BASE_URL = "http://10.0.2.2:3000/"
         private const val BASE_URL = BuildConfig.BASE_URL
         fun getApiServices(token: String): ApiService {
             Log.d("ApiConfig", token)

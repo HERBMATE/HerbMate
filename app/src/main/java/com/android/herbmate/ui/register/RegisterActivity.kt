@@ -1,5 +1,6 @@
 package com.android.herbmate.ui.register
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.InputType
 import android.util.Log
@@ -10,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.android.herbmate.data.ViewModelFactory
 import com.android.herbmate.data.ApiResult
 import com.android.herbmate.databinding.ActivityRegisterBinding
+import com.android.herbmate.ui.login.LoginActivity
 
 class RegisterActivity : AppCompatActivity() {
     private lateinit var binding : ActivityRegisterBinding
@@ -25,16 +27,19 @@ class RegisterActivity : AppCompatActivity() {
             when (result) {
                 is ApiResult.Loading -> {
                     binding.progressBar.visibility = View.VISIBLE
+                    binding.btnRegister.isEnabled = false
                 }
 
                 is ApiResult.Success -> {
                     binding.progressBar.visibility = View.GONE
+                    binding.btnRegister.isEnabled = true
+                    startActivity(Intent(this, LoginActivity::class.java))
                     Toast.makeText(this, result.data, Toast.LENGTH_SHORT).show()
                 }
 
                 is ApiResult.Error -> {
+                    binding.btnRegister.isEnabled = true
                     binding.progressBar.visibility = View.GONE
-                    Log.d("Register Error", result.error)
                 }
             }
         }
@@ -44,8 +49,6 @@ class RegisterActivity : AppCompatActivity() {
             val email = binding.edEmail.text.toString().trim()
             val password = binding.edPassword.text.toString().trim()
             val confirmPassword = binding.edConfirmPassword.text.toString().trim()
-
-            // Validasi input kosong
             when {
                 name.isEmpty() -> {
                     Toast.makeText(this, "Nama tidak boleh kosong", Toast.LENGTH_SHORT).show()
@@ -67,7 +70,6 @@ class RegisterActivity : AppCompatActivity() {
                     Toast.makeText(this, "Password dan konfirmasi tidak cocok", Toast.LENGTH_SHORT).show()
                 }
                 else -> {
-                    // Jika semua input valid, panggil ViewModel untuk registrasi pengguna
                     viewModel.registerUser(name, email, password)
                 }
             }

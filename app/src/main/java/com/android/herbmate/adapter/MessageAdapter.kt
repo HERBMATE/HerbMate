@@ -1,5 +1,6 @@
 package com.android.herbmate.adapter
 
+import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,7 +18,7 @@ class MessageAdapter(private val messages: MutableList<Message>, private var use
         val textViewName: TextView = itemView.findViewById(R.id.textViewName)
         val textViewMessage: TextView = itemView.findViewById(R.id.textViewMessage)
         val imageViewProfile: CircleImageView = itemView.findViewById(R.id.imageViewProfile)
-        val messageLayout: LinearLayout = itemView.findViewById(R.id.messageLayout) // Reference to the message layout
+        val messageLayout: LinearLayout = itemView.findViewById(R.id.messageLayout)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MessageViewHolder {
@@ -28,7 +29,7 @@ class MessageAdapter(private val messages: MutableList<Message>, private var use
     override fun onBindViewHolder(holder: MessageViewHolder, position: Int) {
         val message = messages[position]
 
-        holder.textViewMessage.text = message.content
+        holder.textViewMessage.text = Html.fromHtml(message.content, Html.FROM_HTML_MODE_LEGACY)
 
         if (message.isSentByUser ) {
             holder.textViewName.text = userName

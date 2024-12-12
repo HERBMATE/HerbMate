@@ -12,7 +12,7 @@ import com.android.herbmate.databinding.ItemPlantBinding
 import com.android.herbmate.ui.detail.DetailActivity
 import com.bumptech.glide.Glide
 
-class BookmarkAdapter(private val listener: OnBookmarkClickListener) : ListAdapter<com.android.herbmate.data.remote.response.BookmarkItem, BookmarkAdapter.ListViewHolder>(
+class BookmarkAdapter(private val listener: OnBookmarkClickListener) : ListAdapter<BookmarkItem, BookmarkAdapter.ListViewHolder>(
     DIFF_CALLBACK
 ) {
     class ListViewHolder(private val binding: ItemPlantBinding) : RecyclerView.ViewHolder(binding.root) {
@@ -28,6 +28,11 @@ class BookmarkAdapter(private val listener: OnBookmarkClickListener) : ListAdapt
                 val intent = Intent(binding.root.context, DetailActivity::class.java).apply {
                     putExtra(DetailActivity.EXTRA_NAME, plant.nama)
                     putExtra(DetailActivity.EXTRA_IMAGE, gambar)
+                    putExtra(DetailActivity.EXTRA_LATIN, plant.namaLatin)
+                    putExtra(DetailActivity.EXTRA_ASAL, plant.asal)
+                    putExtra(DetailActivity.EXTRA_KANDUNGAN, plant.kandungan)
+                    putExtra(DetailActivity.EXTRA_STATUS, true)
+                    putExtra(DetailActivity.EXTRA_ID_BOOKMARK, plant.idBookmark)
                 }
                 binding.root.context.startActivity(intent)
             }
