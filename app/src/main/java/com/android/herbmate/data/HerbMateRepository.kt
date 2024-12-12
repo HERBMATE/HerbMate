@@ -271,6 +271,14 @@ class HerbMateRepository(
         return dao.getAllHistory()
     }
 
+    suspend fun saveOnBoarding() {
+        userPreference.saveOnboardingCompleted(true)
+    }
+
+    fun isOnBoardingCompleted(): Flow<Boolean> {
+        return userPreference.isOnboardingCompleted()
+    }
+
     companion object {
         @Volatile
         private var instance: HerbMateRepository? = null

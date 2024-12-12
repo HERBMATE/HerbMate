@@ -11,8 +11,8 @@ import kotlinx.coroutines.launch
 
 class BookmarkViewModel(val repository: HerbMateRepository) : ViewModel() {
 
-    private val _bookmark = MutableLiveData<ApiResult<List<com.android.herbmate.data.remote.response.BookmarkItem>>>()
-    val bookmark: LiveData<ApiResult<List<com.android.herbmate.data.remote.response.BookmarkItem>>> get() = _bookmark
+    private val _bookmark = MutableLiveData<ApiResult<List<BookmarkItem>>>()
+    val bookmark: LiveData<ApiResult<List<BookmarkItem>>> get() = _bookmark
 
     fun getBookmark() {
         viewModelScope.launch {
@@ -28,8 +28,4 @@ class BookmarkViewModel(val repository: HerbMateRepository) : ViewModel() {
             getBookmark()
         }
     }
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is notifications Fragment"
-    }
-    val text: LiveData<String> = _text
 }

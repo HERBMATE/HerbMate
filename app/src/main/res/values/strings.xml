@@ -44,6 +44,18 @@
     <string name="password_lama">Password Lama</string>
     <string name="password_baru">Password Baru</string>
     <string name="tanaman_herbal">Tanaman Herbal</string>
+    <string name="tanaman_lainnya">Tanaman Lainnya</string>
+    <string name="resep">Resep :</string>
+    <string name="kandungan">Kandungan :</string>
+    <string name="asal">Asal :</string>
+    <string name="nama_latin">Nama Latin :</string>
+    <string name="nama_tanaman">Nama Tanaman</string>
+    <string name="temukan_berbagai_tanaman_herbal_lengkap_dengan_informasi_manfaat_dan_cara_penggunaannya">Temukan berbagai tanaman herbal lengkap dengan informasi manfaat dan cara penggunaannya.</string>
+    <string name="gunakan_fitur_scan_untuk_mengenali_tanaman_herbal_secara_instan_dengan_bantuan_teknologi_kami">Gunakan fitur scan untuk mengenali tanaman herbal secara instan dengan bantuan teknologi kami.</string>
+    <string name="coba_fitur_ai">Coba Fitur AI</string>
+    <string name="kosong">Kosong</string>
+    <string name="bookmark_kosong">Bookmark Kosong</string>
+    <string name="bookmark_button">Bookmark button</string>
 
     <string-array name="faq">
         <item>Nama Tanaman</item>

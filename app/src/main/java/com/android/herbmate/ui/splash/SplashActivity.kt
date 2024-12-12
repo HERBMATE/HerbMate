@@ -4,13 +4,15 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import com.android.herbmate.ui.main.MainActivity
+import com.android.herbmate.ui.login.LoginActivity
+import com.android.herbmate.ui.onboarding.OnBoardingActivity
 import com.android.herbmate.data.ViewModelFactory
 import com.android.herbmate.databinding.ActivitySplashBinding
-import com.android.herbmate.ui.login.LoginActivity
 
 class SplashActivity : AppCompatActivity() {
 
@@ -34,14 +36,19 @@ class SplashActivity : AppCompatActivity() {
         }
 
         viewModel.userSession.observe(this) { userSession ->
-            Handler(Looper.getMainLooper()).postDelayed({
-                if (userSession.isLogin) {
-                    startActivity(Intent(this, MainActivity::class.java))
-                } else {
-                    startActivity(Intent(this, LoginActivity::class.java))
-                }
-                finish()
-            }, 3000L)
+            viewModel.isOnBoardingCompleted().observe(this) { isOnBoardingCompleted ->
+                Handler(Looper.getMainLooper()).postDelayed({
+                    if (!isOnBoardingCompleted) {
+                        startActivity(Intent(this, OnBoardingActivity::class.java))
+                    } else if (userSession.isLogin) {
+                        Log.d("SplashActivity", userSession.isLogin.toString())
+                        startActivity(Intent(this, MainActivity::class.java))
+                    } else {
+                        startActivity(Intent(this, LoginActivity::class.java))
+                    }
+                    finish()
+                }, 3000L)
+            }
         }
     }
 }

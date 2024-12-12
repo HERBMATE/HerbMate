@@ -5,10 +5,12 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import com.android.herbmate.OnBookmarkClickListener
+import com.android.herbmate.R
 import com.android.herbmate.adapter.BookmarkAdapter
 import com.android.herbmate.data.ViewModelFactory
 import com.android.herbmate.data.ApiResult
@@ -45,15 +47,26 @@ class BookmarkFragment : Fragment(), OnBookmarkClickListener {
         viewModel.bookmark.observe(viewLifecycleOwner) { result ->
             when (result) {
                 is ApiResult.Loading -> {
-                    // Handle loading state
+                    binding.progressBar.visibility = View.VISIBLE
+                    binding.tvKosong.visibility = View.GONE
                 }
-                is ApiResult.Success -> {
-                    val plants = result.data
-                    adapter.submitList(plants)
 
+                is ApiResult.Success -> {
+                    binding.progressBar.visibility = View.GONE
+                    val plants = result.data
+                    if (plants.isEmpty()) {
+                        binding.tvKosong.text = getString(R.string.bookmark_kosong)
+                        binding.tvKosong.visibility = View.VISIBLE
+                    } else {
+                        adapter.submitList(plants)
+                        binding.tvKosong.visibility = View.GONE
+                    }
                 }
+
                 is ApiResult.Error -> {
-                    Log.d("observe", result.error)
+                    binding.progressBar.visibility = View.GONE
+                    Toast.makeText(requireContext(), "Error: ${result.error}", Toast.LENGTH_SHORT)
+                        .show()
                 }
             }
         }

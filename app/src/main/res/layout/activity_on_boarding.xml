@@ -8,7 +8,6 @@
     app:layoutDescription="@xml/activity_on_boarding_scene"
     tools:context=".ui.main.MainActivity">
 
-<!--    menu1-->
     <ImageView
         android:id="@+id/logoMenu1"
         android:layout_width="0dp"
@@ -101,7 +100,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="Temukan berbagai tanaman herbal lengkap dengan informasi manfaat dan cara penggunaannya."
+                android:text="@string/temukan_berbagai_tanaman_herbal_lengkap_dengan_informasi_manfaat_dan_cara_penggunaannya"
                 android:textColor="@color/blackAndWhiteColor"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -111,7 +110,6 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
-    <!--    menu3-->
     <ImageView
         android:id="@+id/logoMenu3"
         android:layout_width="0dp"
@@ -147,7 +145,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="Gunakan fitur scan untuk mengenali tanaman herbal secara instan dengan bantuan teknologi kami."
+                android:text="@string/gunakan_fitur_scan_untuk_mengenali_tanaman_herbal_secara_instan_dengan_bantuan_teknologi_kami"
                 android:textColor="@color/blackAndWhiteColor"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"

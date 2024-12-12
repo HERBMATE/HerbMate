@@ -38,6 +38,18 @@ class UserPreference private constructor(private val dataStore: DataStore<Prefer
         }
     }
 
+    suspend fun saveOnboardingCompleted(completed: Boolean) {
+        dataStore.edit { preferences ->
+            preferences[ONBOARDING_KEY] = completed
+        }
+    }
+
+    fun isOnboardingCompleted(): Flow<Boolean> {
+        return dataStore.data.map { preferences ->
+            preferences[ONBOARDING_KEY] ?: false
+        }
+    }
+
     suspend fun logout() {
         dataStore.edit { preferences ->
             preferences.clear()
@@ -65,6 +77,7 @@ class UserPreference private constructor(private val dataStore: DataStore<Prefer
         private val TOKEN_KEY = stringPreferencesKey("token")
         private val IS_LOGIN_KEY = booleanPreferencesKey("isLogin")
         private val themeKey = booleanPreferencesKey("theme_setting")
+        private val ONBOARDING_KEY = booleanPreferencesKey("onboarding_completed")
         // Singleton untuk mendapatkan instance UserPreference
         fun getInstance(dataStore: DataStore<Preferences>): UserPreference {
             return INSTANCE ?: synchronized(this) {

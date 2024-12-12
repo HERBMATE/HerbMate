@@ -6,21 +6,31 @@ import android.os.Bundle
 import android.view.WindowInsets
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import com.android.herbmate.ui.main.MainActivity
+import com.android.herbmate.data.local.pref.UserPreference
+import com.android.herbmate.data.local.pref.dataStore
 import com.android.herbmate.databinding.ActivityOnBoardingBinding
+import com.android.herbmate.ui.login.LoginActivity
+import kotlinx.coroutines.launch
 
 class OnBoardingActivity : AppCompatActivity() {
     private lateinit var binding: ActivityOnBoardingBinding
+    private lateinit var userPreference: UserPreference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityOnBoardingBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setupView()
-
-        binding.button.setOnClickListener{
-            val intent = Intent(this, MainActivity::class.java)
+        userPreference = UserPreference.getInstance(dataStore)
+        binding.button.setOnClickListener {
+            lifecycleScope.launch {
+                userPreference.saveOnboardingCompleted(true)
+            }
+            val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
+            finish()
         }
     }
 

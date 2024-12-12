@@ -6,28 +6,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- Search View -->
-    <androidx.appcompat.widget.SearchView
-        android:id="@+id/search_view"
-        android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:background="@drawable/rounded_edittext"
-        app:iconifiedByDefault="false"
-        app:queryBackground="@android:color/transparent"
-        app:queryHint="Search Event..."
-        android:layout_margin="16dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <!-- ScrollView for Filters and Lists -->
     <ScrollView
         android:id="@+id/scroll_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:paddingBottom="72dp"
         android:clipToPadding="false"
-        app:layout_constraintTop_toBottomOf="@id/search_view"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent">
@@ -37,59 +22,22 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <!-- Divider -->
-            <View
-                android:id="@+id/divider"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_margin="16dp"
-                android:background="@color/black" />
-
-            <!-- Filters -->
-            <TextView
-                android:id="@+id/tv_filter"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:text="Filters"
-                android:textStyle="bold" />
-
-            <com.google.android.material.chip.ChipGroup
-                android:id="@+id/chip_group"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp">
-
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chip_all"
-                    style="@style/CustomChipShape"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="All" />
-
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chip_category1"
-                    style="@style/CustomChipShape"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Category 1" />
-
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chip_category2"
-                    style="@style/CustomChipShape"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Category 2" />
-            </com.google.android.material.chip.ChipGroup>
-
-            <!-- RecyclerView for Filtered Items -->
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_view_filters"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
         </LinearLayout>
     </ScrollView>
+
+    <TextView
+        android:id="@+id/tv_kosong"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/kosong"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
     <ProgressBar
         android:id="@+id/progress_bar"
