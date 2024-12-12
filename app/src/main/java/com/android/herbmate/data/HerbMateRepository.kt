@@ -122,7 +122,9 @@ class HerbMateRepository(
 
     suspend fun getTanaman(): ApiResult<List<TanamanItem>> {
         return try {
-            val response = currentApiService.getTanaman()
+            val user = getSession().first()
+            val idUser = user.id
+            val response = currentApiService.getTanaman(idUser)
             if (response.isSuccessful) {
                 val body = response.body()
                 if (body != null && !body.error) {
@@ -139,9 +141,9 @@ class HerbMateRepository(
     }
 
 
-    suspend fun getRekomendasiForSinglePenyakit(penyakit: String): ApiResult<List<TanamanItem>> {
+    suspend fun getRekomendasiForSinglePenyakit(penyakit: String, tanaman: String): ApiResult<List<TanamanItem>> {
         return try {
-            val response = currentApiService.rekomendasi(penyakit)
+            val response = currentApiService.rekomendasi(penyakit, tanaman)
             if (response.isSuccessful) {
                 val responseBody = response.body()
                 if (responseBody != null && !responseBody.error) {
@@ -184,21 +186,22 @@ class HerbMateRepository(
         }
     }
 
-    suspend fun getBookmark() : ApiResult<List<BookmarkItem>> {
-        return try {
-            val user = getSession().first()
-            val idUser = user.id
-            val response = currentApiService.getBookmark(idUser)
-            if (!response.error) {
-                val bookmarkItems = response.data
-                ApiResult.Success(bookmarkItems)
-            } else {
-                ApiResult.Error(response.message)
-            }
-        } catch (e: Exception) {
-            ApiResult.Error(e.message ?: "Unknown error")
+    suspend fun getBookmark(): ApiResult<List<BookmarkItem>> = try {
+        val user = getSession().first()
+        val idUser = user.id
+
+        val response = currentApiService.getBookmark(idUser)
+
+        if (!response.error) {
+            val bookmarkItems = response.data ?: emptyList()  // Menghindari NullPointerException
+            ApiResult.Success(bookmarkItems)
+        } else {
+            ApiResult.Error(response.message)
         }
+    } catch (e: Exception) {
+        ApiResult.Error(e.message ?: "Failed to get bookmark")
     }
+
 
     suspend fun deleteBookmark(idBookmark: Int) : ApiResult<DeleteBookmarkResponse> {
         return try {

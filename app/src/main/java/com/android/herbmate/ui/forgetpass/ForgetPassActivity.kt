@@ -47,7 +47,9 @@ class ForgetPassActivity : AppCompatActivity() {
                 }
                 is ApiResult.Error -> {
                     binding.progressBar.isVisible = false
-                    Toast.makeText(this, result.error, Toast.LENGTH_SHORT).show()
+                    showDialog("Gagal", result.error){
+
+                    }
                 }
             }
         }

@@ -24,5 +24,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "HerbMate"
 include(":app")
-include(":ucrop")
  

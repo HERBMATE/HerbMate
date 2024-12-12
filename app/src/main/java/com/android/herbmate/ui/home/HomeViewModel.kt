@@ -46,14 +46,22 @@ class HomeViewModel(val repository: HerbMateRepository) : ViewModel() {
         }
     }
 
-    private val _bookmarkResult = MutableLiveData<ApiResult<com.android.herbmate.data.remote.response.AddBookmarkResponse>>()
-    val bookmarkResult: LiveData<ApiResult<com.android.herbmate.data.remote.response.AddBookmarkResponse>> = _bookmarkResult
+    private val _bookmarkResult = MutableLiveData<ApiResult<AddBookmarkResponse>>()
+    val bookmarkResult: LiveData<ApiResult<AddBookmarkResponse>> = _bookmarkResult
 
     fun addBookmark(idUser: Int, idTanaman: Int) {
         viewModelScope.launch {
             _bookmarkResult.value = ApiResult.Loading
             val result = repository.addBookmark(idUser, idTanaman)
             _bookmarkResult.value = result
+            getTanaman()
+        }
+    }
+
+    fun deleteBookmark(id: Int){
+        viewModelScope.launch {
+            repository.deleteBookmark(id)
+            getTanaman()
         }
     }
 

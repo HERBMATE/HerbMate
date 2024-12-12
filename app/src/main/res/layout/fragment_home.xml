@@ -31,14 +31,12 @@
         app:layout_constraintTop_toTopOf="parent"
         android:layout_margin="16dp">
 
-        <!-- ConstraintLayout inside CardView -->
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/card_constraint_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="16dp">
 
-            <!-- Title Text -->
             <TextView
                 android:id="@+id/title_text"
                 android:layout_width="0dp"
@@ -51,7 +49,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
 
-            <!-- Description Text -->
             <TextView
                 android:id="@+id/tv_name"
                 android:layout_width="0dp"
@@ -75,7 +72,6 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
-    <!-- Search View -->
     <androidx.appcompat.widget.SearchView
         android:id="@+id/search_view"
         android:layout_width="match_parent"
@@ -89,7 +85,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- ScrollView for Filters and Lists -->
     <LinearLayout
         android:id="@+id/filters_layout"
         android:layout_width="match_parent"
@@ -99,7 +94,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <!-- Divider -->
         <View
             android:id="@+id/divider"
             android:layout_width="match_parent"
@@ -107,127 +101,15 @@
             android:layout_margin="16dp"
             android:background="@color/black" />
 
-        <!-- Filters -->
         <TextView
-            android:id="@+id/tv_filter"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="@string/tanaman_herbal"
             android:layout_marginStart="16dp"
-            android:text="Filters"
-            android:textStyle="bold" />
+            android:textColor="@color/blackAndWhiteColor"
+            android:textSize="24sp"
+            android:textStyle="bold"/>
 
-        <HorizontalScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:scrollbars="none">
-
-            <com.google.android.material.chip.ChipGroup
-                android:id="@+id/chip_group_penyakit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="16dp"
-                app:singleSelection="true"
-                app:selectionRequired="true"
-                app:singleLine="true"
-                app:chipSpacingHorizontal="8dp">
-
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chip_all"
-                    style="@style/CustomChipShape"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="All" />
-
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chip_diabetes"
-                    style="@style/CustomChipShape"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Diabetes" />
-
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chip_kanker"
-                    style="@style/CustomChipShape"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Kanker" />
-
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chip_hipertensi"
-                    style="@style/CustomChipShape"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Hipertensi" />
-
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chip_jerawat"
-                    style="@style/CustomChipShape"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Jerawat" />
-
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chip_radang"
-                    style="@style/CustomChipShape"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Radang" />
-
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chip_insomnia"
-                    style="@style/CustomChipShape"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Insomnia" />
-
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chip_batu_ginjal"
-                    style="@style/CustomChipShape"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Batu Ginjal" />
-
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chip_batuk"
-                    style="@style/CustomChipShape"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Batuk" />
-
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chip_diare"
-                    style="@style/CustomChipShape"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Diare" />
-
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chip_sariawan"
-                    style="@style/CustomChipShape"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Sariawan" />
-
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chip_maag"
-                    style="@style/CustomChipShape"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Maag" />
-
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chip_rematik"
-                    style="@style/CustomChipShape"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Rematik" />
-
-            </com.google.android.material.chip.ChipGroup>
-        </HorizontalScrollView>
-
-        <!-- RecyclerView for Filtered Items -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view_filters"
             android:layout_width="match_parent"

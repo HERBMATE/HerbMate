@@ -1,5 +1,5 @@
 package com.android.herbmate
 
 interface OnBookmarkClickListener {
-    fun onBookmarkClick(idTanaman: Int)
+    fun onBookmarkClick(status : Boolean, idTanaman: Int?, idBookmark: Int?)
 }

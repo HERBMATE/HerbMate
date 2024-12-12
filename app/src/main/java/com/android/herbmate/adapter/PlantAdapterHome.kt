@@ -1,12 +1,14 @@
 package com.android.herbmate.adapter
 
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.android.herbmate.OnBookmarkClickListener
+import com.android.herbmate.R
 import com.android.herbmate.data.remote.response.TanamanItem
 import com.android.herbmate.databinding.ItemPlantHomeBinding
 import com.android.herbmate.ui.detail.DetailActivity
@@ -23,7 +25,8 @@ class PlantAdapterHome(private val listener: OnBookmarkClickListener) : ListAdap
                 .load(gambar)
                 .into(binding.imgPlant)
 
-            val idTanaman = plant.id
+            updateBookmarkIcon(plant.status)
+
             binding.root.setOnClickListener {
                 val intent = Intent(binding.root.context, DetailActivity::class.java).apply {
                     putExtra(DetailActivity.EXTRA_NAME, plant.nama)
@@ -31,15 +34,29 @@ class PlantAdapterHome(private val listener: OnBookmarkClickListener) : ListAdap
                     putExtra(DetailActivity.EXTRA_ASAL, plant.asal)
                     putExtra(DetailActivity.EXTRA_LATIN, plant.namaLatin)
                     putExtra(DetailActivity.EXTRA_KANDUNGAN, plant.kandungan)
+                    putExtra(DetailActivity.EXTRA_STATUS, plant.status)
+                    putExtra(DetailActivity.EXTRA_ID_BOOKMARK, plant.idBookmark)
                 }
                 binding.root.context.startActivity(intent)
             }
 
             binding.btnBookmark.setOnClickListener {
-                listener.onBookmarkClick(idTanaman)
+                val currentStatus = plant.status
+                listener.onBookmarkClick(currentStatus, plant.id, plant.idBookmark)
+                plant.status = !currentStatus
+                updateBookmarkIcon(plant.status)
+            }
+        }
+
+        private fun updateBookmarkIcon(isBookmarked: Boolean) {
+            if (isBookmarked) {
+                binding.btnBookmark.setImageResource(R.drawable.ic_bookmark)
+            } else {
+                binding.btnBookmark.setImageResource(R.drawable.ic_bookmark_border)
             }
         }
     }
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
         val binding = ItemPlantHomeBinding.inflate(LayoutInflater.from(parent.context), parent, false)

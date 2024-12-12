@@ -9,6 +9,7 @@ import androidx.lifecycle.viewModelScope
 import com.android.herbmate.data.ApiResult
 import com.android.herbmate.data.HerbMateRepository
 import com.android.herbmate.data.local.pref.UserModel
+import com.android.herbmate.data.remote.response.AddBookmarkResponse
 import com.android.herbmate.data.remote.response.TanamanDetailsItem
 import com.android.herbmate.data.remote.response.TanamanItem
 import kotlinx.coroutines.launch
@@ -37,8 +38,8 @@ class DetailViewModel(val repository: HerbMateRepository) : ViewModel() {
             _detailTanaman.value = result
         }
     }
-    private val _bookmarkResult = MutableLiveData<ApiResult<com.android.herbmate.data.remote.response.AddBookmarkResponse>>()
-    val bookmarkResult: LiveData<ApiResult<com.android.herbmate.data.remote.response.AddBookmarkResponse>> = _bookmarkResult
+    private val _bookmarkResult = MutableLiveData<ApiResult<AddBookmarkResponse>>()
+    val bookmarkResult: LiveData<ApiResult<AddBookmarkResponse>> = _bookmarkResult
 
     fun addBookmark(idUser: Int, idTanaman: Int) {
         viewModelScope.launch {
@@ -48,19 +49,26 @@ class DetailViewModel(val repository: HerbMateRepository) : ViewModel() {
         }
     }
 
-    fun getRekomendasi(penyakitList: List<String>) {
+
+    fun getRekomendasi(penyakitList: List<String>, tanaman : String) {
         viewModelScope.launch {
             try {
                 for (penyakit in penyakitList) {
-                    val result = repository.getRekomendasiForSinglePenyakit(penyakit)
+                    val result = repository.getRekomendasiForSinglePenyakit(penyakit, tanaman)
                     if (result is ApiResult.Success) {
-                        _rekomendasiList.addAll(result.data) // Tambahkan ke daftar sementara
+                        _rekomendasiList.addAll(result.data)
                         _rekomendasi.postValue(_rekomendasiList) // Perbarui LiveData
                     }
                 }
             } catch (e: Exception) {
                 _rekomendasi.postValue(emptyList()) // Handle error jika diperlukan
             }
+        }
+    }
+
+    fun deleteBookmark(id: Int){
+        viewModelScope.launch {
+            repository.deleteBookmark(id)
         }
     }
 

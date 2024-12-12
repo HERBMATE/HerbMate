@@ -62,8 +62,9 @@ interface ApiService {
         @Part file: MultipartBody.Part
     ): HerbPredictResponse
 
-    @GET("tanaman/getAllTanaman")
+    @GET("tanaman/getAllTanaman/{id}")
     suspend fun getTanaman(
+        @Path("id") id: Int
     ) : Response<TanamanResponse>
 
     @GET("tanaman/getDetails/{nama}")
@@ -92,13 +93,14 @@ interface ApiService {
         @Body request: ChatBotRequest
     ) : ChatBotResponse
 
-    @GET("tanaman/search")
+    @GET("tanaman/search/{nama}")
     suspend fun search(
-        @Query("search") nama : String?,
+        @Path("nama") nama : String?,
     ) : TanamanResponse
 
-    @GET("tanaman/getRekomendasi/{penyakit}")
+    @GET("tanaman/getRekomendasi/{penyakit}/{tanaman}")
     suspend fun rekomendasi(
-        @Path("penyakit") penyakit : String
+        @Path("penyakit") penyakit : String,
+        @Path("tanaman") tanaman : String
     ) : Response<TanamanResponse>
 }

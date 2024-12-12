@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 data class TanamanResponse(
 
     @field:SerializedName("data")
-	val data: List<com.android.herbmate.data.remote.response.TanamanItem>,
+	val data: List<TanamanItem>,
 
     @field:SerializedName("error")
 	val error: Boolean,
@@ -34,7 +34,10 @@ data class TanamanItem(
 	@field:SerializedName("gambar")
 	val gambar: String,
 
-	@field:SerializedName("penyakit")
-	val penyakit: String? = null
+	@field:SerializedName("idBookmark")
+	val idBookmark: Int? = null,
+
+	@field:SerializedName("status")
+	var status: Boolean
 )
 

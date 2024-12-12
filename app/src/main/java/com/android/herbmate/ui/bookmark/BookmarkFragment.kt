@@ -60,9 +60,12 @@ class BookmarkFragment : Fragment(), OnBookmarkClickListener {
         viewModel.getBookmark()
     }
 
-    override fun onBookmarkClick(id: Int) {
-        viewModel.deleteBookmark(id)
-        viewModel.getBookmark()
+    override fun onBookmarkClick(status: Boolean, idTanaman: Int?, idBookmark: Int?) {
+        if (status) {
+            idBookmark?.let {
+                viewModel.deleteBookmark(it)
+            }
+        }
     }
 
     override fun onDestroyView() {

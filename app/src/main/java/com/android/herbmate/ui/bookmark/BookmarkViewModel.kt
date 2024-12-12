@@ -25,6 +25,7 @@ class BookmarkViewModel(val repository: HerbMateRepository) : ViewModel() {
     fun deleteBookmark(id: Int){
         viewModelScope.launch {
             repository.deleteBookmark(id)
+            getBookmark()
         }
     }
     private val _text = MutableLiveData<String>().apply {

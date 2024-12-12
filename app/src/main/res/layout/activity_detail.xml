@@ -1,15 +1,13 @@
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- Header Section with Back and More Icons -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <!-- Header Image -->
         <ImageView
             android:id="@+id/headerImage"
             android:layout_width="match_parent"
@@ -19,7 +17,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-        <!-- Back Icon -->
+
         <ImageView
             android:id="@+id/iv_back"
             android:layout_width="40dp"
@@ -30,9 +28,20 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
+        <ProgressBar
+            android:id="@+id/progress_bar_details"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0"
+            tools:visibility="visible" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <!-- Bottom Sheet -->
     <FrameLayout
         android:id="@+id/bottomSheet"
         android:layout_width="match_parent"
@@ -49,7 +58,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <!-- TextView for Plant Name -->
             <TextView
                 android:id="@+id/tv_nama"
                 android:layout_width="wrap_content"
@@ -74,7 +82,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/tv_nama" />
 
-            <!-- TextView for Description -->
             <TextView
                 android:id="@+id/tv_hd_nama_latin"
                 android:layout_width="wrap_content"
@@ -123,7 +130,7 @@
                 android:id="@+id/tv_hd_kandungan"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Kandungan : "
+                android:text="Kandungan :"
                 android:layout_marginTop="8dp"
                 app:layout_constraintTop_toBottomOf="@id/tv_hd_asal"
                 app:layout_constraintStart_toStartOf="@id/tv_hd_asal"/>
@@ -139,7 +146,7 @@
                 android:textColor="@color/blackAndWhiteColor"
                 android:paddingStart="16dp"
                 android:paddingEnd="16dp"
-                android:text="alhhhhhhhhhhhhhhhhhykhafiuafai fufkauf"/>
+                android:text="Kandungan"/>
 
             <TextView
                 android:id="@+id/tv_hd_resep"
@@ -181,7 +188,6 @@
                 app:layout_constraintTop_toBottomOf="@id/divider"
                 app:layout_constraintStart_toStartOf="parent"/>
 
-                <!-- RecyclerView for Recommendations -->
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_rekomendasi"
                     android:layout_width="match_parent"
@@ -193,5 +199,19 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
     </FrameLayout>
+
+
+
+    <ProgressBar
+        android:id="@+id/progress_bar_rekomendasi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/email_input_layout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/password_input_layout"
+        android:visibility="gone"
+        tools:visibility="visible"/>
+
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

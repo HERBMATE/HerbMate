@@ -43,6 +43,7 @@
     <string name="forget_password">Forget Password</string>
     <string name="password_lama">Password Lama</string>
     <string name="password_baru">Password Baru</string>
+    <string name="tanaman_herbal">Tanaman Herbal</string>
 
     <string-array name="faq">
         <item>Nama Tanaman</item>

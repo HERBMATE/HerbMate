@@ -16,7 +16,7 @@ class BookmarkAdapter(private val listener: OnBookmarkClickListener) : ListAdapt
     DIFF_CALLBACK
 ) {
     class ListViewHolder(private val binding: ItemPlantBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(plant: com.android.herbmate.data.remote.response.BookmarkItem, listener: OnBookmarkClickListener) {
+        fun bind(plant: BookmarkItem, listener: OnBookmarkClickListener) {
             binding.tvName.text = plant.nama
             val gambar = plant.gambar
             Glide.with(binding.root.context)
@@ -33,7 +33,7 @@ class BookmarkAdapter(private val listener: OnBookmarkClickListener) : ListAdapt
             }
 
             binding.btnBookmark.setOnClickListener {
-                listener.onBookmarkClick(idBookmark) // Call the listener with only idTanaman
+                listener.onBookmarkClick(true, 0, idBookmark)
             }
         }
     }

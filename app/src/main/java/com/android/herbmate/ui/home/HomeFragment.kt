@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.result.ActivityResultLauncher
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
@@ -18,7 +19,6 @@ import com.android.herbmate.data.ViewModelFactory
 import com.android.herbmate.data.ApiResult
 import com.android.herbmate.OnBookmarkClickListener
 import com.android.herbmate.ui.login.LoginActivity
-import com.google.android.material.chip.Chip
 
 class HomeFragment : Fragment(), OnBookmarkClickListener {
 
@@ -26,7 +26,7 @@ class HomeFragment : Fragment(), OnBookmarkClickListener {
     private val binding get() = _binding!!
     private lateinit var adapter: PlantAdapterHome
     private var idUser : Int = 0
-    private var selectedText: String? = null // Declare selectedText
+    private lateinit var detailLauncher: ActivityResultLauncher<Intent>
 
     private val viewModel by viewModels<HomeViewModel> {
         ViewModelFactory.getInstance(requireContext())
@@ -44,7 +44,6 @@ class HomeFragment : Fragment(), OnBookmarkClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupRecyclerView()
-        setupChipGroup()
         setupSearchView()
         observeUserSession()
         observePlantData()
@@ -59,18 +58,6 @@ class HomeFragment : Fragment(), OnBookmarkClickListener {
         binding.recyclerViewFilters.adapter = adapter
     }
 
-    private fun setupChipGroup() {
-        binding.chipGroupPenyakit.setOnCheckedChangeListener { group, checkedId ->
-            if (checkedId != View.NO_ID) {
-                val selectedChip = group.findViewById<Chip>(checkedId)
-                selectedText = selectedChip.text.toString() // Update selectedText
-                Toast.makeText(requireContext(), "Penyakit: $selectedText", Toast.LENGTH_SHORT).show()
-            } else {
-                selectedText = null // Reset if no chip is selected
-            }
-        }
-    }
-
     private fun setupSearchView() {
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
@@ -79,7 +66,7 @@ class HomeFragment : Fragment(), OnBookmarkClickListener {
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                viewModel.search(newText) // Pass newText and selectedText
+                viewModel.search(newText)
                 return true
             }
         })
@@ -120,12 +107,13 @@ class HomeFragment : Fragment(), OnBookmarkClickListener {
         viewModel.search.observe(viewLifecycleOwner) { result ->
             when (result) {
                 is ApiResult.Error -> {
-                    Log.d("Home", result.error)
+                    binding.progressBar.visibility = View.GONE
                 }
                 ApiResult.Loading -> {
-                    Log.d("Home", "Loading")
+                    binding.progressBar.visibility = View.VISIBLE
                 }
                 is ApiResult.Success -> {
+                    binding.progressBar.visibility = View.GONE
                     adapter.submitList(result.data)
                 }
             }            }
@@ -135,13 +123,14 @@ class HomeFragment : Fragment(), OnBookmarkClickListener {
         viewModel.bookmarkResult.observe(viewLifecycleOwner) { result ->
             when (result) {
                 is ApiResult.Error -> {
-                    Log.d("Home", result.error)
+                    binding.progressBar.visibility = View.GONE
                 }
                 ApiResult.Loading -> {
-                    Log.d("Home", "Loading")
+                    binding.progressBar.visibility = View.VISIBLE
                 }
                 is ApiResult.Success -> {
-                    Log.d(" Home", result.data.message)
+                    binding.progressBar.visibility = View.GONE
+                    viewModel.getTanaman()
                 }
             }
         }
@@ -157,9 +146,25 @@ class HomeFragment : Fragment(), OnBookmarkClickListener {
         const val EXTRA_ID_TANAMAN = "extra_id_tanaman"
     }
 
-    override fun onBookmarkClick(idTanaman: Int) {
-        viewModel.addBookmark(idUser , idTanaman)
+    override fun onBookmarkClick(status: Boolean, idTanaman: Int?, idBookmark: Int?) {
+        if (status) {
+            idBookmark?.let {
+                viewModel.deleteBookmark(it)
+            }
+        } else {
+            if (idTanaman != null) {
+                viewModel.addBookmark(idUser, idTanaman)
+            }
+        }
+        val currentList = adapter.currentList.toMutableList()
+        val index = currentList.indexOfFirst { it.id == idTanaman }
+        if (index != -1) {
+            val updatedItem = currentList[index].copy(status = !status)
+            currentList[index] = updatedItem
+            adapter.submitList(currentList)
+        }
     }
+
 
     private fun showDialog(title: String, message: String, onOkClick: () -> Unit) {
         AlertDialog.Builder(requireContext())
@@ -171,5 +176,10 @@ class HomeFragment : Fragment(), OnBookmarkClickListener {
             }
             .setCancelable(false)
             .show()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.getTanaman()
     }
 }

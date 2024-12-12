@@ -3,7 +3,7 @@ package com.android.herbmate.data.remote.response
 import com.google.gson.annotations.SerializedName
 
 data class TanamanDetailsResponse(
-    val data: List<com.android.herbmate.data.remote.response.TanamanDetailsItem>,
+    val data: List<TanamanDetailsItem>,
     val error: Boolean,
     val message: String
 )

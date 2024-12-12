@@ -107,22 +107,6 @@
         app:layout_constraintStart_toEndOf="@id/btn_login"
         app:layout_constraintTop_toBottomOf="@id/showPasswordCheckBox" />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_login_google"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/btn_auth"
-        android:backgroundTint="@android:color/transparent"
-        android:drawableStart="@drawable/google_icon"
-        android:drawablePadding="8dp"
-        android:text="Login with Google"
-        android:textAllCaps="false"
-        android:textColor="@color/green"
-        app:layout_constraintEnd_toEndOf="@+id/btn_register"
-        app:layout_constraintStart_toStartOf="@+id/btn_login"
-        app:layout_constraintTop_toBottomOf="@+id/btn_login" />
-
     <ImageView
         android:layout_width="190dp"
         android:layout_height="250dp"
