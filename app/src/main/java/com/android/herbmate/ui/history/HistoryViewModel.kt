@@ -10,7 +10,6 @@ import kotlinx.coroutines.launch
 
 class HistoryViewModel(private val repository: HerbMateRepository) : ViewModel() {
 
-    // LiveData untuk daftar history
     private val _historyListLiveData = MutableLiveData<List<HistoryEntity>>()
     val historyListLiveData: LiveData<List<HistoryEntity>> get() = _historyListLiveData
 
@@ -22,15 +21,14 @@ class HistoryViewModel(private val repository: HerbMateRepository) : ViewModel()
                 plant = plant
             )
             repository.addHistory(newHistory)
-            loadHistory() // Perbarui data setelah penambahan
+            loadHistory()
         }
     }
 
-    // Memuat data history dari repository
     fun loadHistory() {
         viewModelScope.launch {
             val historyList = repository.getHistory()
-            _historyListLiveData.postValue(historyList) // Perbarui LiveData
+            _historyListLiveData.postValue(historyList)
         }
     }
 }

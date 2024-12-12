@@ -64,7 +64,7 @@ interface ApiService {
 
     @GET("tanaman/getAllTanaman")
     suspend fun getTanaman(
-    ) : TanamanResponse
+    ) : Response<TanamanResponse>
 
     @GET("tanaman/getDetails/{nama}")
     suspend fun getTanamanDetails(
@@ -101,16 +101,4 @@ interface ApiService {
     suspend fun rekomendasi(
         @Path("penyakit") penyakit : String
     ) : Response<TanamanResponse>
-
-//    @GET("tanaman")
-//    suspend fun searchTanaman(
-//        @Query("nama") nama : String,
-//        @Query("order") order : String
-//    ) : TanamanResponse
-//
-//    @POST("users/update/{email}")
-//    suspend fun userUpdate(
-//        @Path("email") email: String,
-//        @Body userUpdateRequest: UserUpdateRequest
-//    ) : UserUpdateResponse
 }

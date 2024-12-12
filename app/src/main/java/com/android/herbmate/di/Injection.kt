@@ -15,11 +15,11 @@ object Injection {
     fun provideRepository(context: Context): HerbMateRepository {
         val pref = UserPreference.getInstance(context.dataStore)
         val user = runBlocking { pref.getSession().first() }
+        Log.d("Injection", user.token)
         val apiService = ApiConfig.getApiServices(user.token)
         val database = HistoryDatabase.getDatabase(context.applicationContext)
         val dao = database.historyDao()
         val appExecutors = AppExecutors()
         return HerbMateRepository.getInstance(apiService, pref, dao, appExecutors)
-        Log.d("Injection", "Token: ${user.token}")
     }
 }

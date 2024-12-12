@@ -28,6 +28,12 @@ class HomeViewModel(val repository: HerbMateRepository) : ViewModel() {
 
     val userSession: LiveData<UserModel> = repository.getSession().asLiveData()
 
+    fun logout() {
+        viewModelScope.launch {
+            repository.logout()
+        }
+    }
+
     fun getTanaman() {
         viewModelScope.launch {
             _tanaman.value = ApiResult.Loading

@@ -1,5 +1,6 @@
 package com.android.herbmate.ui.home
 
+import android.content.Intent
 import com.android.herbmate.databinding.FragmentHomeBinding
 import android.os.Bundle
 import android.util.Log
@@ -7,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -15,6 +17,7 @@ import com.android.herbmate.adapter.PlantAdapterHome
 import com.android.herbmate.data.ViewModelFactory
 import com.android.herbmate.data.ApiResult
 import com.android.herbmate.OnBookmarkClickListener
+import com.android.herbmate.ui.login.LoginActivity
 import com.google.android.material.chip.Chip
 
 class HomeFragment : Fragment(), OnBookmarkClickListener {
@@ -93,13 +96,20 @@ class HomeFragment : Fragment(), OnBookmarkClickListener {
         viewModel.tanaman.observe(viewLifecycleOwner) { result ->
             when (result) {
                 is ApiResult.Loading -> {
-                    // Show loading indicator
+                    binding.progressBar.visibility = View.VISIBLE
                 }
                 is ApiResult.Success -> {
+                    binding.progressBar.visibility = View.GONE
                     adapter.submitList(result.data)
                 }
                 is ApiResult.Error -> {
-                    // Show error message
+                    binding.progressBar.visibility = View.GONE
+                    if (result.error == "401") {
+                        showDialog("Session Expired", "Your session has expired. Please login again.") {
+                            viewModel.logout()
+                            startActivity(Intent(requireContext(), LoginActivity::class.java))
+                        }
+                    }
                     Toast.makeText(requireContext(), result.error, Toast.LENGTH_SHORT).show()
                 }
             }
@@ -149,5 +159,17 @@ class HomeFragment : Fragment(), OnBookmarkClickListener {
 
     override fun onBookmarkClick(idTanaman: Int) {
         viewModel.addBookmark(idUser , idTanaman)
+    }
+
+    private fun showDialog(title: String, message: String, onOkClick: () -> Unit) {
+        AlertDialog.Builder(requireContext())
+            .setTitle(title)
+            .setMessage(message)
+            .setPositiveButton("OK") { dialog, _ ->
+                dialog.dismiss()
+                onOkClick()
+            }
+            .setCancelable(false)
+            .show()
     }
 }

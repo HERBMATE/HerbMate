@@ -1,5 +1,6 @@
 package com.android.herbmate.data.remote.retrofit
 
+import android.util.Log
 import com.android.herbmate.BuildConfig
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -9,9 +10,10 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class ApiConfig {
     companion object{
-//        private const val BASE_URL = "http://10.0.2.2:3000/"
-        private const val BASE_URL = BuildConfig.BASE_URL
+        private const val BASE_URL = "http://10.0.2.2:3000/"
+//        private const val BASE_URL = BuildConfig.BASE_URL
         fun getApiServices(token: String): ApiService {
+            Log.d("ApiConfig", token)
             val loggingInterceptor = if (BuildConfig.DEBUG) {
                 HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
             } else {
@@ -33,7 +35,8 @@ class ApiConfig {
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(client)
                 .build()
-            return retrofit.create(ApiService::class.java)
+            val apiService = retrofit.create(ApiService::class.java)
+            return apiService
         }
 
     }

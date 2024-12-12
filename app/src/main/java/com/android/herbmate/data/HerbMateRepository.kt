@@ -1,6 +1,5 @@
 package com.android.herbmate.data
 
-import android.util.Log
 import com.android.herbmate.data.local.entity.HistoryEntity
 import com.android.herbmate.data.local.room.HistoryDao
 import com.android.herbmate.data.local.pref.UserModel
@@ -35,6 +34,8 @@ class HerbMateRepository(
     private val appExecutors: AppExecutors
 ) {
 
+    private var currentApiService : ApiService = apiService
+
     suspend fun login(
         email: String,
         password: String
@@ -49,8 +50,8 @@ class HerbMateRepository(
                 token = response.token,
                 isLogin = true
             )
-            Log.d("login", "login berhasil")
             saveSession(user)
+            currentApiService = ApiConfig.getApiServices(user.token)
             ApiResult.Success(response)
         } catch (e: Exception) {
             ApiResult.Error(e.message ?: "Unknown error")
@@ -74,7 +75,7 @@ class HerbMateRepository(
 
     suspend fun forgotPass(email: String): ApiResult<ForgotPassResponse> {
         return try {
-            val response = apiService.forgotPass(
+            val response = currentApiService.forgotPass(
                 ForgotPassRequest(
                     email
                 )
@@ -88,7 +89,7 @@ class HerbMateRepository(
         suspend fun update(email: String, name: String?, verify: String?, password: String?): ApiResult<UserUpdateResponse> {
         return try {
             val request = UserUpdateRequest(name, verify, password)
-            val response = apiService.userUpdate(email, request)
+            val response = currentApiService.userUpdate(email, request)
             val user = UserModel(
                 id = response.data.idUser,
                 name = response.data.name,
@@ -97,8 +98,144 @@ class HerbMateRepository(
                 isLogin = true
             )
             saveSession(user)
+            currentApiService = ApiConfig.getApiServices(user.token)
             ApiResult.Success(response)
         } catch (e: HttpException) {
+            ApiResult.Error(e.message ?: "Unknown error")
+        }
+    }
+
+    suspend fun uploadHerbImage(file: MultipartBody.Part): ApiResult<HerbPredictResponse> {
+        return try {
+            val user = getSession().first()
+            val apiService = ApiConfig.getApiServices(user.token)
+            val response = apiService.herbPredict(file)
+            if (!response.error) {
+                ApiResult.Success(response)
+            } else {
+                ApiResult.Error(response.status)
+            }
+        } catch (e: Exception) {
+            ApiResult.Error("Unknown error")
+        }
+    }
+
+    suspend fun getTanaman(): ApiResult<List<TanamanItem>> {
+        return try {
+            val response = currentApiService.getTanaman()
+            if (response.isSuccessful) {
+                val body = response.body()
+                if (body != null && !body.error) {
+                    ApiResult.Success(body.data)
+                } else {
+                    ApiResult.Error(body?.message ?: "Unknown error from server")
+                }
+            } else {
+                ApiResult.Error(response.code().toString())
+            }
+        } catch (e: Exception) {
+            ApiResult.Error(e.message ?: "Unknown error")
+        }
+    }
+
+
+    suspend fun getRekomendasiForSinglePenyakit(penyakit: String): ApiResult<List<TanamanItem>> {
+        return try {
+            val response = currentApiService.rekomendasi(penyakit)
+            if (response.isSuccessful) {
+                val responseBody = response.body()
+                if (responseBody != null && !responseBody.error) {
+                    ApiResult.Success(responseBody.data)
+                } else {
+                    ApiResult.Error("Error: ${responseBody?.message ?: "Unknown error"}")
+                }
+            } else {
+                ApiResult.Error("Error: ${response.errorBody()?.string() ?: "Unknown error"}")
+            }
+        } catch (e: Exception) {
+            ApiResult.Error("Exception: ${e.message}")
+        }
+    }
+
+    suspend fun getDetailTanaman(nama : String): ApiResult<List<TanamanDetailsItem>> {
+        return try {
+            val response = currentApiService.getTanamanDetails(nama)
+            if (!response.error) {
+                val tanamanDetailsItems = response.data
+                ApiResult.Success(tanamanDetailsItems)
+            } else {
+                ApiResult.Error(response.message)
+            }
+        } catch (e: Exception) {
+            ApiResult.Error(e.message ?: "Unknown error")
+        }
+    }
+
+    suspend fun addBookmark(idUser: Int, id: Int): ApiResult<AddBookmarkResponse> {
+        return try{
+            val response = currentApiService.addBookmark(idUser, id)
+            if (!response.error) {
+                ApiResult.Success(response)
+            } else {
+                ApiResult.Error(response.message)
+            }
+        } catch (e: Exception) {
+            ApiResult.Error(e.message ?: "Unknown error")
+        }
+    }
+
+    suspend fun getBookmark() : ApiResult<List<BookmarkItem>> {
+        return try {
+            val user = getSession().first()
+            val idUser = user.id
+            val response = currentApiService.getBookmark(idUser)
+            if (!response.error) {
+                val bookmarkItems = response.data
+                ApiResult.Success(bookmarkItems)
+            } else {
+                ApiResult.Error(response.message)
+            }
+        } catch (e: Exception) {
+            ApiResult.Error(e.message ?: "Unknown error")
+        }
+    }
+
+    suspend fun deleteBookmark(idBookmark: Int) : ApiResult<DeleteBookmarkResponse> {
+        return try {
+            val response = currentApiService.deleteBookmark(idBookmark)
+            if (!response.error) {
+                ApiResult.Success(response)
+            } else {
+                ApiResult.Error(response.message)
+            }
+        } catch (e : Exception) {
+            ApiResult.Error(e.message ?: "Unknown error")
+        }
+    }
+
+    suspend fun chatBot(prompt: String): ApiResult<ChatBotResponse> {
+        return try {
+            val response = currentApiService.chatBot(
+                ChatBotRequest(
+                    prompt
+                )
+            )
+            ApiResult.Success(response)
+        } catch (e: Exception) {
+            ApiResult.Error(e.message ?: "Unknown error")
+        }
+    }
+
+    suspend fun search(search: String?): ApiResult<List<TanamanItem>> {
+        return try {
+            val response = currentApiService.search(search)
+            if (!response.error) {
+                val searchItems = response.data
+                ApiResult.Success(searchItems)
+            } else {
+                ApiResult.Error(response.message)
+            }
+        } catch (e: Exception) {
             ApiResult.Error(e.message ?: "Unknown error")
         }
     }
@@ -123,146 +260,6 @@ class HerbMateRepository(
         userPreference.saveThemeSetting(isDarkModeActive)
     }
 
-    suspend fun uploadHerbImage(file: MultipartBody.Part): ApiResult<HerbPredictResponse> {
-        return try {
-            val user = getSession().first()
-            val apiService = ApiConfig.getApiServices(user.token)
-            val response = apiService.herbPredict(file)
-            if (!response.error) {
-                ApiResult.Success(response)
-            } else {
-                ApiResult.Error(response.status)
-            }
-        } catch (e: Exception) {
-            ApiResult.Error("Unknown error")
-        }
-    }
-
-    suspend fun getTanaman(): ApiResult<List<TanamanItem>> {
-        return try {
-            val user = getSession().first()
-            val apiService = ApiConfig.getApiServices(user.token)
-            val response = apiService.getTanaman()
-            if (!response.error) {
-                val tanamanItems = response.data
-                ApiResult.Success(tanamanItems)
-            } else {
-                ApiResult.Error(response.message)
-            }
-        } catch (e: Exception) {
-            ApiResult.Error(e.message ?: "Unknown error") // Handle errors
-        }
-    }
-
-    suspend fun getRekomendasiForSinglePenyakit(penyakit: String): ApiResult<List<TanamanItem>> {
-        return try {
-            val user = getSession().first()
-            val apiService = ApiConfig.getApiServices(user.token)
-            val response = apiService.rekomendasi(penyakit)
-            if (response.isSuccessful) {
-                val responseBody = response.body()
-                if (responseBody != null && !responseBody.error) {
-                    ApiResult.Success(responseBody.data)
-                } else {
-                    ApiResult.Error("Error: ${responseBody?.message ?: "Unknown error"}")
-                }
-            } else {
-                ApiResult.Error("Error: ${response.errorBody()?.string() ?: "Unknown error"}")
-            }
-        } catch (e: Exception) {
-            ApiResult.Error("Exception: ${e.message}")
-        }
-    }
-
-
-    suspend fun getDetailTanaman(nama : String): ApiResult<List<TanamanDetailsItem>> {
-        return try {
-            val user = getSession().first()
-            val apiService = ApiConfig.getApiServices(user.token)
-            val response = apiService.getTanamanDetails(nama)
-            if (!response.error) {
-                val tanamanDetailsItems = response.data
-                ApiResult.Success(tanamanDetailsItems)
-            } else {
-                ApiResult.Error(response.message)
-            }
-        } catch (e: Exception) {
-            ApiResult.Error(e.message ?: "Unknown error")
-        }
-    }
-
-    suspend fun addBookmark(idUser: Int, id: Int): ApiResult<AddBookmarkResponse> {
-        return try{
-            val user = getSession().first()
-            val apiService = ApiConfig.getApiServices(user.token)
-            val response = apiService.addBookmark(idUser, id)
-            if (!response.error) {
-                ApiResult.Success(response)
-            } else {
-                ApiResult.Error(response.message)
-            }
-        } catch (e: Exception) {
-            ApiResult.Error(e.message ?: "Unknown error")
-        }
-    }
-
-    suspend fun getBookmark() : ApiResult<List<BookmarkItem>> {
-        return try {
-            val user = getSession().first()
-            val idUser = user.id
-            ApiConfig.getApiServices(user.token)
-            val response = apiService.getBookmark(idUser)
-            if (!response.error) {
-                val bookmarkItems = response.data
-                ApiResult.Success(bookmarkItems)
-            } else {
-                ApiResult.Error(response.message)
-            }
-        } catch (e: Exception) {
-            ApiResult.Error(e.message ?: "Unknown error")
-        }
-    }
-
-    suspend fun deleteBookmark(idBookmark: Int) : ApiResult<DeleteBookmarkResponse> {
-        return try {
-            val response = apiService.deleteBookmark(idBookmark)
-            if (!response.error) {
-                ApiResult.Success(response)
-            } else {
-                ApiResult.Error(response.message)
-            }
-        } catch (e : Exception) {
-            ApiResult.Error(e.message ?: "Unknown error")
-        }
-    }
-
-    suspend fun chatBot(prompt: String): ApiResult<ChatBotResponse> {
-        return try {
-            val response = apiService.chatBot(
-                ChatBotRequest(
-                    prompt
-                )
-            )
-            ApiResult.Success(response)
-        } catch (e: Exception) {
-            ApiResult.Error(e.message ?: "Unknown error")
-        }
-    }
-
-    suspend fun search(search: String?): ApiResult<List<TanamanItem>> {
-        return try {
-            val response = apiService.search(search)
-            if (!response.error) {
-                val searchItems = response.data
-                ApiResult.Success(searchItems)
-            } else {
-                ApiResult.Error(response.message)
-            }
-        } catch (e: Exception) {
-            ApiResult.Error(e.message ?: "Unknown error")
-        }
-    }
-
     suspend fun addHistory(history: HistoryEntity) {
         dao.insertHistory(history)
     }
@@ -270,43 +267,6 @@ class HerbMateRepository(
     suspend fun getHistory(): List<HistoryEntity> {
         return dao.getAllHistory()
     }
-
-//    suspend fun loginGoogle(code: String): ApiResult<LoginResponse> {
-//        return try {
-//            val response = apiService.googleSignIn(code)
-//
-//    }
-
-//    suspend fun searchTanaman(nama: String, order: String): ApiResult<List<TanamanResponseItem>> {
-//        return try {
-//            val response = apiService.searchTanaman(nama, order)
-//            val tanamanItems = response.tanamanResponse
-//            ApiResult.Success(tanamanItems)
-//        } catch (e: Exception) {
-//            ApiResult.Error(e.message ?: "Unknown error")
-//        }
-//    }
-
-//    suspend fun getListTanaman(): ApiResult<List<String>> {
-//        return try {
-//            // Make the API call
-//            val response = apiService.getPertanyaanKategori()
-//
-//            // Parse the response into the ApiResponse data class
-//            val apiResponse = response // Assuming response is already the ApiResponse type
-//            // If response is a JSON string, you need to parse it using Gson or another library
-//
-//            // Filter out null values from list_tanaman
-//            val result = apiResponse.listTanaman?.filterNotNull() ?: emptyList()
-//
-//            Log.d("GetListTanaman", "Retrieved plants: $result")
-//            // Return the successful result
-//            ApiResult.Success(result)
-//        } catch (e: Exception) {
-//            // Handle any exceptions and return an error result
-//            ApiResult.Error(e.message ?: "Unknown error")
-//        }
-//    }
 
     companion object {
         @Volatile

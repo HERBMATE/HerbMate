@@ -25,7 +25,6 @@ class ProfileFragment : Fragment() {
         ViewModelFactory.getInstance(requireContext())
     }
     private val binding get() = _binding!!
-    private var userEmail: String? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -102,9 +101,7 @@ class ProfileFragment : Fragment() {
             val name = binding.edName.text.toString()
             val verify = binding.edPassword.text.toString()
             val password = binding.edPasswordbaru.text.toString()
-
             viewModel.update(email, name,verify, password)
-
         }
 
         binding.btnCancel.setOnClickListener {
@@ -152,7 +149,6 @@ class ProfileFragment : Fragment() {
             viewModel.saveThemeSetting(isChecked)
         }
     }
-
 
     override fun onDestroyView() {
         super.onDestroyView()

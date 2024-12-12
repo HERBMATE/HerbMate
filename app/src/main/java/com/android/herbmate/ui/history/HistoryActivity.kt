@@ -17,19 +17,16 @@ class HistoryActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // Setup View Binding
         binding = ActivityHistoryBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Setup RecyclerView
-        val adapter = HistoryAdapter(emptyList()) // Awalnya kosong
+        val adapter = HistoryAdapter(listOf())
         binding.recyclerView.adapter = adapter
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
 
-        viewModel.historyListLiveData.observe(this) { historyList ->
-            adapter.updateData(historyList) // Perbarui data di adapter
+        viewModel.historyListLiveData.observeForever { historyList ->
+            adapter.updateData(historyList)
         }
-
         viewModel.loadHistory()
     }
 }
