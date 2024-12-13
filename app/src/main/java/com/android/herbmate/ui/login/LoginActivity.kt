@@ -7,6 +7,7 @@ import android.text.InputType
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import com.android.herbmate.ui.main.MainActivity
@@ -90,16 +91,34 @@ class LoginActivity : AppCompatActivity() {
                 is ApiResult.Success -> {
                     binding.btnLogin.isEnabled = true
                     binding.progressBar.isVisible = false
-                    startActivity(Intent(this, MainActivity::class.java))
-                    finish()
+                    showDialog(getString(R.string.berhasil), result.data.message){
+                        startActivity(Intent(this, MainActivity::class.java))
+                        finish()
+                    }
                 }
 
                 is ApiResult.Error -> {
                     binding.btnLogin.isEnabled = true
                     binding.progressBar.isVisible = false
-                    Toast.makeText(this, result.error, Toast.LENGTH_SHORT).show()
+                    showDialog(getString(R.string.gagal), getString(R.string.email_atau_password_salah)){
+
+                    }
                 }
             }
         }
     }
+
+    private fun showDialog(title: String, message: String, onOkClick: () -> Unit) {
+        AlertDialog.Builder(this)
+            .setTitle(title)
+            .setMessage(message)
+            .setPositiveButton("OK") { dialog, _ ->
+                dialog.dismiss()
+                onOkClick()
+            }
+            .setCancelable(false)
+            .show()
+    }
+
+
 }

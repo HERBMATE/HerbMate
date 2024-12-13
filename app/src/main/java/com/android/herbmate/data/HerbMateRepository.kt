@@ -1,5 +1,6 @@
 package com.android.herbmate.data
 
+import android.util.Log
 import com.android.herbmate.data.local.entity.HistoryEntity
 import com.android.herbmate.data.local.room.HistoryDao
 import com.android.herbmate.data.local.pref.UserModel
@@ -15,6 +16,7 @@ import com.android.herbmate.data.remote.response.HerbPredictResponse
 import com.android.herbmate.data.remote.response.LoginRequest
 import com.android.herbmate.data.remote.response.LoginResponse
 import com.android.herbmate.data.remote.response.RegisterRequest
+import com.android.herbmate.data.remote.response.RegisterResponse
 import com.android.herbmate.data.remote.response.TanamanDetailsItem
 import com.android.herbmate.data.remote.response.TanamanItem
 import com.android.herbmate.data.remote.response.UserUpdateRequest
@@ -58,16 +60,14 @@ class HerbMateRepository(
         }
     }
 
-    suspend fun register(name: String, email: String, password: String): ApiResult<String> {
+    suspend fun register(name: String, email: String, password: String): ApiResult<RegisterResponse> {
         return try {
-            val response = apiService.register(
-                RegisterRequest(
-                    name,
-                    email,
-                    password
-                )
-            )
-            ApiResult.Success(response.message)
+            val response = apiService.register(RegisterRequest(name, email, password))
+            if (!response.error){
+                ApiResult.Success(response)
+            } else {
+                ApiResult.Error(response.message)
+            }
         } catch (e: HttpException) {
             ApiResult.Error(e.message ?: "Unknown error")
         }
@@ -86,7 +86,7 @@ class HerbMateRepository(
         }
     }
 
-        suspend fun update(email: String, name: String?, verify: String?, password: String?): ApiResult<UserUpdateResponse> {
+    suspend fun update(email: String, name: String?, verify: String?, password: String?): ApiResult<UserUpdateResponse> {
         return try {
             val request = UserUpdateRequest(name, verify, password)
             val response = currentApiService.userUpdate(email, request)
@@ -271,8 +271,8 @@ class HerbMateRepository(
         return dao.getAllHistory()
     }
 
-    suspend fun saveOnBoarding() {
-        userPreference.saveOnboardingCompleted(true)
+    suspend fun deleteAllHistory() {
+        dao.deleteAllHistory()
     }
 
     fun isOnBoardingCompleted(): Flow<Boolean> {

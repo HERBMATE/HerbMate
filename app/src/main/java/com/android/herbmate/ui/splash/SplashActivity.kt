@@ -39,6 +39,7 @@ class SplashActivity : AppCompatActivity() {
             viewModel.isOnBoardingCompleted().observe(this) { isOnBoardingCompleted ->
                 Handler(Looper.getMainLooper()).postDelayed({
                     if (!isOnBoardingCompleted) {
+                        Log.d("SplashActivity", isOnBoardingCompleted.toString())
                         startActivity(Intent(this, OnBoardingActivity::class.java))
                     } else if (userSession.isLogin) {
                         Log.d("SplashActivity", userSession.isLogin.toString())

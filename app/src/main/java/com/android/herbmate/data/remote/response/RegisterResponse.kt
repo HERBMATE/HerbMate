@@ -1,7 +1,7 @@
 package com.android.herbmate.data.remote.response
 
 data class RegisterResponse(
-    val data: com.android.herbmate.data.remote.response.RegisterResult,
+    val data: RegisterResult,
     val error: Boolean,
     val message: String
 )

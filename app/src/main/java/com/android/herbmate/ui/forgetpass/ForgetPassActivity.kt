@@ -7,6 +7,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
+import com.android.herbmate.R
 import com.android.herbmate.data.ViewModelFactory
 import com.android.herbmate.data.ApiResult
 import com.android.herbmate.databinding.ActivityForgetPassBinding
@@ -29,7 +30,8 @@ class ForgetPassActivity : AppCompatActivity() {
             if (email.isNotEmpty()) {
                 viewModel.forgotPass(email)
             } else {
-                Toast.makeText(this, "Email dan password tidak boleh kosong", Toast.LENGTH_SHORT)
+                Toast.makeText(this,
+                    getString(R.string.email_dan_password_tidak_boleh_kosong), Toast.LENGTH_SHORT)
                     .show()
             }
         }
@@ -38,16 +40,20 @@ class ForgetPassActivity : AppCompatActivity() {
             when (result) {
                 is ApiResult.Loading -> {
                     binding.progressBar.isVisible = true
+                    binding.btnKirim.isEnabled = false
                 }
                 is ApiResult.Success -> {
                     binding.progressBar.isVisible = false
-                    showDialog("Berhasil", result.data.message){
+                    binding.btnKirim.isEnabled = true
+                    showDialog(getString(R.string.berhasil), result.data.message){
+                        startActivity(Intent(this, LoginActivity::class.java))
+                        finish()
                     }
-                    Toast.makeText(this, result.data.message, Toast.LENGTH_SHORT).show()
                 }
                 is ApiResult.Error -> {
                     binding.progressBar.isVisible = false
-                    showDialog("Gagal", result.error){
+                    binding.btnKirim.isEnabled = true
+                    showDialog(getString(R.string.gagal), getString(R.string.email_not_found)){
 
                     }
                 }
@@ -70,8 +76,6 @@ class ForgetPassActivity : AppCompatActivity() {
             .setPositiveButton("OK") { dialog, _ ->
                 dialog.dismiss()
                 onOkClick()
-                startActivity(Intent(this, LoginActivity::class.java))
-                finish()
             }
             .setCancelable(false)
             .show()

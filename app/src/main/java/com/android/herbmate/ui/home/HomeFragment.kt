@@ -61,12 +61,20 @@ class HomeFragment : Fragment(), OnBookmarkClickListener {
     private fun setupSearchView() {
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-                viewModel.search(query)
+                if (query.isNullOrEmpty()) {
+                    viewModel.getTanaman()
+                } else {
+                    viewModel.search(query)
+                }
                 return true
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                viewModel.search(newText)
+                if (newText.isNullOrEmpty()) {
+                    viewModel.getTanaman()
+                } else {
+                    viewModel.search(newText)
+                }
                 return true
             }
         })
@@ -75,7 +83,6 @@ class HomeFragment : Fragment(), OnBookmarkClickListener {
     private fun observeUserSession() {
         viewModel.userSession.observe(viewLifecycleOwner) { user ->
             idUser = user.id
-            Log.d("id", idUser .toString())
         }
     }
 

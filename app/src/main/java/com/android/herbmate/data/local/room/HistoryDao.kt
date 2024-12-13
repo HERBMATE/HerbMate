@@ -12,4 +12,7 @@ interface HistoryDao {
 
     @Query("SELECT * FROM history ORDER BY timestamp DESC")
     suspend fun getAllHistory(): List<HistoryEntity>
+
+    @Query("DELETE FROM history")
+    suspend fun deleteAllHistory()
 }

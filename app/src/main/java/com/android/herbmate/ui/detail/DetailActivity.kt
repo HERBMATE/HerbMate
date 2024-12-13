@@ -1,7 +1,9 @@
 package com.android.herbmate.ui.detail
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -13,6 +15,7 @@ import com.android.herbmate.adapter.PenyakitAdapter
 import com.android.herbmate.adapter.RekomendasiAdapter
 import com.android.herbmate.data.ApiResult
 import com.android.herbmate.data.ViewModelFactory
+import com.android.herbmate.ui.main.MainActivity
 import com.bumptech.glide.Glide
 
 class DetailActivity : AppCompatActivity(), OnBookmarkClickListener {
@@ -53,7 +56,6 @@ class DetailActivity : AppCompatActivity(), OnBookmarkClickListener {
         Glide.with(this).load(image).into(binding.headerImage)
 
         binding.ivBookmark.setOnClickListener {
-            Log.d("ISBOOKMARK", isBookmarked.toString())
             if (isBookmarked) {
                 removeBookmark()
             } else {
@@ -73,23 +75,22 @@ class DetailActivity : AppCompatActivity(), OnBookmarkClickListener {
         binding.rvRekomendasi.adapter = rekomendasiAdapter
 
         binding.ivBack.setOnClickListener {
-            onBackPressed()
+            startActivity(Intent(this,MainActivity::class.java))
         }
 
         viewModel.detailTanaman.observe(this){ result ->
             when(result){
                 is ApiResult.Error -> {
-                    binding.progressBarDetails.visibility = android.view.View.GONE
-                    binding.progressBarRekomendasi.visibility = android.view.View.GONE
-                    Log.d("DetailTanaman", "Error: ${result.error}")
+                    binding.progressBarDetails.visibility = View.GONE
+                    binding.progressBarRekomendasi.visibility = View.GONE
                 }
                 is ApiResult.Loading -> {
-                    binding.progressBarDetails.visibility = android.view.View.VISIBLE
-                    binding.progressBarRekomendasi.visibility = android.view.View.VISIBLE
+                    binding.progressBarDetails.visibility = View.VISIBLE
+                    binding.progressBarRekomendasi.visibility = View.VISIBLE
                 }
                 is ApiResult.Success -> {
-                    binding.progressBarDetails.visibility = android.view.View.GONE
-                    binding.progressBarRekomendasi.visibility = android.view.View.GONE
+                    binding.progressBarDetails.visibility = View.GONE
+                    binding.progressBarRekomendasi.visibility = View.GONE
                     penyakitAdapter.submitList(result.data)
                     val penyakit = result.data.map { it.penyakit }
                     viewModel.getRekomendasi(penyakit, name)
@@ -114,7 +115,7 @@ class DetailActivity : AppCompatActivity(), OnBookmarkClickListener {
         viewModel.bookmarkResult.observe(this) { result ->
             when (result) {
                 is ApiResult.Loading -> {
-                    Toast.makeText(this, "Loading...", Toast.LENGTH_SHORT).show()
+                    binding.progressBarDetails.visibility = View.VISIBLE
                 }
                 is ApiResult.Success -> {
                     updateBookmarkIcon(isBookmarked)
@@ -125,8 +126,8 @@ class DetailActivity : AppCompatActivity(), OnBookmarkClickListener {
                     ).show()
                 }
                 is ApiResult.Error -> {
+                    binding.progressBarDetails.visibility = View.GONE
                     Toast.makeText(this, "Error: ${result.error}", Toast.LENGTH_SHORT).show()
-                    Log.e("Bookmark", "Error: ${result.error}")
                 }
             }
         }

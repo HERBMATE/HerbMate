@@ -44,6 +44,7 @@ class ScanActivity : AppCompatActivity() {
         binding.takePictureButton.setOnClickListener {
             takePhoto()
             binding.takePictureButton.isEnabled = false
+            finish()
         }
 
         checkCameraPermission()
@@ -70,10 +71,9 @@ class ScanActivity : AppCompatActivity() {
             val cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
 
             try {
-                cameraProvider.unbindAll() // Unbind use cases before rebinding
+                cameraProvider.unbindAll()
                 cameraProvider.bindToLifecycle(this, cameraSelector, preview, imageCapture) // Bind preview and image capture
             } catch (exc: Exception) {
-                Log.e("ScanActivity", "Camera binding failed", exc)
             }
         }, ContextCompat.getMainExecutor(this))
     }
@@ -108,11 +108,11 @@ class ScanActivity : AppCompatActivity() {
                     intent.putExtra("image_uri", savedUri)
                     startActivity(intent)
                     Toast.makeText(this@ScanActivity, "Photo saved: $savedUri", Toast.LENGTH_SHORT).show()
-                    finish()
+//                    finish()
                 }
 
                 override fun onError(exception: ImageCaptureException) {
-                    Log.e("ScanActivity", "Photo capture failed: ${exception.message}", exception)
+
                 }
             }
         )

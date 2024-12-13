@@ -1,8 +1,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:padding="8dp">
+    android:orientation="vertical">
 
     <LinearLayout
         android:id="@+id/messageLayout"
@@ -31,7 +30,7 @@
                 android:id="@+id/textViewName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@android:color/black"
+                android:textColor="@color/blackAndWhiteColor"
                 android:textStyle="bold"
                 android:textSize="14sp"
                 android:paddingBottom="4dp"
@@ -41,7 +40,7 @@
                 android:id="@+id/textViewMessage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@android:color/black"
+                android:textColor="@color/blackAndWhiteColor"
                 android:padding="8dp"
                 android:text="tes"
                 android:textSize="16sp" />

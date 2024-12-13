@@ -46,10 +46,8 @@ class UploadActivity : AppCompatActivity() {
                 is ApiResult.Loading -> {
                     binding.progressBar.visibility = View.VISIBLE
                     binding.uploadBtn.isEnabled = false
-                    Log.d("Upload", "Loading")
                 }
                 is ApiResult.Success -> {
-                    Log.d("Upload", "Success")
                     binding.progressBar.visibility = View.GONE
                     binding.uploadBtn.isEnabled = true
 
@@ -80,7 +78,6 @@ class UploadActivity : AppCompatActivity() {
                     binding.progressBar.visibility = View.GONE
                     binding.uploadBtn.isEnabled = true
                     Toast.makeText(this, "Error: ${result.error}", Toast.LENGTH_SHORT).show()
-                    Log.e("Upload Error", "uploadImage: ${result.error}")
                 }
             }
         }
@@ -93,7 +90,6 @@ class UploadActivity : AppCompatActivity() {
     private fun uploadImage() {
         uploadViewModel.currentImageUri?.let { uri ->
             val imageFile = uriToFile(uri, this).reduceFileImage()
-            Log.d("Image File", "showImage: ${imageFile.path}")
             val requestImageFile = imageFile.asRequestBody("image/jpeg".toMediaType())
             val multipartBody = MultipartBody.Part.createFormData(
                 "file",
@@ -107,7 +103,6 @@ class UploadActivity : AppCompatActivity() {
 
     private fun showImage() {
         uploadViewModel.currentImageUri?.let {
-            Log.d("Image URI", "showImage: $it")
             binding.image.setImageURI(it)
         }
     }

@@ -13,8 +13,8 @@ import kotlinx.coroutines.launch
 
 class ProfileViewModel(val repository: HerbMateRepository) : ViewModel() {
 
-    private val _updateResult = MutableLiveData<ApiResult<com.android.herbmate.data.remote.response.UserUpdateResponse>>()
-    val updateResult: LiveData<ApiResult<com.android.herbmate.data.remote.response.UserUpdateResponse>> get() = _updateResult
+    private val _updateResult = MutableLiveData<ApiResult<UserUpdateResponse>?>()
+    val updateResult: LiveData<ApiResult<UserUpdateResponse>?> get() = _updateResult
 
     fun logout() {
         viewModelScope.launch {
@@ -41,5 +41,16 @@ class ProfileViewModel(val repository: HerbMateRepository) : ViewModel() {
     }
 
     val userSession: LiveData<UserModel> = repository.getSession().asLiveData()
+
+    fun resetUpdateResult() {
+        _updateResult.value = null
+    }
+
+    fun deleteHistory() {
+        viewModelScope.launch {
+            repository.deleteAllHistory()
+        }
+
+    }
 
 }

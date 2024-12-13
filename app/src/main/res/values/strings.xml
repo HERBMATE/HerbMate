@@ -56,6 +56,13 @@
     <string name="kosong">Kosong</string>
     <string name="bookmark_kosong">Bookmark Kosong</string>
     <string name="bookmark_button">Bookmark button</string>
+    <string name="user_is_already_registered">User is already registered</string>
+    <string name="berhasil">Berhasil</string>
+    <string name="gagal">Gagal</string>
+    <string name="email_not_found">Email not found</string>
+    <string name="email_dan_password_tidak_boleh_kosong">Email dan password tidak boleh kosong</string>
+    <string name="email_atau_password_salah">Email atau password salah</string>
+    <string name="password_salah">Password Salah</string>
 
     <string-array name="faq">
         <item>Nama Tanaman</item>

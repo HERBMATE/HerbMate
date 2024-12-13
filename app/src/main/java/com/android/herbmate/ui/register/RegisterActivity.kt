@@ -7,7 +7,9 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.android.herbmate.R
 import com.android.herbmate.data.ViewModelFactory
 import com.android.herbmate.data.ApiResult
 import com.android.herbmate.databinding.ActivityRegisterBinding
@@ -29,17 +31,20 @@ class RegisterActivity : AppCompatActivity() {
                     binding.progressBar.visibility = View.VISIBLE
                     binding.btnRegister.isEnabled = false
                 }
-
                 is ApiResult.Success -> {
                     binding.progressBar.visibility = View.GONE
                     binding.btnRegister.isEnabled = true
-                    startActivity(Intent(this, LoginActivity::class.java))
-                    Toast.makeText(this, result.data, Toast.LENGTH_SHORT).show()
+                    showDialog(getString(R.string.berhasil), result.data.message){
+                        startActivity(Intent(this, LoginActivity::class.java))
+                        finish()
+                    }
                 }
-
                 is ApiResult.Error -> {
                     binding.btnRegister.isEnabled = true
                     binding.progressBar.visibility = View.GONE
+                    showDialog(getString(R.string.gagal), getString(R.string.user_is_already_registered) ){
+
+                    }
                 }
             }
         }
@@ -108,5 +113,17 @@ class RegisterActivity : AppCompatActivity() {
             passwordInput.text?.let { passwordInput.setSelection(it.length) }
             confirmPasswordInput.text?.let { confirmPasswordInput.setSelection(it.length) }
         }
+    }
+
+    private fun showDialog(title: String, message: String, onOkClick: () -> Unit) {
+        AlertDialog.Builder(this)
+            .setTitle(title)
+            .setMessage(message)
+            .setPositiveButton("OK") { dialog, _ ->
+                dialog.dismiss()
+                onOkClick()
+            }
+            .setCancelable(false)
+            .show()
     }
 }

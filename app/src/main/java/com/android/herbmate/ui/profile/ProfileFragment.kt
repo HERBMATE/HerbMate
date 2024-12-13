@@ -9,8 +9,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CompoundButton
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.viewModels
+import com.android.herbmate.R
 import com.android.herbmate.data.ViewModelFactory
 import com.android.herbmate.data.ApiResult
 import com.android.herbmate.databinding.FragmentProfileBinding
@@ -78,26 +80,49 @@ class ProfileFragment : Fragment() {
         viewModel.updateResult.observe(viewLifecycleOwner) { result ->
             when (result) {
                 is ApiResult.Error -> {
-                    binding.progressBar.visibility = View.GONE
-                    binding.btnCancel.visibility = View.GONE
-                    binding.btnSave.visibility = View.GONE
+                    binding.apply {
+                        progressBar.visibility = View.GONE
+                        edName.isEnabled = false
+                        edPassword.isEnabled = false
+                        edPasswordbaru.isEnabled = false
+                        edPassword.text = null
+                        edPasswordbaru.text = null
+                        btnSave.visibility = View.GONE
+                        btnCancel.visibility = View.GONE
+                    }
+
+                    showDialog(getString(R.string.gagal), getString(R.string.password_salah)){
+                    }
+
                 }
                 is ApiResult.Loading -> {
-                    binding.btnCancel.visibility = View.VISIBLE
-                    binding.btnSave.visibility = View.VISIBLE
-                    binding.btnSave.isEnabled = false
-                    binding.btnCancel.isEnabled = false
-                    binding.progressBar.visibility = View.VISIBLE
+                    binding.apply {
+                        btnCancel.visibility = View.VISIBLE
+                        btnSave.visibility = View.VISIBLE
+                        btnSave.isEnabled = false
+                        btnCancel.isEnabled = false
+                        progressBar.visibility = View.VISIBLE
+                    }
+
                 }
                 is ApiResult.Success -> {
-                    binding.progressBar.visibility = View.GONE
-                    binding.edName.isEnabled = false
-                    binding.edPassword.isEnabled = false
-                    binding.edPasswordbaru.isEnabled = false
-                    binding.edPassword.text = null
-                    binding.edPasswordbaru.text = null
-                    binding.btnSave.visibility = View.GONE
-                    binding.btnCancel.visibility = View.GONE
+                    binding.apply {
+                        progressBar.visibility = View.GONE
+                        edName.isEnabled = false
+                        edPassword.isEnabled = false
+                        edPasswordbaru.isEnabled = false
+                        edPassword.text = null
+                        edPasswordbaru.text = null
+                        btnSave.visibility = View.GONE
+                        btnCancel.visibility = View.GONE
+                    }
+                    showDialog(getString(R.string.berhasil), result.data.message){
+
+                    }
+                }
+
+                null -> {
+
                 }
             }
         }
@@ -119,6 +144,7 @@ class ProfileFragment : Fragment() {
         }
 
         binding.btnLogOut.setOnClickListener {
+            viewModel.deleteHistory()
             viewModel.logout()
             startActivity(Intent(requireContext(), LoginActivity::class.java))
         }
@@ -135,7 +161,6 @@ class ProfileFragment : Fragment() {
             } ?: run {
                 binding.edEmail.text = Editable.Factory.getInstance().newEditable("")
                 binding.edName.text = Editable.Factory.getInstance().newEditable("")
-//                binding.edPassword.text = Editable.Factory.getInstance().newEditable("")
             }
         }
 
@@ -166,6 +191,19 @@ class ProfileFragment : Fragment() {
         val editor = sharedPreferences.edit()
         editor.putBoolean("dark_mode", isDarkMode)
         editor.apply()
+    }
+
+    private fun showDialog(title: String, message: String, onOkClick: () -> Unit) {
+        AlertDialog.Builder(requireContext())
+            .setTitle(title)
+            .setMessage(message)
+            .setPositiveButton("OK") { dialog, _ ->
+                dialog.dismiss()
+                onOkClick()
+                viewModel.resetUpdateResult()
+            }
+            .setCancelable(false)
+            .show()
     }
 
 }
