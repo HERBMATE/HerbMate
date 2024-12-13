@@ -12,7 +12,6 @@ import com.android.herbmate.data.remote.response.LoginRequest
 import com.android.herbmate.data.remote.response.LoginResponse
 import com.android.herbmate.data.remote.response.RegisterRequest
 import com.android.herbmate.data.remote.response.RegisterResponse
-import com.android.herbmate.data.remote.response.SignInResponse
 import com.android.herbmate.data.remote.response.TanamanDetailsResponse
 import com.android.herbmate.data.remote.response.TanamanResponse
 import com.android.herbmate.data.remote.response.UserUpdateRequest
@@ -27,7 +26,6 @@ import retrofit2.http.PATCH
 import retrofit2.http.POST
 import retrofit2.http.Part
 import retrofit2.http.Path
-import retrofit2.http.Query
 
 interface ApiService {
     @POST("users/register")

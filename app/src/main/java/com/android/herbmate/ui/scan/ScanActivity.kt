@@ -6,7 +6,6 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
-import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
@@ -19,11 +18,10 @@ import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.PreviewView
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.android.herbmate.R
 import com.android.herbmate.databinding.ActivityScanBinding
 import com.android.herbmate.ui.upload.UploadActivity
 import com.android.herbmate.utils.createCustomTempFile
-import java.io.File
+
 
 class ScanActivity : AppCompatActivity() {
     private lateinit var binding: ActivityScanBinding
@@ -73,7 +71,7 @@ class ScanActivity : AppCompatActivity() {
             try {
                 cameraProvider.unbindAll()
                 cameraProvider.bindToLifecycle(this, cameraSelector, preview, imageCapture) // Bind preview and image capture
-            } catch (exc: Exception) {
+            } catch (_: Exception) {
             }
         }, ContextCompat.getMainExecutor(this))
     }

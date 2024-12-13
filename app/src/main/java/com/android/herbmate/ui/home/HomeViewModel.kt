@@ -1,6 +1,5 @@
 package com.android.herbmate.ui.home
 
-import android.net.Uri
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -11,17 +10,16 @@ import com.android.herbmate.data.ApiResult
 import com.android.herbmate.data.HerbMateRepository
 import com.android.herbmate.data.local.pref.UserModel
 import com.android.herbmate.data.remote.response.AddBookmarkResponse
-import com.android.herbmate.data.remote.response.DataSearchItem
 import com.android.herbmate.data.remote.response.TanamanItem
 import kotlinx.coroutines.launch
 
 class HomeViewModel(val repository: HerbMateRepository) : ViewModel() {
 
-    private val _tanaman = MutableLiveData<ApiResult<List<com.android.herbmate.data.remote.response.TanamanItem>>>()
-    val tanaman: LiveData<ApiResult<List<com.android.herbmate.data.remote.response.TanamanItem>>> = _tanaman
+    private val _tanaman = MutableLiveData<ApiResult<List<TanamanItem>>>()
+    val tanaman: LiveData<ApiResult<List<TanamanItem>>> = _tanaman
 
-    private val _search = MutableLiveData<ApiResult<List<com.android.herbmate.data.remote.response.TanamanItem>>>()
-    val search: LiveData<ApiResult<List<com.android.herbmate.data.remote.response.TanamanItem>>> = _search
+    private val _search = MutableLiveData<ApiResult<List<TanamanItem>>>()
+    val search: LiveData<ApiResult<List<TanamanItem>>> = _search
 
     private val _list = MutableLiveData<ApiResult<List<String>>>()
     val list: LiveData<ApiResult<List<String>>> = _list

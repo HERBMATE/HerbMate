@@ -2,6 +2,7 @@
 <androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
@@ -18,7 +19,8 @@
             android:layout_width="200dp"
             android:layout_height="100dp"
             android:scaleType="centerCrop"
-            android:src="@color/black"/>
+            android:src="@color/black"
+            tools:ignore="ContentDescription" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -30,16 +32,17 @@
                 android:id="@+id/plant"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Plant"
+                android:text="@string/plant"
                 android:textStyle="bold"
                 android:textColor="@color/primaryColor"
-                android:textSize="24sp" />
+                android:textSize="24sp"
+                tools:ignore="HardcodedText" />
 
             <TextView
                 android:id="@+id/timestamp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Timestamp"
+                android:text="@string/timestamp"
                 android:textColor="@color/black"
                 android:textSize="14sp" />
 

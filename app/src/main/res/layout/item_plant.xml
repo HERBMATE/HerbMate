@@ -1,5 +1,6 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/item_card_view"
     android:layout_width="match_parent"
     android:backgroundTint="@color/primaryColor"
@@ -20,7 +21,8 @@
             android:scaleType="centerCrop"
             android:src="@drawable/sambiloto"
             card_view:layout_constraintStart_toStartOf="parent"
-            card_view:layout_constraintTop_toTopOf="parent" />
+            card_view:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ContentDescription,UnusedAttribute" />
 
         <TextView
             android:id="@+id/tv_name"
@@ -29,7 +31,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
-            android:text="Test"
+            android:text="@string/test"
             android:textColor="@color/blackAndWhiteColor"
             android:textSize="16sp"
             android:textStyle="bold"

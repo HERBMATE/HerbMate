@@ -15,14 +15,15 @@
         android:background="@drawable/logo_herbmate"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/name_input_layout"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Name"
+        android:hint="@string/name"
         android:layout_marginTop="35dp"
         android:layout_marginStart="67.5dp"
         android:layout_marginEnd="67.5dp"
@@ -41,7 +42,7 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Email"
+        android:hint="@string/email"
         android:layout_marginTop="16dp"
         android:layout_marginStart="67.5dp"
         android:layout_marginEnd="67.5dp"
@@ -61,7 +62,7 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Password"
+        android:hint="@string/password"
         android:layout_marginTop="16dp"
         android:layout_marginStart="67.5dp"
         android:layout_marginEnd="67.5dp"
@@ -81,7 +82,7 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Confirm Password"
+        android:hint="@string/confirm_password"
         android:layout_marginTop="16dp"
         android:layout_marginStart="67.5dp"
         android:layout_marginEnd="67.5dp"
@@ -110,7 +111,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/btn_auth"
         android:backgroundTint="@color/green"
-        android:text="Register"
+        android:text="@string/register"
         android:textAllCaps="false"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="@id/confirm_password_input_layout"
@@ -123,7 +124,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:background="@drawable/asset321"/>
+        android:background="@drawable/asset321"
+        tools:ignore="ContentDescription" />
 
     <ProgressBar
         android:id="@+id/progress_bar"

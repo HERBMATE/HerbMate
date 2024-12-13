@@ -10,20 +10,6 @@
         <item name="android:textSize">10sp</item>
     </style>
 
-    <style name="CustomChipShape" parent="Widget.MaterialComponents.Chip.Action">
-        <item name="shapeAppearanceOverlay">@style/CustomShapeStyle</item>
-    </style>
-
-    <style name="CustomShapeStyle" parent="ShapeAppearance.MaterialComponents.SmallComponent">
-        <item name="cornerFamily">rounded</item> <!-- Bentuk sudut -->
-        <item name="cornerSize">25%</item> <!-- Membuat chip berbentuk elips -->
-    </style>
-
-    <style name="SearchViewTheme" parent="Theme.AppCompat.DayNight">
-        <item name="android:textColor">@color/searchBarColor</item>
-        <item name="android:textColorHint">@color/blackAndWhiteColor</item>
-    </style>
-
     <style name="ErrorTextStyle">
         <item name="android:padding">0dp</item> <!-- Pastikan tidak ada padding -->
         <item name="android:textColor">@android:color/black</item> <!-- Ganti dengan warna yang sesuai -->

@@ -1,39 +1,9 @@
 <resources>
     <string name="app_name">HerbMate Discover, Learn, and Apply the Benefits of Herbal Plants</string>
     <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
     <string name="title_search">Search</string>
-    <string name="image_classifier_failed">Image classifier failed to initialize. See error logs for details</string>
-    <string name="image_processing_error">Image classifier failed to initialize. See error logs for details</string>
     <string name="title_bookmark">Bookmark</string>
     <string name="title_profile">Profile</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string-array name="name_plant">
-        <item>Sambiloto</item>
-        <item>Chamomile</item>
-        <item>Ginseng</item>
-        <item>Lidah Buaya</item>
-        <item>Rosemary</item>
-    </string-array>
-    <integer-array name="image_plant">
-        <item>@drawable/sambiloto</item>
-        <item>@drawable/chamomile</item>
-        <item>@drawable/ginseng</item>
-        <item>@drawable/lidah_buaya</item>
-        <item>@drawable/rosemary</item>
-    </integer-array>
-    <string name="title_activity_login">LoginActivity</string>
-    <string name="prompt_email">Email</string>
-    <string name="prompt_password">Password</string>
-    <string name="action_sign_in">Sign in or register</string>
-    <string name="action_sign_in_short">Sign in</string>
-    <string name="welcome">"Welcome !"</string>
-    <string name="invalid_username">Not a valid username</string>
-    <string name="invalid_password">Password must be >5 characters</string>
-    <string name="login_failed">"Login failed"</string>
-    <string name="default_web_client_id">7784081244-ftk8a4777sm8c0aft79e8a2c67jojq5l.apps.googleusercontent.com</string>
     <string name="email_handling">Format email tidak valid</string>
     <string name="password_handling">Password harus lebih dari 8 karakter</string>
     <string name="tampilkan_password">Show Password</string>
@@ -63,27 +33,40 @@
     <string name="email_dan_password_tidak_boleh_kosong">Email dan password tidak boleh kosong</string>
     <string name="email_atau_password_salah">Email atau password salah</string>
     <string name="password_salah">Password Salah</string>
+    <string name="penyakit">Penyakit</string>
+    <string name="email">Email</string>
+    <string name="kirim">Kirim</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="register">Register</string>
+    <string name="selamat_datang_di_herbmate">Selamat Datang di Herbmate!</string>
+    <string name="aplikasi_yang_mengenalkanmu_pada_dunia_tanaman_herbal_dan_manfaatnya_untuk_kesehatan">Aplikasi yang mengenalkanmu pada dunia tanaman herbal dan manfaatnya untuk kesehatan.</string>
+    <string name="punya_pertanyaan_tentang_tanaman_herbal_tanya_herbbot_asisten_virtual_kami_yang_siap_membantu">Punya pertanyaan tentang tanaman herbal? Tanya HerbBot, asisten virtual kami yang siap membantu!</string>
+    <string name="siap_memulai_perjalananmu_dengan_herbmate">Siap memulai perjalananmu dengan Herbmate?</string>
+    <string name="mulailah_eksplorasi_sekarang_dan_temukan_manfaatnya">Mulailah eksplorasi sekarang dan temukan manfaatnya!</string>
+    <string name="mulai">Mulai</string>
+    <string name="name">Name</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="upload">Upload</string>
+    <string name="timestamp">Timestamp</string>
+    <string name="plant">Plant</string>
+    <string name="test">Test</string>
+    <string name="scan_your_herb_plants">Scan your herb plants</string>
+    <string name="place_your_herb_in_the_highlighted_frame_below">Place your herb in the highlighted frame below</string>
+    <string name="ketik_pesan">Ketik Pesan</string>
+    <string name="edit">Edit</string>
+    <string name="log_out">Log Out</string>
+    <string name="history">History</string>
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
+    <string name="dark_mode">Dark Mode</string>
+    <string name="herbmate_chatbot">HerbMate ChatBot</string>
+    <string name="profile">Profile</string>
+    <string name="bot">Bot</string>
+    <string name="pesan">Pesan</string>
+    <string name="efek_samping">Efek Samping :</string>
+    <string name="manfaat">Manfaat</string>
+    <string name="sumber">sumber</string>
 
-    <string-array name="faq">
-        <item>Nama Tanaman</item>
-        <item>Nama Penyakit</item>
-    </string-array>
-
-    <string-array name="Tanaman">
-        <item>Nangka</item>
-        <item>Nangka</item>
-        <item>Nangka</item>
-        <item>Nangka</item>
-        <item>Nangka</item>
-    </string-array>
-
-    <string-array name="Penyakit">
-        <item>Flu</item>
-        <item>Flu</item>
-        <item>Flu</item>
-        <item>Flu</item>
-        <item>Flu</item>
-        <item>Flu</item>
-    </string-array>
 
 </resources>

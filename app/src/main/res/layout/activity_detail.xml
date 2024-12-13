@@ -16,7 +16,8 @@
             android:src="@drawable/rectangle"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ContentDescription" />
 
         <ImageView
             android:id="@+id/iv_back"
@@ -26,7 +27,8 @@
             android:layout_marginTop="16dp"
             android:layout_marginStart="16dp"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="ContentDescription" />
 
         <ProgressBar
             android:id="@+id/progress_bar_details"
@@ -82,7 +84,8 @@
                 android:src="@drawable/ic_bookmark_border"
                 app:layout_constraintBottom_toBottomOf="@+id/tv_nama"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/tv_nama" />
+                app:layout_constraintTop_toTopOf="@+id/tv_nama"
+                tools:ignore="ContentDescription" />
 
             <TextView
                 android:id="@+id/tv_hd_nama_latin"
@@ -102,7 +105,7 @@
                 android:layout_marginTop="8dp"
                 android:paddingStart="16dp"
                 android:paddingEnd="16dp"
-                android:text="nama latin "
+                android:text="@string/nama_latin"
                 android:textColor="@color/blackAndWhiteColor"
                 app:layout_constraintStart_toEndOf="@+id/tv_hd_nama_latin"
                 app:layout_constraintTop_toBottomOf="@id/tv_nama" />
@@ -126,7 +129,7 @@
                 android:textColor="@color/blackAndWhiteColor"
                 android:paddingStart="16dp"
                 android:paddingEnd="16dp"
-                android:text="asal "/>
+                android:text="@string/asal"/>
 
             <TextView
                 android:id="@+id/tv_hd_kandungan"
@@ -148,7 +151,7 @@
                 android:textColor="@color/blackAndWhiteColor"
                 android:paddingStart="16dp"
                 android:paddingEnd="16dp"
-                android:text="Kandungan"/>
+                android:text="@string/kandungan"/>
 
             <TextView
                 android:id="@+id/tv_hd_resep"
@@ -203,8 +206,6 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
     </FrameLayout>
-
-
 
     <ProgressBar
         android:id="@+id/progress_bar_rekomendasi"

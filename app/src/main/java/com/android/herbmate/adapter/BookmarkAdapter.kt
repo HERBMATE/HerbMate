@@ -54,12 +54,12 @@ class BookmarkAdapter(private val listener: OnBookmarkClickListener) : ListAdapt
     }
 
     companion object {
-        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<com.android.herbmate.data.remote.response.BookmarkItem>() {
-            override fun areItemsTheSame(oldItem: com.android.herbmate.data.remote.response.BookmarkItem, newItem: com.android.herbmate.data.remote.response.BookmarkItem): Boolean {
+        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<BookmarkItem>() {
+            override fun areItemsTheSame(oldItem: BookmarkItem, newItem: BookmarkItem): Boolean {
                 return oldItem.id == newItem.id
             }
 
-            override fun areContentsTheSame(oldItem: com.android.herbmate.data.remote.response.BookmarkItem, newItem: com.android.herbmate.data.remote.response.BookmarkItem): Boolean {
+            override fun areContentsTheSame(oldItem: BookmarkItem, newItem: BookmarkItem): Boolean {
                 return oldItem == newItem
             }
         }

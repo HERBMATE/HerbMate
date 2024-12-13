@@ -17,7 +17,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.19999999" />
+        app:layout_constraintVertical_bias="0.19999999"
+        tools:ignore="ContentDescription" />
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/image"
@@ -41,7 +42,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/btn_auth"
         android:backgroundTint="@color/greenL1"
-        android:text="Upload"
+        android:text="@string/upload"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.83"
@@ -54,7 +55,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:background="@drawable/asset321"/>
+        android:background="@drawable/asset321"
+        tools:ignore="ContentDescription" />
 
     <ProgressBar
         android:id="@+id/progress_bar"

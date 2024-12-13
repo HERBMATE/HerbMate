@@ -28,7 +28,7 @@
             android:layout_marginEnd="20dp"
             android:layout_marginBottom="20dp"
             android:background="@drawable/rounded_edittext"
-            android:hint="Type a message" />
+            android:hint="@string/ketik_pesan" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/buttonSend"
@@ -38,7 +38,7 @@
             android:textColor="@color/white"
             android:layout_marginBottom="20dp"
             android:backgroundTint="@color/greenL1"
-            android:text="Send" />
+            android:text="@string/kirim" />
     </LinearLayout>
 
 </LinearLayout>

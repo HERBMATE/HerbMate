@@ -1,6 +1,5 @@
 package com.android.herbmate.data
 
-import android.util.Log
 import com.android.herbmate.data.local.entity.HistoryEntity
 import com.android.herbmate.data.local.room.HistoryDao
 import com.android.herbmate.data.local.pref.UserModel
@@ -107,9 +106,7 @@ class HerbMateRepository(
 
     suspend fun uploadHerbImage(file: MultipartBody.Part): ApiResult<HerbPredictResponse> {
         return try {
-            val user = getSession().first()
-            val apiService = ApiConfig.getApiServices(user.token)
-            val response = apiService.herbPredict(file)
+            val response = currentApiService.herbPredict(file)
             if (!response.error) {
                 ApiResult.Success(response)
             } else {

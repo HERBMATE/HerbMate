@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 data class SearchResponse(
 
     @field:SerializedName("data")
-	val data: List<com.android.herbmate.data.remote.response.DataSearchItem>,
+	val data: List<DataSearchItem>,
 
     @field:SerializedName("error")
 	val error: Boolean,

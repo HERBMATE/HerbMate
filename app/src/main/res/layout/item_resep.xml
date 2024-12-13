@@ -11,7 +11,7 @@
         android:id="@+id/tv_hd_resep"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Resep"
+        android:text="@string/resep"
         android:textSize="16sp"
         android:layout_marginStart="12dp"
         android:textColor="@android:color/black"
@@ -22,7 +22,7 @@
         android:id="@+id/tv_resep"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Resep"
+        android:text="@string/resep"
         app:layout_constraintTop_toBottomOf="@id/tv_hd_resep"
         app:layout_constraintStart_toStartOf="@id/tv_hd_resep"/>
 
@@ -30,7 +30,7 @@
         android:id="@+id/tv_hd_efek_samping"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Efek Samping"
+        android:text="@string/efek_samping"
         android:textSize="16sp"
         android:layout_marginStart="12dp"
         android:textColor="@android:color/black"
@@ -42,7 +42,7 @@
         android:id="@+id/tv_efek_samping"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Efek Samping"
+        android:text="@string/efek_samping"
         app:layout_constraintStart_toStartOf="@id/tv_hd_efek_samping"
         app:layout_constraintTop_toBottomOf="@id/tv_hd_efek_samping"/>
 
@@ -50,7 +50,7 @@
         android:id="@+id/tv_hd_manfaat"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Manfaat"
+        android:text="@string/manfaat"
         android:textSize="16sp"
         android:layout_marginStart="12dp"
         android:textColor="@android:color/black"
@@ -62,19 +62,9 @@
         android:id="@+id/tv_manfaat"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Manfaat"
+        android:text="@string/manfaat"
         app:layout_constraintTop_toBottomOf="@id/tv_hd_manfaat"
         app:layout_constraintStart_toStartOf="@id/tv_hd_manfaat"/>
-
-<!--    <TextView-->
-<!--        android:id="@+id/tv_hd_sumber"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:text="Sumber"-->
-<!--        android:textSize="16sp"-->
-<!--        android:textColor="@color/black"-->
-<!--        app:layout_constraintTop_toBottomOf="@id/tv_manfaat"-->
-<!--        app:layout_constraintStart_toStartOf="parent"/>-->
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/tv_sumber"
@@ -82,7 +72,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/btn_auth"
         android:backgroundTint="@color/primaryColor"
-        android:text="sumber"
+        android:text="@string/sumber"
         android:textColor="@color/white"
         android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"

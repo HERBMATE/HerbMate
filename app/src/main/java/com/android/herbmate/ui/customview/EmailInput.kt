@@ -5,9 +5,7 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.util.AttributeSet
 import android.util.Patterns
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import com.android.herbmate.R
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout

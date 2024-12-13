@@ -24,13 +24,14 @@
             android:clipToOutline="true"
             android:background="@drawable/rounded_card"
             card_view:layout_constraintTop_toTopOf="parent"
-            card_view:layout_constraintStart_toStartOf="parent"/>
+            card_view:layout_constraintStart_toStartOf="parent"
+            tools:ignore="ContentDescription,UnusedAttribute" />
 
         <TextView
             android:id="@+id/tv_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Test"
+            android:text="@string/nama_tanaman"
             android:textStyle="bold"
             android:textSize="16sp"
             android:textColor="@color/blackAndWhiteColor"
@@ -47,7 +48,7 @@
             android:background="@drawable/rounded_btn_bookmark"
             android:backgroundTint="@color/yellow"
             android:src="@drawable/ic_bookmark_border"
-            android:contentDescription="Bookmark button"
+            android:contentDescription="@string/bookmark_button"
             card_view:layout_constraintBottom_toBottomOf="@+id/tv_name"
             card_view:layout_constraintEnd_toEndOf="@id/img_plant"
             card_view:layout_constraintTop_toTopOf="@+id/tv_name" />

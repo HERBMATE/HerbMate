@@ -47,41 +47,26 @@ android {
 
 dependencies {
 
-//    implementation (libs.androidx.credentials)
-//    implementation (libs.androidx.credentials.play.services.auth)
-//    implementation (libs.androidx.credentials.play.services.auth.v100alpha03)
-//    implementation (libs.androidx.credentials.v100alpha03)
-    implementation("com.google.android.gms:play-services-auth:20.7.0")
-
-    implementation("androidx.room:room-runtime:2.5.2")
-    implementation("androidx.room:room-ktx:2.5.2")
-    ksp("androidx.room:room-compiler:2.5.2")
-//    implementation (libs.androidx.preference)
-//    implementation (libs.androidx.datastore.preferences)
-    implementation ("de.hdodenhof:circleimageview:3.1.0")
-//
-    implementation("androidx.core:core-splashscreen:1.0.1")
-    implementation("com.github.bumptech.glide:glide:4.15.1")
+    implementation(libs.androidx.room.runtime)
+    implementation(libs.androidx.room.ktx.v252)
+    ksp(libs.androidx.room.compiler)
+    implementation (libs.circleimageview)
+    implementation(libs.core.splashscreen)
+    implementation(libs.glide.v4151)
     implementation(libs.androidx.room.common)
     implementation(libs.androidx.room.ktx)
-//    implementation(libs.googleid)
-    annotationProcessor("com.github.bumptech.glide:compiler:4.15.1")
-    implementation ("pl.droidsonroids.gif:android-gif-drawable:1.2.29")
-    implementation ("androidx.camera:camera-core:1.4.0")
-    implementation ("androidx.camera:camera-camera2:1.4.0")
-    implementation ("androidx.camera:camera-lifecycle:1.4.0")
-    implementation ("androidx.camera:camera-view:1.4.0")
-
+    annotationProcessor(libs.compiler)
+    implementation (libs.android.gif.drawable)
+    implementation (libs.androidx.camera.core)
+    implementation (libs.androidx.camera.camera2)
+    implementation (libs.androidx.camera.lifecycle)
+    implementation (libs.androidx.camera.view)
     implementation(libs.androidx.datastore.preferences)
-
-    implementation("com.squareup.okhttp3:logging-interceptor:4.9.1")
-    implementation ("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
-
-
+    implementation(libs.logging.interceptor)
+    implementation (libs.retrofit)
+    implementation (libs.converter.gson)
     implementation(libs.circleimageview)
     implementation (libs.glide)
-
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
@@ -92,14 +77,8 @@ dependencies {
     implementation(libs.androidx.navigation.ui.ktx)
     implementation(libs.androidx.annotation)
     implementation(libs.androidx.activity)
-
     implementation(libs.androidx.datastore.preferences.core)
-
-//    implementation(libs.androidx.datastore.core.android)
-//    implementation(libs.androidx.datastore.preferences.core.jvm)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-
-    implementation(libs.generativeai)
 }

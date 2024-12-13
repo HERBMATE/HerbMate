@@ -15,14 +15,15 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:background="@drawable/logo_herbmate"/>
+        android:background="@drawable/logo_herbmate"
+        tools:ignore="ContentDescription" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/email_input_layout"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Email"
+        android:hint="@string/email"
         android:layout_marginTop="35dp"
         android:layout_marginStart="52.5dp"
         android:layout_marginEnd="52.5dp"
@@ -44,7 +45,7 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Password"
+        android:hint="@string/password"
         android:layout_marginTop="8dp"
         android:layout_marginStart="52.5dp"
         android:layout_marginEnd="52.5dp"
@@ -74,7 +75,7 @@
         android:id="@+id/btn_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Login"
+        android:text="@string/login"
         android:textAllCaps="false"
         android:background="@drawable/btn_auth"
         android:backgroundTint="@color/green"
@@ -97,7 +98,7 @@
         android:id="@+id/btn_register"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Register"
+        android:text="@string/register"
         android:textAllCaps="false"
         android:background="@drawable/btn_auth"
         android:backgroundTint="@android:color/transparent"
@@ -112,7 +113,8 @@
         android:layout_height="250dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:background="@drawable/asset121"/>
+        android:background="@drawable/asset121"
+        tools:ignore="ContentDescription" />
 
     <ProgressBar
         android:id="@+id/progress_bar"

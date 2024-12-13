@@ -19,7 +19,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.3" />
+        app:layout_constraintVertical_bias="0.3"
+        tools:ignore="ContentDescription" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardViewMenu1"
@@ -42,7 +43,7 @@
                 android:id="@+id/titleMenu1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Selamat Datang di Herbmate!"
+                android:text="@string/selamat_datang_di_herbmate"
                 android:textColor="@color/blackAndWhiteColor"
                 android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -54,7 +55,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="Aplikasi yang mengenalkanmu pada dunia tanaman herbal dan manfaatnya untuk kesehatan."
+                android:text="@string/aplikasi_yang_mengenalkanmu_pada_dunia_tanaman_herbal_dan_manfaatnya_untuk_kesehatan"
                 android:textColor="@color/blackAndWhiteColor"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -64,7 +65,6 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
-<!--    menu2-->
     <ImageView
         android:id="@+id/logoMenu2"
         android:layout_width="0dp"
@@ -76,7 +76,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.3" />
+        app:layout_constraintVertical_bias="0.3"
+        tools:ignore="ContentDescription" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardViewMenu2"
@@ -121,7 +122,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.3" />
+        app:layout_constraintVertical_bias="0.3"
+        tools:ignore="ContentDescription" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardViewMenu3"
@@ -155,7 +157,6 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
-    <!--    menu4-->
     <ImageView
         android:id="@+id/logoMenu4"
         android:layout_width="0dp"
@@ -167,7 +168,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.3" />
+        app:layout_constraintVertical_bias="0.3"
+        tools:ignore="ContentDescription" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardViewMenu4"
@@ -191,7 +193,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="Punya pertanyaan tentang tanaman herbal? Tanya HerbBot, asisten virtual kami yang siap membantu!"
+                android:text="@string/punya_pertanyaan_tentang_tanaman_herbal_tanya_herbbot_asisten_virtual_kami_yang_siap_membantu"
                 android:textColor="@color/blackAndWhiteColor"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -201,7 +203,6 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
-<!--    menu5-->
     <androidx.cardview.widget.CardView
         android:id="@+id/cardViewMenu5"
         android:layout_width="0dp"
@@ -223,7 +224,7 @@
                 android:id="@+id/titleMenu5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Siap memulai perjalananmu dengan Herbmate?"
+                android:text="@string/siap_memulai_perjalananmu_dengan_herbmate"
                 android:textColor="@color/blackAndWhiteColor"
                 android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -235,7 +236,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="Mulailah eksplorasi sekarang dan temukan manfaatnya!"
+                android:text="@string/mulailah_eksplorasi_sekarang_dan_temukan_manfaatnya"
                 android:textColor="@color/blackAndWhiteColor"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -247,7 +248,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/primaryColor"
-                android:text="Mulai"
+                android:text="@string/mulai"
                 android:layout_margin="10dp"
                 android:textColor="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"

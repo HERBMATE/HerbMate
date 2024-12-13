@@ -68,7 +68,8 @@
                 android:layout_height="11dp"
                 android:background="@drawable/logoBlackAndWhite"
                 app:layout_constraintTop_toBottomOf="@id/tv_name"
-                app:layout_constraintEnd_toEndOf="parent" />
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:ignore="ContentDescription" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 

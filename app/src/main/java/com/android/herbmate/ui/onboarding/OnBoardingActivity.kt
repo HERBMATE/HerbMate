@@ -7,7 +7,6 @@ import android.view.WindowInsets
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
-import com.android.herbmate.ui.main.MainActivity
 import com.android.herbmate.data.local.pref.UserPreference
 import com.android.herbmate.data.local.pref.dataStore
 import com.android.herbmate.databinding.ActivityOnBoardingBinding

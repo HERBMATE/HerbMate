@@ -59,7 +59,8 @@
             android:backgroundTint="@color/green"
             app:layout_anchor="@id/bottomNavigationView"
             app:layout_anchorGravity="center|bottom"
-            app:srcCompat="@drawable/scan" />
+            app:srcCompat="@drawable/scan"
+            tools:ignore="ContentDescription" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

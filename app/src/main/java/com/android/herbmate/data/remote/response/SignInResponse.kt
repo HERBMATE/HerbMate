@@ -8,7 +8,7 @@ data class SignInResponse(
     val message: String,
 
     @field:SerializedName("data")
-    val data: com.android.herbmate.data.remote.response.UserData?,
+    val data: UserData?,
 
     @field:SerializedName("token")
     val token: String?

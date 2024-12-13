@@ -47,7 +47,7 @@
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Scan your herb plants"
+            android:text="@string/scan_your_herb_plants"
             android:textColor="@color/white"
             android:textSize="24sp"
             android:textStyle="bold" />
@@ -57,7 +57,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="Place your herb in the highlighted frame below"
+            android:text="@string/place_your_herb_in_the_highlighted_frame_below"
             android:textColor="@color/white"
             android:textSize="16sp" />
 
@@ -74,7 +74,6 @@
         android:background="#CC96A875"
         android:padding="10dp">
 
-        <!-- Tombol untuk membuka galeri -->
         <ImageButton
             android:id="@+id/openGalleryButton"
             android:layout_width="60dp"
@@ -84,9 +83,9 @@
             app:layout_constraintEnd_toStartOf="@+id/takePictureButton"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_gallery" />
+            app:srcCompat="@drawable/ic_gallery"
+            tools:ignore="ContentDescription" />
 
-        <!-- Tombol untuk mengambil gambar -->
         <ImageButton
             android:id="@+id/takePictureButton"
             android:layout_width="80dp"
@@ -95,7 +94,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ContentDescription" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ProgressBar

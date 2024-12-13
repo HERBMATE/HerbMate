@@ -17,7 +17,7 @@
             android:layout_height="30dp"
             android:src="@drawable/ic_herbmate"
             android:visibility="gone"
-            android:contentDescription="Profile" />
+            android:contentDescription="@string/profile" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -34,7 +34,7 @@
                 android:textStyle="bold"
                 android:textSize="14sp"
                 android:paddingBottom="4dp"
-                android:text="Bot" />
+                android:text="@string/bot" />
 
             <TextView
                 android:id="@+id/textViewMessage"
@@ -42,7 +42,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/blackAndWhiteColor"
                 android:padding="8dp"
-                android:text="tes"
+                android:text="@string/pesan"
                 android:textSize="16sp" />
         </LinearLayout>
     </LinearLayout>

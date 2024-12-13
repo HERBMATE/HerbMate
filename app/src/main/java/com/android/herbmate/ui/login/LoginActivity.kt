@@ -1,15 +1,13 @@
 package com.android.herbmate.ui.login
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.text.InputType
-import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.isVisible
 import com.android.herbmate.ui.main.MainActivity
 import com.android.herbmate.R
 import com.android.herbmate.data.ViewModelFactory
@@ -17,10 +15,6 @@ import com.android.herbmate.data.ApiResult
 import com.android.herbmate.databinding.ActivityLoginBinding
 import com.android.herbmate.ui.forgetpass.ForgetPassActivity
 import com.android.herbmate.ui.register.RegisterActivity
-import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.auth.api.signin.GoogleSignInClient
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.google.android.gms.common.api.ApiException
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
@@ -84,13 +78,13 @@ class LoginActivity : AppCompatActivity() {
         viewModel.loginResult.observe(this) { result ->
             when (result) {
                 is ApiResult.Loading -> {
-                    binding.progressBar.isVisible = true
+                    binding.progressBar.visibility = View.VISIBLE
                     binding.btnLogin.isEnabled = false
                 }
 
                 is ApiResult.Success -> {
                     binding.btnLogin.isEnabled = true
-                    binding.progressBar.isVisible = false
+                    binding.progressBar.visibility = View.GONE
                     showDialog(getString(R.string.berhasil), result.data.message){
                         startActivity(Intent(this, MainActivity::class.java))
                         finish()
@@ -99,7 +93,7 @@ class LoginActivity : AppCompatActivity() {
 
                 is ApiResult.Error -> {
                     binding.btnLogin.isEnabled = true
-                    binding.progressBar.isVisible = false
+                    binding.progressBar.visibility = View.GONE
                     showDialog(getString(R.string.gagal), getString(R.string.email_atau_password_salah)){
 
                     }
